@@ -204,9 +204,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AdornedControl\AdornedControl.2010.csproj">
+    <ProjectReference Include="..\NetworkView.AdornedControl\NetworkView.AdornedControl.csproj">
       <Project>{94B81CB7-F8A6-44BC-BD71-E927F701E0D8}</Project>
-      <Name>AdornedControl</Name>
+      <Name>NetworkView.AdornedControl</Name>
     </ProjectReference>
     <ProjectReference Include="..\NetworkView.NetworkUI\NetworkView.NetworkUI.csproj">
       <Project>{B7CA1480-C144-40AC-AB97-A626F800D5B4}</Project>

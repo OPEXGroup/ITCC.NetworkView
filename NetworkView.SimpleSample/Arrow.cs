@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Diagnostics;
+﻿using System.Windows;
 using System.Windows.Media;
-using System.Windows;
 using System.Windows.Shapes;
 
-namespace SampleCode
+namespace NetworkView.SimpleSample
 {
     /// <summary>
     /// Defines a simple straight arrow draw along a line.

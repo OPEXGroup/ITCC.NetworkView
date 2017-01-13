@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SampleCode
+﻿namespace NetworkView.AdvancedSample
 {
     /// <summary>
     /// Defines the current state of the mouse handling logic.

@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections.ObjectModel;
-using Utils;
 using System.Windows;
+using NetworkView.Utils;
 
-namespace NetworkModel
+namespace NetworkView.AdvancedNetworkModel
 {
     /// <summary>
     /// Defines a node in the view-model.

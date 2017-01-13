@@ -1,12 +1,12 @@
-﻿ <Window x:Class="SampleCode.MainWindow"
+﻿ <Window x:Class="NetworkView.AdvancedSample.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:SampleCode"
-    xmlns:NetworkUI="clr-namespace:NetworkUI;assembly=NetworkUI"
-    xmlns:NetworkModel="clr-namespace:NetworkModel;assembly=NetworkModel"
-    xmlns:ZoomAndPan="clr-namespace:ZoomAndPan;assembly=ZoomAndPan"
-    xmlns:ac="clr-namespace:AdornedControl;assembly=AdornedControl"
+    xmlns:NetworkUI="clr-namespace:NetworkView.NetworkUI;assembly=NetworkView.NetworkUI"
+    xmlns:NetworkModel="clr-namespace:NetworkView.AdvancedNetworkModel;assembly=NetworkView.AdvancedNetworkModel"
+    xmlns:ZoomAndPan="clr-namespace:NetworkView.ZoomAndPan;assembly=NetworkView.ZoomAndPan"
+    xmlns:ac="clr-namespace:NetworkView.AdornedControl;assembly=NetworkView.AdornedControl"
     xmlns:diagnostics="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+    xmlns:advancedSample="clr-namespace:NetworkView.AdvancedSample"
     Title="Main Window" 
     x:Name="mainWindow"
     MinWidth="400"
@@ -52,14 +52,14 @@
             This converts from a scale value to a percentage value.
             It is used to convert the value of 'ContentScale' to the percentage zoom level that is displayed in the UI.
             -->
-            <local:ScaleToPercentConverter 
+            <advancedSample:ScaleToPercentConverter 
                 x:Key="scaleToPercentConverter" 
                 />
 
             <!-- 
             This graphic is used to indicate that a connection cannot be made between two particular connectors.        
             -->
-            <DataTemplate DataType="{x:Type local:ConnectionBadIndicator}">
+            <DataTemplate DataType="{x:Type advancedSample:ConnectionBadIndicator}">
                 <Grid
                     Width="80"
                     >
@@ -75,7 +75,7 @@
             <!-- 
             This graphic is used to indicate that a connection can be made between two particular connectors.        
             -->
-            <DataTemplate DataType="{x:Type local:ConnectionOkIndicator}">
+            <DataTemplate DataType="{x:Type advancedSample:ConnectionOkIndicator}">
                 <Grid
                     Width="80"
                     >
@@ -245,7 +245,7 @@
                     >
 
                     <!-- The connection is represented by a curved arrow. -->                                
-                    <local:CurvedArrow
+                    <advancedSample:CurvedArrow
                         Stroke="{StaticResource connectionBrush}"
                         StrokeThickness="2"
                         Fill="{StaticResource connectionBrush}"
@@ -422,7 +422,7 @@
         <!-- Bind input to commands. -->
         
         <KeyBinding
-			Key="Del"
+			Key="Delete"
 			Command="{StaticResource Commands.DeleteSelectedNodes}"
 			/>
         <KeyBinding
@@ -434,7 +434,7 @@
 			Command="{StaticResource Commands.ZoomIn}"
 			/>
         <KeyBinding
-			Key="Backspace"
+			Key="Back"
 			Command="{StaticResource Commands.JumpBackToPrevZoom}"
 			/>
         <KeyBinding
@@ -544,7 +544,7 @@
     </Window.ContextMenu>
 
     <Window.DataContext>
-        <local:MainWindowViewModel />
+        <advancedSample:MainWindowViewModel />
     </Window.DataContext>
 
     <DockPanel>

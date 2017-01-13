@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Utils;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Windows.Media;
 using System.Windows;
+using System.Windows.Media;
+using NetworkView.Utils;
 
-namespace NetworkModel
+namespace NetworkView.AdvancedNetworkModel
 {
     /// <summary>
     /// Defines a connection between two connectors (aka connection points) of two nodes.

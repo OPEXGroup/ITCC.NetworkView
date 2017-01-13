@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Controls;
-using ZoomAndPan;
-using NetworkModel;
 using System.Collections;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using NetworkView.AdvancedNetworkModel;
+using NetworkView.ZoomAndPan;
 
-namespace SampleCode
+namespace NetworkView.AdvancedSample
 {
     /// <summary>
     /// This is a partial implementation of MainWindow that just contains most of the zooming and panning functionality.

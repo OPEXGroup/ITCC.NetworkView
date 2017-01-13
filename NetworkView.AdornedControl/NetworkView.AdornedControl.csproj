@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B855BFF4-4537-446F-AD26-5392296A248E}</ProjectGuid>
+    <ProjectGuid>{94B81CB7-F8A6-44BC-BD71-E927F701E0D8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NetworkView.SimpleNetworkModel</RootNamespace>
-    <AssemblyName>NetworkView.SimpleNetworkModel</AssemblyName>
+    <RootNamespace>NetworkView.AdornedControl</RootNamespace>
+    <AssemblyName>NetworkView.AdornedControl</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -91,6 +91,12 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -109,14 +115,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConnectionViewModel.cs" />
-    <Compile Include="ConnectorViewModel.cs" />
-    <Compile Include="NetworkViewModel.cs" />
-    <Compile Include="NodeViewModel.cs" />
+    <Compile Include="AdornedControl.cs" />
+    <Compile Include="AdornerEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\NetworkView.Utils\NetworkView.Utils.csproj">
+    <ProjectReference Include="..\NetworkView.Utils\NetworkView.Utils.csproj">
       <Project>{E7D6707B-D6EF-4FA8-9374-DC3B7D3CDFD6}</Project>
       <Name>NetworkView.Utils</Name>
     </ProjectReference>

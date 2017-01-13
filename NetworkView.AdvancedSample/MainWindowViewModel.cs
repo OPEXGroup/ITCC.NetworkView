@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Utils;
-using NetworkModel;
-using System.Windows;
 using System.Diagnostics;
+using System.Windows;
+using NetworkView.AdvancedNetworkModel;
+using NetworkView.Utils;
 
-namespace SampleCode
+namespace NetworkView.AdvancedSample
 {
     /// <summary>
     /// The view-model for the main window.

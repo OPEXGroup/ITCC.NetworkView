@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using Utils;
+using NetworkView.Utils;
 
-namespace NetworkModel
+namespace NetworkView.SimpleNetworkModel
 {
     /// <summary>
     /// Defines a network of nodes and connections between the nodes.

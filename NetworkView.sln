@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkView.AdvancedSample"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkView.AdvancedNetworkModel", "NetworkView.AdvancedSample\NetworkModel\NetworkView.AdvancedNetworkModel.csproj", "{669475DA-8F89-4657-B917-0B0C126BCD1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkView.AdornedControl", "NetworkView.AdornedControl\NetworkView.AdornedControl.csproj", "{94B81CB7-F8A6-44BC-BD71-E927F701E0D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -118,6 +120,18 @@ Global
 		{669475DA-8F89-4657-B917-0B0C126BCD1D}.Release|x64.Build.0 = Release|x64
 		{669475DA-8F89-4657-B917-0B0C126BCD1D}.Release|x86.ActiveCfg = Release|x86
 		{669475DA-8F89-4657-B917-0B0C126BCD1D}.Release|x86.Build.0 = Release|x86
+		{94B81CB7-F8A6-44BC-BD71-E927F701E0D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94B81CB7-F8A6-44BC-BD71-E927F701E0D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94B81CB7-F8A6-44BC-BD71-E927F701E0D8}.Debug|x64.ActiveCfg = Debug|x64
+		{94B81CB7-F8A6-44BC-BD71-E927F701E0D8}.Debug|x64.Build.0 = Debug|x64
+		{94B81CB7-F8A6-44BC-BD71-E927F701E0D8}.Debug|x86.ActiveCfg = Debug|x86
+		{94B81CB7-F8A6-44BC-BD71-E927F701E0D8}.Debug|x86.Build.0 = Debug|x86
+		{94B81CB7-F8A6-44BC-BD71-E927F701E0D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94B81CB7-F8A6-44BC-BD71-E927F701E0D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94B81CB7-F8A6-44BC-BD71-E927F701E0D8}.Release|x64.ActiveCfg = Release|x64
+		{94B81CB7-F8A6-44BC-BD71-E927F701E0D8}.Release|x64.Build.0 = Release|x64
+		{94B81CB7-F8A6-44BC-BD71-E927F701E0D8}.Release|x86.ActiveCfg = Release|x86
+		{94B81CB7-F8A6-44BC-BD71-E927F701E0D8}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

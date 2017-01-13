@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Shapes;
+﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Media;
-using System.Diagnostics;
+using System.Windows.Shapes;
 
-namespace SampleCode
+namespace NetworkView.AdvancedSample
 {
     /// <summary>
     /// Defines an arrow that has multiple points.

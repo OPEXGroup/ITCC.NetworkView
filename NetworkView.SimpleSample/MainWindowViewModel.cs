@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NetworkModel;
-using Utils;
-using System.Windows;
+﻿using System.Windows;
+using NetworkView.SimpleNetworkModel;
+using NetworkView.Utils;
 
-namespace SampleCode
+namespace NetworkView.SimpleSample
 {
     /// <summary>
     /// The view-model for the main window.

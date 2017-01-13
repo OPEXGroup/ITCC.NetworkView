@@ -1,18 +1,17 @@
-﻿<Window x:Class="SampleCode.OverviewWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:SampleCode"
-    xmlns:NetworkModel="clr-namespace:NetworkModel;assembly=NetworkModel"
-    xmlns:NetworkUI="clr-namespace:NetworkUI;assembly=NetworkUI"
-    xmlns:ZoomAndPan="clr-namespace:ZoomAndPan;assembly=ZoomAndPan"
-    Title="Overview" 
-    Height="200" 
-    Width="200" 
-    WindowStyle="ToolWindow"
-    ShowInTaskbar="False" 
-    ShowActivated="False"
-    MouseDown="Window_MouseDown"
-    >
+﻿<Window x:Class="NetworkView.AdvancedSample.OverviewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:advancedSample="clr-namespace:NetworkView.AdvancedSample"
+        xmlns:networkUi="clr-namespace:NetworkView.NetworkUI;assembly=NetworkView.NetworkUI"
+        xmlns:advancedNetworkModel="clr-namespace:NetworkView.AdvancedNetworkModel;assembly=NetworkView.AdvancedNetworkModel"
+        xmlns:zoomAndPan="clr-namespace:NetworkView.ZoomAndPan;assembly=NetworkView.ZoomAndPan"
+        Title="Overview" 
+        Height="200" 
+        Width="200" 
+        WindowStyle="ToolWindow"
+        ShowInTaskbar="False" 
+        ShowActivated="False"
+        MouseDown="Window_MouseDown">
     <Window.Resources>
 
         <ResourceDictionary>
@@ -30,7 +29,7 @@
             Define the visual style for a 'ConnectorItem'.
             -->
             <Style 
-                TargetType="{x:Type NetworkUI:ConnectorItem}"
+                TargetType="{x:Type networkUi:ConnectorItem}"
                 >
 
                 <!-- The visual template. -->
@@ -39,7 +38,7 @@
                     >
                     <Setter.Value>
                         <ControlTemplate 
-                            TargetType="{x:Type NetworkUI:ConnectorItem}"
+                            TargetType="{x:Type networkUi:ConnectorItem}"
                             >
                             <!-- The visual for the connector. -->
                             <Ellipse
@@ -57,12 +56,12 @@
             In this sample a curved arrow represents connections between nodes.
             -->
             <DataTemplate 
-                DataType="{x:Type NetworkModel:ConnectionViewModel}"
+                DataType="{x:Type advancedNetworkModel:ConnectionViewModel}"
                 >
-                
+
                 <!-- The connection is represented by a curved arrow. -->
-                
-                <local:CurvedArrow
+
+                <advancedSample:CurvedArrow
                     Stroke="{StaticResource connectionBrush}"
                     StrokeThickness="2"
                     Fill="{StaticResource connectionBrush}"
@@ -70,20 +69,20 @@
                     />
             </DataTemplate>
 
-            <!-- Define a data-template for the 'NodeViewModel' class. -->    
+            <!-- Define a data-template for the 'NodeViewModel' class. -->
             <DataTemplate
-                DataType="{x:Type NetworkModel:NodeViewModel}"
+                DataType="{x:Type advancedNetworkModel:NodeViewModel}"
                 >
-                
+
                 <!-- The margin has been selected so that the selection rect nicely covers the entire node. -->
-                
+
                 <Grid
                     MinWidth="120"
                     Margin="10,6,10,6"
                     >
 
                     <!-- This rectangle is the main visual for the node. -->
-                    
+
                     <Rectangle
                         Stroke="{StaticResource nodeBorderBrush}"
                         StrokeThickness="1.3"
@@ -107,11 +106,11 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <!-- spacer -->
-                            <RowDefinition Height="2" />                    
+                            <RowDefinition Height="2" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <!-- The name of the node. -->                
+                        <!-- The name of the node. -->
                         <TextBlock
                             Grid.Column="0"
                             Grid.ColumnSpan="3"
@@ -121,7 +120,7 @@
                             VerticalAlignment="Center"
                             />
 
-                        <!-- Displays the node's input connectors. -->                
+                        <!-- Displays the node's input connectors. -->
                         <ItemsControl
                             Grid.Column="0"
                             Grid.Row="2"
@@ -141,8 +140,8 @@
                     </Grid>
                 </Grid>
             </DataTemplate>
-                    
-        </ResourceDictionary>        
+
+        </ResourceDictionary>
     </Window.Resources>
 
     <!--
@@ -150,8 +149,8 @@
     This is used so that we can scale the content to fit the overview window,
     therefore we see an overview of all of the content at once.
     -->
-    <ZoomAndPan:ZoomAndPanControl
-        x:Name="overview"
+    <zoomAndPan:ZoomAndPanControl
+        x:Name="Overview"
         Background="LightGray"
         Loaded="overview_Loaded"
         SizeChanged="overview_SizeChanged"
@@ -168,8 +167,8 @@
             <!--
             In this sample the NetworkView is the content displayed by the ZoomAndPanControl.
             -->
-            <NetworkUI:NetworkView
-                x:Name="networkControl"
+            <networkUi:NetworkView
+                x:Name="NetworkControl"
                 NodesSource="{Binding Network.Nodes}"
                 ConnectionsSource="{Binding Network.Connections}"
                 BorderBrush="Blue"
@@ -183,7 +182,7 @@
             -->
             <Canvas>
                 <Thumb
-                    x:Name="overviewZoomRectThumb"
+                    x:Name="OverviewZoomRectThumb"
                     Canvas.Left="{Binding ContentOffsetX, Mode=TwoWay}"
                     Canvas.Top="{Binding ContentOffsetY, Mode=TwoWay}"
                     Width="{Binding ContentViewportWidth}"
@@ -207,8 +206,8 @@
                     </Thumb.Template>
                 </Thumb>
             </Canvas>
-            
+
         </Grid>
-    </ZoomAndPan:ZoomAndPanControl>    
+    </zoomAndPan:ZoomAndPanControl>
 
 </Window>

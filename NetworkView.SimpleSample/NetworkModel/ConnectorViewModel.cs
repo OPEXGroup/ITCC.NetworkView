@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Utils;
-using System.Diagnostics;
 using System.Windows;
+using NetworkView.Utils;
 
-namespace NetworkModel
+namespace NetworkView.SimpleNetworkModel
 {
     /// <summary>
     /// Defines a connector (aka connection point) that can be attached to a node and is used to connect the node to another node.
