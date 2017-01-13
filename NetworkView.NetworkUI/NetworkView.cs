@@ -117,10 +117,10 @@ namespace NetworkView.NetworkUI
         public static readonly RoutedEvent ConnectionDragCompletedEvent =
             EventManager.RegisterRoutedEvent("ConnectionDragCompleted", RoutingStrategy.Bubble, typeof(ConnectionDragCompletedEventHandler), typeof(NetworkView));
 
-        public static readonly RoutedCommand SelectAllCommand = null;
-        public static readonly RoutedCommand SelectNoneCommand = null;
-        public static readonly RoutedCommand InvertSelectionCommand = null;
-        public static readonly RoutedCommand CancelConnectionDraggingCommand = null;
+        public static readonly RoutedCommand SelectAllCommand;
+        public static readonly RoutedCommand SelectNoneCommand;
+        public static readonly RoutedCommand InvertSelectionCommand;
+        public static readonly RoutedCommand CancelConnectionDraggingCommand;
 
         #endregion Dependency Property/Event Definitions
 
@@ -129,17 +129,17 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// Cached reference to the NodeItemsControl in the visual-tree.
         /// </summary>
-        private NodeItemsControl nodeItemsControl = null;
+        private NodeItemsControl nodeItemsControl;
 
         /// <summary>
         /// Cached reference to the ItemsControl for connections in the visual-tree.
         /// </summary>
-        private ItemsControl connectionItemsControl = null;
+        private ItemsControl connectionItemsControl;
 
         /// <summary>
         /// Cached list of currently selected nodes.
         /// </summary>
-        private List<object> initialSelectedNodes = null;
+        private List<object> initialSelectedNodes;
 
         #endregion Private Data Members
 
@@ -545,20 +545,17 @@ namespace NetworkView.NetworkUI
                 {
                     return nodeItemsControl.SelectedItem;
                 }
-                else
+                if (initialSelectedNodes == null)
                 {
-                    if (initialSelectedNodes == null)
-                    {
-                        return null;
-                    }
-
-                    if (initialSelectedNodes.Count != 1)
-                    {
-                        return null;
-                    }
-
-                    return initialSelectedNodes[0];
+                    return null;
                 }
+
+                if (initialSelectedNodes.Count != 1)
+                {
+                    return null;
+                }
+
+                return initialSelectedNodes[0];
             }
             set
             {
@@ -590,15 +587,12 @@ namespace NetworkView.NetworkUI
                 {
                     return nodeItemsControl.SelectedItems;
                 }
-                else
+                if (initialSelectedNodes == null)
                 {
-                    if (initialSelectedNodes == null)
-                    {
-                        initialSelectedNodes = new List<object>();
-                    }
-
-                    return initialSelectedNodes;
+                    initialSelectedNodes = new List<object>();
                 }
+
+                return initialSelectedNodes;
             }
         }
 
@@ -611,10 +605,7 @@ namespace NetworkView.NetworkUI
         /// Bring the currently selected nodes into view.
         /// This affects ContentViewportOffsetX/ContentViewportOffsetY, but doesn't affect 'ContentScale'.
         /// </summary>
-        public void BringSelectedNodesIntoView()
-        {
-            BringNodesIntoView(SelectedNodes);
-        }
+        public void BringSelectedNodesIntoView() => BringNodesIntoView(SelectedNodes);
 
         /// <summary>
         /// Bring the collection of nodes into view.
@@ -655,10 +646,7 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// Clear the selection.
         /// </summary>
-        public void SelectNone()
-        {
-            SelectedNodes.Clear();
-        }
+        public void SelectNone() => SelectedNodes.Clear();
 
         /// <summary>
         /// Selects all of the nodes.

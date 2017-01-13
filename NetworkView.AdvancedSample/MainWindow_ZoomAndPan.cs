@@ -46,7 +46,7 @@ namespace NetworkView.AdvancedSample
         /// <summary>
         /// Set to 'true' when the previous zoom rect is saved.
         /// </summary>
-        private bool prevZoomRectSet = false;
+        private bool prevZoomRectSet;
 
         /// <summary>
         /// Event raised on mouse down in the NetworkView.
@@ -255,18 +255,12 @@ namespace NetworkView.AdvancedSample
         /// <summary>
         /// The 'ZoomOut' command (bound to the minus key) was executed.
         /// </summary>
-        private void ZoomOut_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            ZoomOut(new Point(zoomAndPanControl.ContentZoomFocusX, zoomAndPanControl.ContentZoomFocusY));
-        }
+        private void ZoomOut_Executed(object sender, ExecutedRoutedEventArgs e) => ZoomOut(new Point(zoomAndPanControl.ContentZoomFocusX, zoomAndPanControl.ContentZoomFocusY));
 
         /// <summary>
         /// The 'JumpBackToPrevZoom' command was executed.
         /// </summary>
-        private void JumpBackToPrevZoom_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            JumpBackToPrevZoom();
-        }
+        private void JumpBackToPrevZoom_Executed(object sender, ExecutedRoutedEventArgs e) => JumpBackToPrevZoom();
 
         /// <summary>
         /// Determines whether the 'JumpBackToPrevZoom' command can be executed.
@@ -359,18 +353,12 @@ namespace NetworkView.AdvancedSample
         /// <summary>
         /// Zoom the viewport out, centering on the specified point (in content coordinates).
         /// </summary>
-        private void ZoomOut(Point contentZoomCenter)
-        {
-            zoomAndPanControl.ZoomAboutPoint(zoomAndPanControl.ContentScale - 0.1, contentZoomCenter);
-        }
+        private void ZoomOut(Point contentZoomCenter) => zoomAndPanControl.ZoomAboutPoint(zoomAndPanControl.ContentScale - 0.1, contentZoomCenter);
 
         /// <summary>
         /// Zoom the viewport in, centering on the specified point (in content coordinates).
         /// </summary>
-        private void ZoomIn(Point contentZoomCenter)
-        {
-            zoomAndPanControl.ZoomAboutPoint(zoomAndPanControl.ContentScale + 0.1, contentZoomCenter);
-        }
+        private void ZoomIn(Point contentZoomCenter) => zoomAndPanControl.ZoomAboutPoint(zoomAndPanControl.ContentScale + 0.1, contentZoomCenter);
 
         /// <summary>
         /// Initialize the rectangle that the use is dragging out.
@@ -454,8 +442,7 @@ namespace NetworkView.AdvancedSample
         private void FadeOutDragZoomRect()
         {
             AnimationHelper.StartAnimation(dragZoomBorder, OpacityProperty, 0.0, 0.1,
-                delegate(object sender, EventArgs e)
-                {
+                delegate {
                     dragZoomCanvas.Visibility = Visibility.Collapsed;
                 });
         }

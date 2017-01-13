@@ -7,6 +7,6 @@
     {
         Undefined,
         Input,
-        Output,
+        Output
     }
 }

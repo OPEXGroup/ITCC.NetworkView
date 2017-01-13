@@ -28,6 +28,6 @@
         /// <summary>
         /// The user is holding down shift and left-mouse-button-dragging to select a region to zoom to.
         /// </summary>
-        DragZooming,
+        DragZooming
     }
 }

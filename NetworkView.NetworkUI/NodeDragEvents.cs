@@ -11,7 +11,7 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// The NodeItem's or their DataContext (when non-NULL).
         /// </summary>
-        public ICollection nodes = null;
+        public ICollection nodes;
 
         protected NodeDragEventArgs(RoutedEvent routedEvent, object source, ICollection nodes) :
             base(routedEvent, source)
@@ -44,7 +44,7 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// Set to 'false' to disallow dragging.
         /// </summary>
-        private bool cancel = false;
+        private bool cancel;
 
         internal NodeDragStartedEventArgs(RoutedEvent routedEvent, object source, ICollection nodes) :
             base(routedEvent, source, nodes)
@@ -80,12 +80,12 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// The amount the node has been dragged horizontally.
         /// </summary>
-        public double horizontalChange = 0;
+        public double horizontalChange;
 
         /// <summary>
         /// The amount the node has been dragged vertically.
         /// </summary>
-        public double verticalChange = 0;
+        public double verticalChange;
 
         internal NodeDraggingEventArgs(RoutedEvent routedEvent, object source, ICollection nodes, double horizontalChange, double verticalChange) :
             base(routedEvent, source, nodes)

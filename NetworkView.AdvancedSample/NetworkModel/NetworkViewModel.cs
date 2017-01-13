@@ -1,5 +1,4 @@
-﻿using System;
-using NetworkView.Utils;
+﻿using NetworkView.Utils;
 
 namespace NetworkView.AdvancedNetworkModel
 {
@@ -13,12 +12,12 @@ namespace NetworkView.AdvancedNetworkModel
         /// <summary>
         /// The collection of nodes in the network.
         /// </summary>
-        private ImpObservableCollection<NodeViewModel> nodes = null;
+        private ImpObservableCollection<NodeViewModel> nodes;
 
         /// <summary>
         /// The collection of connections in the network.
         /// </summary>
-        private ImpObservableCollection<ConnectionViewModel> connections = null;
+        private ImpObservableCollection<ConnectionViewModel> connections;
 
         #endregion Internal Data Members
 

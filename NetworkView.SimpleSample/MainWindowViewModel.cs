@@ -15,7 +15,7 @@ namespace NetworkView.SimpleSample
         /// This is the network that is displayed in the window.
         /// It is the main part of the view-model.
         /// </summary>
-        public NetworkViewModel network = null;
+        public NetworkViewModel network;
 
         #endregion Internal Data Members
 

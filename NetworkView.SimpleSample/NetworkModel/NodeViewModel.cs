@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NetworkView.Utils;
 
 namespace NetworkView.SimpleNetworkModel
@@ -20,22 +19,22 @@ namespace NetworkView.SimpleNetworkModel
         /// <summary>
         /// The X coordinate for the position of the node.
         /// </summary>
-        private double x = 0;
+        private double x;
 
         /// <summary>
         /// The Y coordinate for the position of the node.
         /// </summary>
-        private double y = 0;
+        private double y;
 
         /// <summary>
         /// Set to 'true' when the node is selected.
         /// </summary>
-        private bool isSelected = false;
+        private bool isSelected;
 
         /// <summary>
         /// List of input connectors (connections points) attached to the node.
         /// </summary>
-        private ImpObservableCollection<ConnectorViewModel> connectors = null;
+        private ImpObservableCollection<ConnectorViewModel> connectors;
 
         #endregion Internal Data Members
 

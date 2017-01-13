@@ -85,10 +85,7 @@ namespace NetworkView.SimpleSample
         /// <summary>
         /// Event raised to delete the selected node.
         /// </summary>
-        private void DeleteSelectedNodes_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            ViewModel.DeleteSelectedNodes();
-        }
+        private void DeleteSelectedNodes_Executed(object sender, ExecutedRoutedEventArgs e) => ViewModel.DeleteSelectedNodes();
 
         /// <summary>
         /// Event raised to create a new node.

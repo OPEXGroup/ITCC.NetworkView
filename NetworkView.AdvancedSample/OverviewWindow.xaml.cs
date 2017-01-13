@@ -30,24 +30,12 @@ namespace NetworkView.AdvancedSample
         /// <summary>
         /// Event raised when the ZoomAndPanControl is loaded.
         /// </summary>
-        private void overview_Loaded(object sender, RoutedEventArgs e)
-        {
-            //
-            // Update the scale so that the entire content fits in the window.
-            //
-            Overview.ScaleToFit();
-        }
+        private void overview_Loaded(object sender, RoutedEventArgs e) => Overview.ScaleToFit();
 
         /// <summary>
         /// Event raised when the size of the ZoomAndPanControl changes.
         /// </summary>
-        private void overview_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            //
-            // Update the scale so that the entire content fits in the window.
-            //
-            Overview.ScaleToFit();
-        }
+        private void overview_SizeChanged(object sender, SizeChangedEventArgs e) => Overview.ScaleToFit();
 
         /// <summary>
         /// Event raised when the user drags the overview zoom rect.

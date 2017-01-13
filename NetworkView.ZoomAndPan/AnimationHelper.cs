@@ -12,10 +12,7 @@ namespace NetworkView.ZoomAndPan
         /// <summary>
         /// Starts an animation to a particular value on the specified dependency property.
         /// </summary>
-        public static void StartAnimation(UIElement animatableElement, DependencyProperty dependencyProperty, double toValue, double animationDurationSeconds)
-        {
-            StartAnimation(animatableElement, dependencyProperty, toValue, animationDurationSeconds, null);
-        }
+        public static void StartAnimation(UIElement animatableElement, DependencyProperty dependencyProperty, double toValue, double animationDurationSeconds) => StartAnimation(animatableElement, dependencyProperty, toValue, animationDurationSeconds, null);
 
         /// <summary>
         /// Starts an animation to a particular value on the specified dependency property.
@@ -53,9 +50,6 @@ namespace NetworkView.ZoomAndPan
         /// <summary>
         /// Cancel any animations that are running on the specified dependency property.
         /// </summary>
-        public static void CancelAnimation(UIElement animatableElement, DependencyProperty dependencyProperty)
-        {
-            animatableElement.BeginAnimation(dependencyProperty, null);
-        }
+        public static void CancelAnimation(UIElement animatableElement, DependencyProperty dependencyProperty) => animatableElement.BeginAnimation(dependencyProperty, null);
     }
 }

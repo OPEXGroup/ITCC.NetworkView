@@ -15,12 +15,12 @@ namespace NetworkView.SimpleNetworkModel
         /// <summary>
         /// The source connector the connection is attached to.
         /// </summary>
-        private ConnectorViewModel sourceConnector = null;
+        private ConnectorViewModel sourceConnector;
 
         /// <summary>
         /// The destination connector the connection is attached to.
         /// </summary>
-        private ConnectorViewModel destConnector = null;
+        private ConnectorViewModel destConnector;
 
         /// <summary>
         /// The source and dest hotspots used for generating connection points.

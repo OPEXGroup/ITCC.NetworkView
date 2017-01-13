@@ -46,7 +46,7 @@ namespace NetworkView.Utils
         /// <summary>
         /// Set to 'true' when in a collection changed event.
         /// </summary>
-        private bool inCollectionChangedEvent = false;
+        private bool inCollectionChangedEvent;
 
         public ImpObservableCollection()
         {
@@ -207,10 +207,7 @@ namespace NetworkView.Utils
         /// </summary>
         public event EventHandler<CollectionItemsChangedEventArgs> ItemsRemoved;
 
-        public T[] ToArray()
-        {
-            return inner.ToArray();
-        }
+        public T[] ToArray() => inner.ToArray();
 
         public T2[] ToArray<T2>()
             where T2 : class

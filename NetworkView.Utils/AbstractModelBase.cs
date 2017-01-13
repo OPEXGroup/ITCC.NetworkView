@@ -8,7 +8,7 @@ namespace NetworkView.Utils
     public abstract class AbstractModelBase : INotifyPropertyChanged
     {
 #if DEBUG
-        private static int nextObjectId = 0;
+        private static int nextObjectId;
         private int objectDebugId = nextObjectId++;
 
         public int ObjectDebugId

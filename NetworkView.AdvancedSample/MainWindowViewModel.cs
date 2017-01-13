@@ -17,7 +17,7 @@ namespace NetworkView.AdvancedSample
         /// This is the network that is displayed in the window.
         /// It is the main part of the view-model.
         /// </summary>
-        public NetworkViewModel network = null;
+        public NetworkViewModel network;
 
         ///
         /// The current scale at which the content is being viewed.
@@ -27,12 +27,12 @@ namespace NetworkView.AdvancedSample
         ///
         /// The X coordinate of the offset of the viewport onto the content (in content coordinates).
         /// 
-        private double contentOffsetX = 0;
+        private double contentOffsetX;
 
         ///
         /// The Y coordinate of the offset of the viewport onto the content (in content coordinates).
         /// 
-        private double contentOffsetY = 0;
+        private double contentOffsetY;
 
         ///
         /// The width of the content (in content coordinates).
@@ -49,14 +49,14 @@ namespace NetworkView.AdvancedSample
         /// The value for this is actually computed by the main window's ZoomAndPanControl and update in the
         /// view-model so that the value can be shared with the overview window.
         /// 
-        private double contentViewportWidth = 0;
+        private double contentViewportWidth;
 
         ///
         /// The height of the viewport onto the content (in content coordinates).
         /// The value for this is actually computed by the main window's ZoomAndPanControl and update in the
         /// view-model so that the value can be shared with the overview window.
         /// 
-        private double contentViewportHeight = 0;
+        private double contentViewportHeight;
 
         #endregion Internal Data Members
 
@@ -463,7 +463,7 @@ namespace NetworkView.AdvancedSample
                 //
                 EventHandler<EventArgs> sizeChangedEventHandler = null;
                 sizeChangedEventHandler =
-                    delegate(object sender, EventArgs e)
+                    delegate
                     {
                         //
                         // This event handler will be called after the size of the node has been determined.
@@ -497,11 +497,7 @@ namespace NetworkView.AdvancedSample
         /// <summary>
         /// Utility method to delete a connection from the view-model.
         /// </summary>
-        public void DeleteConnection(ConnectionViewModel connection)
-        {
-            Network.Connections.Remove(connection);
-            }
-
+        public void DeleteConnection(ConnectionViewModel connection) => Network.Connections.Remove(connection);
 
         #region Private Methods
 

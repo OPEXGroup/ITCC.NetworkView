@@ -21,17 +21,17 @@ namespace NetworkView.AdvancedNetworkModel
         /// <summary>
         /// The X coordinate for the position of the node.
         /// </summary>
-        private double x = 0;
+        private double x;
 
         /// <summary>
         /// The Y coordinate for the position of the node.
         /// </summary>
-        private double y = 0;
+        private double y;
 
         /// <summary>
         /// The Z index of the node.
         /// </summary>
-        private int zIndex = 0;
+        private int zIndex;
 
         /// <summary>
         /// The size of the node.
@@ -47,17 +47,17 @@ namespace NetworkView.AdvancedNetworkModel
         /// <summary>
         /// List of input connectors (connections points) attached to the node.
         /// </summary>
-        private ImpObservableCollection<ConnectorViewModel> inputConnectors = null;
+        private ImpObservableCollection<ConnectorViewModel> inputConnectors;
 
         /// <summary>
         /// List of output connectors (connections points) attached to the node.
         /// </summary>
-        private ImpObservableCollection<ConnectorViewModel> outputConnectors = null;
+        private ImpObservableCollection<ConnectorViewModel> outputConnectors;
 
         /// <summary>
         /// Set to 'true' when the node is selected.
         /// </summary>
-        private bool isSelected = false;
+        private bool isSelected;
 
         #endregion Private Data Members
 

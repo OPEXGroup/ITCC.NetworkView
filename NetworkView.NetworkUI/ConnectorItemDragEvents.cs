@@ -35,12 +35,12 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// The amount the connector has been dragged horizontally.
         /// </summary>
-        private double horizontalChange = 0;
+        private double horizontalChange;
 
         /// <summary>
         /// The amount the connector has been dragged vertically.
         /// </summary>
-        private double verticalChange = 0;
+        private double verticalChange;
 
         public ConnectorItemDraggingEventArgs(RoutedEvent routedEvent, object source, double horizontalChange, double verticalChange) :
             base(routedEvent, source)

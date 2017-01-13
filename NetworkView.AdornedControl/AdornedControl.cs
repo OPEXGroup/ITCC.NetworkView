@@ -387,7 +387,7 @@ namespace NetworkView.AdornedControl
             Visible,
             Hidden,
             FadingIn,
-            FadingOut,
+            FadingOut
         }
 
         /// <summary>
@@ -398,12 +398,12 @@ namespace NetworkView.AdornedControl
         /// <summary>
         /// Caches the adorner layer.
         /// </summary>
-        private AdornerLayer adornerLayer = null;
+        private AdornerLayer adornerLayer;
 
         /// <summary>
         /// The actual adorner create to contain our 'adorner UI content'.
         /// </summary>
-        private FrameworkElementAdorner adorner = null;
+        private FrameworkElementAdorner adorner;
 
         /// <summary>
         /// This timer is used to fade out and close the adorner.
@@ -428,10 +428,7 @@ namespace NetworkView.AdornedControl
         /// <summary>
         /// Event raised when the DataContext of the adorned control changes.
         /// </summary>
-        private void AdornedControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            UpdateAdornerDataContext();
-        }
+        private void AdornedControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e) => UpdateAdornerDataContext();
 
         /// <summary>
         /// Update the DataContext of the adorner from the adorned control.
@@ -542,18 +539,12 @@ namespace NetworkView.AdornedControl
         /// <summary>
         /// Event raised when the mouse cursor enters the area of the adorner.
         /// </summary>
-        private void adornerContent_MouseEnter(object sender, MouseEventArgs e)
-        {
-            MouseEnterLogic();
-        }
+        private void adornerContent_MouseEnter(object sender, MouseEventArgs e) => MouseEnterLogic();
 
         /// <summary>
         /// Event raised when the mouse cursor leaves the area of the adorner.
         /// </summary>
-        private void adornerContent_MouseLeave(object sender, MouseEventArgs e)
-        {
-            MouseLeaveLogic();
-        }
+        private void adornerContent_MouseLeave(object sender, MouseEventArgs e) => MouseLeaveLogic();
 
         /// <summary>
         /// Internal method to show or hide the adorner based on the value of IsAdornerVisible.

@@ -14,7 +14,7 @@ namespace NetworkView.AdvancedNetworkModel
         /// <summary>
         /// The connections that are attached to this connector, or null if no connections are attached.
         /// </summary>
-        private ImpObservableCollection<ConnectionViewModel> attachedConnections = null;
+        private ImpObservableCollection<ConnectionViewModel> attachedConnections;
 
         /// <summary>
         /// The hotspot (or center) of the connector.

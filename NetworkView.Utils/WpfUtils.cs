@@ -447,10 +447,7 @@ namespace NetworkView.Utils
         /// <summary>
         /// Transform a point to an ancestors coordinate system.
         /// </summary>
-        public static Point TransformPointToAncestor(Visual ancestor, FrameworkElement element, Point point)
-        {
-            return element.TransformToAncestor(ancestor).Transform(point);
-        }
+        public static Point TransformPointToAncestor(Visual ancestor, FrameworkElement element, Point point) => element.TransformToAncestor(ancestor).Transform(point);
 
         /// <summary>
         /// Find the framework element with the specified name.
@@ -706,17 +703,14 @@ namespace NetworkView.Utils
                     continue;
                 }
 
-                FindTypedElements<T>(childElement, foundElements);
+                FindTypedElements(childElement, foundElements);
                 }
             }
 
         /// <summary>
         /// Recursively dump out all elements in the visual tree.
         /// </summary>
-        public static void DumpVisualTree(Visual root)
-        {
-            DumpVisualTree(root, 0);
-        }
+        public static void DumpVisualTree(Visual root) => DumpVisualTree(root, 0);
 
         /// <summary>
         /// Recursively dump out all elements in the visual tree.

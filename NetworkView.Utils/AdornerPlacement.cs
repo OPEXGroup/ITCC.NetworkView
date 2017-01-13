@@ -7,6 +7,6 @@
     {
         Inside,
         Outside,
-        Mouse,
+        Mouse
     }
 }

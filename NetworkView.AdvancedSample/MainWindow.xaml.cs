@@ -117,18 +117,12 @@ namespace NetworkView.AdvancedSample
         /// <summary>
         /// Event raised to delete the selected node.
         /// </summary>
-        private void DeleteSelectedNodes_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            ViewModel.DeleteSelectedNodes();
-        }
+        private void DeleteSelectedNodes_Executed(object sender, ExecutedRoutedEventArgs e) => ViewModel.DeleteSelectedNodes();
 
         /// <summary>
         /// Event raised to create a new node.
         /// </summary>
-        private void CreateNode_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            CreateNode();
-        }
+        private void CreateNode_Executed(object sender, ExecutedRoutedEventArgs e) => CreateNode();
 
         /// <summary>
         /// Event raised to delete a node.

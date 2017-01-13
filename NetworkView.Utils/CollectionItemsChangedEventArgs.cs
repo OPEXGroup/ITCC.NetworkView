@@ -11,7 +11,7 @@ namespace NetworkView.Utils
         /// <summary>
         /// The collection of items that changed.
         /// </summary>
-        private ICollection items = null;
+        private ICollection items;
 
         public CollectionItemsChangedEventArgs(ICollection items)
         {
