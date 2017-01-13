@@ -54,7 +54,7 @@ namespace NetworkView.AdvancedNetworkModel
                 if (sourceConnector != null)
                 {
                     sourceConnector.AttachedConnections.Remove(this);
-                    sourceConnector.HotspotUpdated -= new EventHandler<EventArgs>(sourceConnector_HotspotUpdated);
+                    sourceConnector.HotspotUpdated -= sourceConnector_HotspotUpdated;
                 }
 
                 sourceConnector = value;
@@ -62,8 +62,8 @@ namespace NetworkView.AdvancedNetworkModel
                 if (sourceConnector != null)
                 {
                     sourceConnector.AttachedConnections.Add(this);
-                    sourceConnector.HotspotUpdated += new EventHandler<EventArgs>(sourceConnector_HotspotUpdated);
-                    this.SourceConnectorHotspot = sourceConnector.Hotspot;
+                    sourceConnector.HotspotUpdated += sourceConnector_HotspotUpdated;
+                    SourceConnectorHotspot = sourceConnector.Hotspot;
                 }
 
                 OnPropertyChanged("SourceConnector");
@@ -90,7 +90,7 @@ namespace NetworkView.AdvancedNetworkModel
                 if (destConnector != null)
                 {
                     destConnector.AttachedConnections.Remove(this);
-                    destConnector.HotspotUpdated -= new EventHandler<EventArgs>(destConnector_HotspotUpdated);
+                    destConnector.HotspotUpdated -= destConnector_HotspotUpdated;
                 }
 
                 destConnector = value;
@@ -98,8 +98,8 @@ namespace NetworkView.AdvancedNetworkModel
                 if (destConnector != null)
                 {
                     destConnector.AttachedConnections.Add(this);
-                    destConnector.HotspotUpdated += new EventHandler<EventArgs>(destConnector_HotspotUpdated);
-                    this.DestConnectorHotspot = destConnector.Hotspot;
+                    destConnector.HotspotUpdated += destConnector_HotspotUpdated;
+                    DestConnectorHotspot = destConnector.Hotspot;
                 }
 
                 OnPropertyChanged("DestConnector");
@@ -182,7 +182,7 @@ namespace NetworkView.AdvancedNetworkModel
         /// </summary>
         private void sourceConnector_HotspotUpdated(object sender, EventArgs e)
         {
-            this.SourceConnectorHotspot = this.SourceConnector.Hotspot;
+            SourceConnectorHotspot = SourceConnector.Hotspot;
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace NetworkView.AdvancedNetworkModel
         /// </summary>
         private void destConnector_HotspotUpdated(object sender, EventArgs e)
         {
-            this.DestConnectorHotspot = this.DestConnector.Hotspot;
+            DestConnectorHotspot = DestConnector.Hotspot;
         }
 
         /// <summary>
@@ -199,27 +199,27 @@ namespace NetworkView.AdvancedNetworkModel
         private void ComputeConnectionPoints()
         {
             PointCollection computedPoints = new PointCollection();
-            computedPoints.Add(this.SourceConnectorHotspot);
+            computedPoints.Add(SourceConnectorHotspot);
 
-            double deltaX = Math.Abs(this.DestConnectorHotspot.X - this.SourceConnectorHotspot.X);
-            double deltaY = Math.Abs(this.DestConnectorHotspot.Y - this.SourceConnectorHotspot.Y);
+            double deltaX = Math.Abs(DestConnectorHotspot.X - SourceConnectorHotspot.X);
+            double deltaY = Math.Abs(DestConnectorHotspot.Y - SourceConnectorHotspot.Y);
             if (deltaX > deltaY)
             {
-                double midPointX = this.SourceConnectorHotspot.X + ((this.DestConnectorHotspot.X - this.SourceConnectorHotspot.X) / 2);
-                computedPoints.Add(new Point(midPointX, this.SourceConnectorHotspot.Y));
-                computedPoints.Add(new Point(midPointX, this.DestConnectorHotspot.Y));
+                double midPointX = SourceConnectorHotspot.X + ((DestConnectorHotspot.X - SourceConnectorHotspot.X) / 2);
+                computedPoints.Add(new Point(midPointX, SourceConnectorHotspot.Y));
+                computedPoints.Add(new Point(midPointX, DestConnectorHotspot.Y));
             }
             else
             {
-                double midPointY = this.SourceConnectorHotspot.Y + ((this.DestConnectorHotspot.Y - this.SourceConnectorHotspot.Y) / 2);
-                computedPoints.Add(new Point(this.SourceConnectorHotspot.X, midPointY));
-                computedPoints.Add(new Point(this.DestConnectorHotspot.X, midPointY));
+                double midPointY = SourceConnectorHotspot.Y + ((DestConnectorHotspot.Y - SourceConnectorHotspot.Y) / 2);
+                computedPoints.Add(new Point(SourceConnectorHotspot.X, midPointY));
+                computedPoints.Add(new Point(DestConnectorHotspot.X, midPointY));
             }
 
-            computedPoints.Add(this.DestConnectorHotspot);
+            computedPoints.Add(DestConnectorHotspot);
             computedPoints.Freeze();
 
-            this.Points = computedPoints;
+            Points = computedPoints;
         }
 
         #endregion Private Methods

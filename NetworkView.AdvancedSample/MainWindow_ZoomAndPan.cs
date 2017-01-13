@@ -289,7 +289,7 @@ namespace NetworkView.AdvancedSample
             }
             else
             {
-                nodes = this.ViewModel.Network.Nodes;
+                nodes = ViewModel.Network.Nodes;
                 if (nodes.Count == 0)
                 {
                     return;
@@ -453,7 +453,7 @@ namespace NetworkView.AdvancedSample
         //
         private void FadeOutDragZoomRect()
         {
-            AnimationHelper.StartAnimation(dragZoomBorder, Border.OpacityProperty, 0.0, 0.1,
+            AnimationHelper.StartAnimation(dragZoomBorder, OpacityProperty, 0.0, 0.1,
                 delegate(object sender, EventArgs e)
                 {
                     dragZoomCanvas.Visibility = Visibility.Collapsed;

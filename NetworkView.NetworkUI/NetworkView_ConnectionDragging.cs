@@ -51,31 +51,31 @@ namespace NetworkView.NetworkUI
         /// </summary>
         private void ConnectorItem_DragStarted(object source, ConnectorItemDragStartedEventArgs e)
         {
-            this.Focus();
+            Focus();
 
             e.Handled = true;
 
-            this.IsDragging = true;
-            this.IsNotDragging = false;
-            this.IsDraggingConnection = true;
-            this.IsNotDraggingConnection = false;
+            IsDragging = true;
+            IsNotDragging = false;
+            IsDraggingConnection = true;
+            IsNotDraggingConnection = false;
 
-            this.draggedOutConnectorItem = (ConnectorItem)e.OriginalSource;
-            var nodeItem = this.draggedOutConnectorItem.ParentNodeItem;
-            this.draggedOutNodeDataContext = nodeItem.DataContext != null ? nodeItem.DataContext : nodeItem;
-            this.draggedOutConnectorDataContext = this.draggedOutConnectorItem.DataContext != null ? this.draggedOutConnectorItem.DataContext : this.draggedOutConnectorItem;
+            draggedOutConnectorItem = (ConnectorItem)e.OriginalSource;
+            var nodeItem = draggedOutConnectorItem.ParentNodeItem;
+            draggedOutNodeDataContext = nodeItem.DataContext != null ? nodeItem.DataContext : nodeItem;
+            draggedOutConnectorDataContext = draggedOutConnectorItem.DataContext != null ? draggedOutConnectorItem.DataContext : draggedOutConnectorItem;
 
             //
             // Raise an event so that application code can create a connection and
             // add it to the view-model.
             //
-            ConnectionDragStartedEventArgs eventArgs = new ConnectionDragStartedEventArgs(ConnectionDragStartedEvent, this, this.draggedOutNodeDataContext, this.draggedOutConnectorDataContext);
+            ConnectionDragStartedEventArgs eventArgs = new ConnectionDragStartedEventArgs(ConnectionDragStartedEvent, this, draggedOutNodeDataContext, draggedOutConnectorDataContext);
             RaiseEvent(eventArgs);
 
             //
             // Retrieve the the view-model object for the connection was created by application code.
             //
-            this.draggingConnectionDataContext = eventArgs.Connection;
+            draggingConnectionDataContext = eventArgs.Connection;
 
             if (draggingConnectionDataContext == null)
             {
@@ -94,7 +94,7 @@ namespace NetworkView.NetworkUI
         {
             e.Handled = true;
 
-            Trace.Assert((ConnectorItem)e.OriginalSource == this.draggedOutConnectorItem);
+            Trace.Assert((ConnectorItem)e.OriginalSource == draggedOutConnectorItem);
 
             Point mousePoint = Mouse.GetPosition(this);
             //
@@ -102,8 +102,8 @@ namespace NetworkView.NetworkUI
             //
             var connectionDraggingEventArgs =
                 new ConnectionDraggingEventArgs(ConnectionDraggingEvent, this, 
-                        this.draggedOutNodeDataContext, this.draggingConnectionDataContext, 
-                        this.draggedOutConnectorDataContext);
+                        draggedOutNodeDataContext, draggingConnectionDataContext, 
+                        draggedOutConnectorDataContext);
 
             RaiseEvent(connectionDraggingEventArgs);
 
@@ -121,8 +121,8 @@ namespace NetworkView.NetworkUI
                 // that was dragged over is valid or not.
                 //
                 var queryFeedbackEventArgs = 
-                    new QueryConnectionFeedbackEventArgs(QueryConnectionFeedbackEvent, this, this.draggedOutNodeDataContext, this.draggingConnectionDataContext, 
-                            this.draggedOutConnectorDataContext, connectorDataContextDraggedOver);
+                    new QueryConnectionFeedbackEventArgs(QueryConnectionFeedbackEvent, this, draggedOutNodeDataContext, draggingConnectionDataContext, 
+                            draggedOutConnectorDataContext, connectorDataContextDraggedOver);
 
                 RaiseEvent(queryFeedbackEventArgs);
 
@@ -160,7 +160,7 @@ namespace NetworkView.NetworkUI
         {
             e.Handled = true;
 
-            Trace.Assert((ConnectorItem)e.OriginalSource == this.draggedOutConnectorItem);
+            Trace.Assert((ConnectorItem)e.OriginalSource == draggedOutConnectorItem);
 
             Point mousePoint = Mouse.GetPosition(this);
 
@@ -181,16 +181,16 @@ namespace NetworkView.NetworkUI
             // The application code can determine if the connection between the two connectors
             // is valid and if so it is free to make the appropriate connection in the view-model.
             //
-            RaiseEvent(new ConnectionDragCompletedEventArgs(ConnectionDragCompletedEvent, this, this.draggedOutNodeDataContext, this.draggingConnectionDataContext, this.draggedOutConnectorDataContext, connectorDataContextDraggedOver));
+            RaiseEvent(new ConnectionDragCompletedEventArgs(ConnectionDragCompletedEvent, this, draggedOutNodeDataContext, draggingConnectionDataContext, draggedOutConnectorDataContext, connectorDataContextDraggedOver));
 
-            this.IsDragging = false;
-            this.IsNotDragging = true;
-            this.IsDraggingConnection = false;
-            this.IsNotDraggingConnection = true;
-            this.draggedOutConnectorDataContext = null;
-            this.draggedOutNodeDataContext = null;
-            this.draggedOutConnectorItem = null;
-            this.draggingConnectionDataContext = null;
+            IsDragging = false;
+            IsNotDragging = true;
+            IsDraggingConnection = false;
+            IsNotDraggingConnection = true;
+            draggedOutConnectorDataContext = null;
+            draggedOutNodeDataContext = null;
+            draggedOutConnectorItem = null;
+            draggingConnectionDataContext = null;
         }
 
         /// <summary>

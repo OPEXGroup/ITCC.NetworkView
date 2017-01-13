@@ -26,8 +26,8 @@ namespace NetworkView.AdvancedNetworkModel
 
         public ConnectorViewModel(string name)
         {
-            this.Name = name;
-            this.Type = ConnectorType.Undefined;
+            Name = name;
+            Type = ConnectorType.Undefined;
         }
 
         /// <summary>
@@ -90,8 +90,8 @@ namespace NetworkView.AdvancedNetworkModel
                 if (attachedConnections == null)
                 {
                     attachedConnections = new ImpObservableCollection<ConnectionViewModel>();
-                    attachedConnections.ItemsAdded += new EventHandler<CollectionItemsChangedEventArgs>(attachedConnections_ItemsAdded);
-                    attachedConnections.ItemsRemoved += new EventHandler<CollectionItemsChangedEventArgs>(attachedConnections_ItemsRemoved);
+                    attachedConnections.ItemsAdded += attachedConnections_ItemsAdded;
+                    attachedConnections.ItemsRemoved += attachedConnections_ItemsRemoved;
                 }
 
                 return attachedConnections;
@@ -144,7 +144,7 @@ namespace NetworkView.AdvancedNetworkModel
         {
             foreach (ConnectionViewModel connection in e.Items)
             {
-                connection.ConnectionChanged += new EventHandler<EventArgs>(connection_ConnectionChanged);
+                connection.ConnectionChanged += connection_ConnectionChanged;
             }
 
             if ((AttachedConnections.Count - e.Items.Count) == 0)
@@ -165,7 +165,7 @@ namespace NetworkView.AdvancedNetworkModel
         {
             foreach (ConnectionViewModel connection in e.Items)
             {
-                connection.ConnectionChanged -= new EventHandler<EventArgs>(connection_ConnectionChanged);
+                connection.ConnectionChanged -= connection_ConnectionChanged;
             }
 
             if (AttachedConnections.Count == 0)

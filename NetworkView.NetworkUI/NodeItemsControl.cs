@@ -24,7 +24,7 @@ namespace NetworkView.NetworkUI
         /// </summary>
         internal NodeItem FindAssociatedNodeItem(object nodeDataContext)
         {
-            return (NodeItem) this.ItemContainerGenerator.ContainerFromItem(nodeDataContext);
+            return (NodeItem) ItemContainerGenerator.ContainerFromItem(nodeDataContext);
         }
 
         /// <summary>

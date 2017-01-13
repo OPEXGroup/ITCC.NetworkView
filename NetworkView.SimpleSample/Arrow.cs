@@ -122,8 +122,8 @@ namespace NetworkView.SimpleSample
                 // Generate geometry and cache it.
                 //
                 LineGeometry geometry = new LineGeometry();
-                geometry.StartPoint = this.Start;
-                geometry.EndPoint = this.End;
+                geometry.StartPoint = Start;
+                geometry.EndPoint = End;
 
                 GeometryGroup group = new GeometryGroup();
                 group.Children.Add(geometry);
@@ -142,16 +142,16 @@ namespace NetworkView.SimpleSample
         /// </summary>
         private void GenerateArrowHeadGeometry(GeometryGroup geometryGroup)
         {
-            EllipseGeometry ellipse = new EllipseGeometry(this.Start, DotSize, DotSize);
+            EllipseGeometry ellipse = new EllipseGeometry(Start, DotSize, DotSize);
             geometryGroup.Children.Add(ellipse);
 
-            Vector startDir = this.End - this.Start;
+            Vector startDir = End - Start;
             startDir.Normalize();
-            Point basePoint = this.End - (startDir * ArrowHeadLength);
+            Point basePoint = End - (startDir * ArrowHeadLength);
             Vector crossDir = new Vector(-startDir.Y, startDir.X);
 
             Point[] arrowHeadPoints = new Point[3];
-            arrowHeadPoints[0] = this.End;
+            arrowHeadPoints[0] = End;
             arrowHeadPoints[1] = basePoint - (crossDir * (ArrowHeadWidth / 2));
             arrowHeadPoints[2] = basePoint + (crossDir * (ArrowHeadWidth / 2));
 

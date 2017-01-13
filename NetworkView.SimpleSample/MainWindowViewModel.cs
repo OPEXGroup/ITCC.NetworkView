@@ -54,7 +54,7 @@ namespace NetworkView.SimpleSample
                 // There is an existing connection attached to the connector that has been dragged out.
                 // Remove the existing connection from the view-model.
                 //
-                this.Network.Connections.Remove(draggedOutConnector.AttachedConnection);
+                Network.Connections.Remove(draggedOutConnector.AttachedConnection);
             }
 
             //
@@ -75,7 +75,7 @@ namespace NetworkView.SimpleSample
             //
             // Add the new connection to the view-model.
             //
-            this.Network.Connections.Add(connection);
+            Network.Connections.Add(connection);
 
             return connection;
         }
@@ -102,7 +102,7 @@ namespace NetworkView.SimpleSample
                 // The connection was unsuccessful.
                 // Maybe the user dragged it out and dropped it in empty space.
                 //
-                this.Network.Connections.Remove(newConnection);
+                Network.Connections.Remove(newConnection);
                 return;
             }
 
@@ -117,7 +117,7 @@ namespace NetworkView.SimpleSample
                 // There is already a connection attached to the connector that was dragged over.
                 // Remove the existing connection from the view-model.
                 //
-                this.Network.Connections.Remove(existingConnection);
+                Network.Connections.Remove(existingConnection);
             }
 
             //
@@ -133,7 +133,7 @@ namespace NetworkView.SimpleSample
         public void DeleteSelectedNodes()
         {
             // Take a copy of the nodes list so we can delete nodes while iterating.
-            var nodesCopy = this.Network.Nodes.ToArray();
+            var nodesCopy = Network.Nodes.ToArray();
 
             foreach (var node in nodesCopy)
             {
@@ -153,12 +153,12 @@ namespace NetworkView.SimpleSample
             //
             // Remove all connections attached to the node.
             //
-            this.Network.Connections.RemoveRange(node.AttachedConnections);
+            Network.Connections.RemoveRange(node.AttachedConnections);
 
             //
             // Remove the node from the network.
             //
-            this.Network.Nodes.Remove(node);
+            Network.Nodes.Remove(node);
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace NetworkView.SimpleSample
             //
             // Add the new node to the view-model.
             //
-            this.Network.Nodes.Add(node);
+            Network.Nodes.Add(node);
 
             return node;
         }
@@ -196,7 +196,7 @@ namespace NetworkView.SimpleSample
             //
             // Create a network, the root of the view-model.
             //
-            this.Network = new NetworkViewModel();
+            Network = new NetworkViewModel();
 
             //
             // Create some nodes and add them to the view-model.
@@ -214,7 +214,7 @@ namespace NetworkView.SimpleSample
             //
             // Add the connection to the view-model.
             //
-            this.Network.Connections.Add(connection);
+            Network.Connections.Add(connection);
         }
 
         #endregion Private Methods

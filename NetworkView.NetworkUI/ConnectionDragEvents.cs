@@ -54,7 +54,7 @@ namespace NetworkView.NetworkUI
             base(routedEvent, source)
         {
             this.node = node;
-            this.draggedOutConnector = connector;
+            draggedOutConnector = connector;
             this.connection = connection;
         }
 

@@ -124,8 +124,8 @@ namespace NetworkView.SimpleNetworkModel
                 if (connectors == null)
                 {
                     connectors = new ImpObservableCollection<ConnectorViewModel>();
-                    connectors.ItemsAdded += new EventHandler<CollectionItemsChangedEventArgs>(connectors_ItemsAdded);
-                    connectors.ItemsRemoved += new EventHandler<CollectionItemsChangedEventArgs>(connectors_ItemsRemoved);
+                    connectors.ItemsAdded += connectors_ItemsAdded;
+                    connectors.ItemsRemoved += connectors_ItemsRemoved;
                 }
 
                 return connectors;
@@ -141,7 +141,7 @@ namespace NetworkView.SimpleNetworkModel
             {
                 List<ConnectionViewModel> attachedConnections = new List<ConnectionViewModel>();
 
-                foreach (var connector in this.Connectors)
+                foreach (var connector in Connectors)
                 {
                     if (connector.AttachedConnection != null)
                     {

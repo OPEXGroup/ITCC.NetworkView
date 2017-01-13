@@ -68,7 +68,7 @@ namespace NetworkView.NetworkUI
             //
             // Hook layout update to recompute 'Hotspot' when the layout changes.
             //
-            this.LayoutUpdated += new EventHandler(ConnectorItem_LayoutUpdated);
+            LayoutUpdated += ConnectorItem_LayoutUpdated;
         }
 
         /// <summary>
@@ -139,38 +139,38 @@ namespace NetworkView.NetworkUI
         {
             base.OnMouseDown(e);
 
-            if (this.ParentNodeItem != null)
+            if (ParentNodeItem != null)
             {
-                this.ParentNodeItem.BringToFront();
+                ParentNodeItem.BringToFront();
             }
 
-            if (this.ParentNetworkView != null)
+            if (ParentNetworkView != null)
             {
-                this.ParentNetworkView.Focus();
+                ParentNetworkView.Focus();
             }
 
             if (e.ChangedButton == MouseButton.Left)
             {
-                if (this.ParentNodeItem != null)
+                if (ParentNodeItem != null)
                 {
                     //
                     // Delegate to parent node to execute selection logic.
                     //
-                    this.ParentNodeItem.LeftMouseDownSelectionLogic();
+                    ParentNodeItem.LeftMouseDownSelectionLogic();
                 }
 
-                lastMousePoint = e.GetPosition(this.ParentNetworkView);
+                lastMousePoint = e.GetPosition(ParentNetworkView);
                 isLeftMouseDown = true;
                 e.Handled = true;
             }
             else if (e.ChangedButton == MouseButton.Right)
             {
-                if (this.ParentNodeItem != null)
+                if (ParentNodeItem != null)
                 {
                     //
                     // Delegate to parent node to execute selection logic.
                     //
-                    this.ParentNodeItem.RightMouseDownSelectionLogic();
+                    ParentNodeItem.RightMouseDownSelectionLogic();
                 }
             }
         }
@@ -188,7 +188,7 @@ namespace NetworkView.NetworkUI
                 // Raise the event to notify that dragging is in progress.
                 //
 
-                Point curMousePoint = e.GetPosition(this.ParentNetworkView);
+                Point curMousePoint = e.GetPosition(ParentNetworkView);
                 Vector offset = curMousePoint - lastMousePoint;
                 if (offset.X != 0.0 &&
                     offset.Y != 0.0)
@@ -202,15 +202,15 @@ namespace NetworkView.NetworkUI
             }
             else if (isLeftMouseDown)
             {
-                if (this.ParentNetworkView != null &&
-                    this.ParentNetworkView.EnableConnectionDragging)
+                if (ParentNetworkView != null &&
+                    ParentNetworkView.EnableConnectionDragging)
                 {
                     //
                     // The user is left-dragging the connector and connection dragging is enabled,
                     // but don't initiate the drag operation until 
                     // the mouse cursor has moved more than the threshold distance.
                     //
-                    Point curMousePoint = e.GetPosition(this.ParentNetworkView);
+                    Point curMousePoint = e.GetPosition(ParentNetworkView);
                     var dragDelta = curMousePoint - lastMousePoint;
                     double dragDistance = Math.Abs(dragDelta.Length);
                     if (dragDistance > DragThreshold)
@@ -235,7 +235,7 @@ namespace NetworkView.NetworkUI
                         }
 
                         isDragging = true;
-                        this.CaptureMouse();
+                        CaptureMouse();
                         e.Handled = true;
                     }
                 }
@@ -257,7 +257,7 @@ namespace NetworkView.NetworkUI
                     {
                         RaiseEvent(new ConnectorItemDragCompletedEventArgs(ConnectorDragCompletedEvent, this));
                         
-                        this.ReleaseMouseCapture();
+                        ReleaseMouseCapture();
 
                         isDragging = false;
                     }
@@ -266,12 +266,12 @@ namespace NetworkView.NetworkUI
                         //
                         // Execute mouse up selection logic only if there was no drag operation.
                         //
-                        if (this.ParentNodeItem != null)
+                        if (ParentNodeItem != null)
                         {
                             //
                             // Delegate to parent node to execute selection logic.
                             //
-                            this.ParentNodeItem.LeftMouseUpSelectionLogic();
+                            ParentNodeItem.LeftMouseUpSelectionLogic();
                         }
                     }
 
@@ -295,7 +295,7 @@ namespace NetworkView.NetworkUI
                 RaiseEvent(new ConnectorItemDragCompletedEventArgs(ConnectorDragCompletedEvent, null));
 
                 isLeftMouseDown = false;
-                this.ReleaseMouseCapture();
+                ReleaseMouseCapture();
             }
         }
 
@@ -321,20 +321,20 @@ namespace NetworkView.NetworkUI
         /// </summary>
         private void UpdateHotspot()
         {
-            if (this.ParentNetworkView == null)
+            if (ParentNetworkView == null)
             {
                 // No parent NetworkView is set.
                 return;
             }
 
-            if (!this.ParentNetworkView.IsAncestorOf(this))
+            if (!ParentNetworkView.IsAncestorOf(this))
             {
                 //
                 // The parent NetworkView is no longer an ancestor of the connector.
                 // This happens when the connector (and its parent node) has been removed from the network.
                 // Reset the property null so we don't attempt to check again.
                 //
-                this.ParentNetworkView = null;
+                ParentNetworkView = null;
                 return;
             }
 
@@ -342,7 +342,7 @@ namespace NetworkView.NetworkUI
             // The parent NetworkView is still valid.
             // Compute the center point of the connector.
             //
-            var centerPoint = new Point(this.ActualWidth / 2, this.ActualHeight / 2);
+            var centerPoint = new Point(ActualWidth / 2, ActualHeight / 2);
 
             //
             // Transform the center point so that it is relative to the parent NetworkView.
@@ -350,7 +350,7 @@ namespace NetworkView.NetworkUI
             // view-model using OneWayToSource so that the value of the hotspot is then pushed through
             // to the view-model.
             //
-            this.Hotspot = this.TransformToAncestor(this.ParentNetworkView).Transform(centerPoint);
+            Hotspot = TransformToAncestor(ParentNetworkView).Transform(centerPoint);
        }
 
         #endregion Private Methods

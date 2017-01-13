@@ -57,10 +57,10 @@ namespace NetworkView.AdvancedSample
             //
             // Update the position of the overview rect as the user drags it around.
             //
-            double newContentOffsetX = Math.Min(Math.Max(0.0, Canvas.GetLeft(OverviewZoomRectThumb) + e.HorizontalChange), this.ViewModel.ContentWidth - this.ViewModel.ContentViewportWidth);
+            double newContentOffsetX = Math.Min(Math.Max(0.0, Canvas.GetLeft(OverviewZoomRectThumb) + e.HorizontalChange), ViewModel.ContentWidth - ViewModel.ContentViewportWidth);
             Canvas.SetLeft(OverviewZoomRectThumb, newContentOffsetX);
 
-            double newContentOffsetY = Math.Min(Math.Max(0.0, Canvas.GetTop(OverviewZoomRectThumb) + e.VerticalChange), this.ViewModel.ContentHeight - this.ViewModel.ContentViewportHeight);
+            double newContentOffsetY = Math.Min(Math.Max(0.0, Canvas.GetTop(OverviewZoomRectThumb) + e.VerticalChange), ViewModel.ContentHeight - ViewModel.ContentViewportHeight);
             Canvas.SetTop(OverviewZoomRectThumb, newContentOffsetY);
         }
 

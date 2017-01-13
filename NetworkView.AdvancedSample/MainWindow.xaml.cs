@@ -35,16 +35,16 @@ namespace NetworkView.AdvancedSample
             // Display help text for the sample app.
             //
             HelpTextWindow helpTextWindow = new HelpTextWindow();
-            helpTextWindow.Left = this.Left + this.Width + 5;
-            helpTextWindow.Top = this.Top;
+            helpTextWindow.Left = Left + Width + 5;
+            helpTextWindow.Top = Top;
             helpTextWindow.Owner = this;
             helpTextWindow.Show();
 
             OverviewWindow overviewWindow = new OverviewWindow();
-            overviewWindow.Left = this.Left;
-            overviewWindow.Top = this.Top + this.Height + 5;
+            overviewWindow.Left = Left;
+            overviewWindow.Top = Top + Height + 5;
             overviewWindow.Owner = this;
-            overviewWindow.DataContext = this.ViewModel; // Pass the view model onto the overview window.
+            overviewWindow.DataContext = ViewModel; // Pass the view model onto the overview window.
             overviewWindow.Show();
         }
 
@@ -59,7 +59,7 @@ namespace NetworkView.AdvancedSample
             //
             // Delegate the real work to the view model.
             //
-            var connection = this.ViewModel.ConnectionDragStarted(draggedOutConnector, curDragPoint);
+            var connection = ViewModel.ConnectionDragStarted(draggedOutConnector, curDragPoint);
 
             //
             // Must return the view-model object that represents the connection via the event args.
@@ -78,7 +78,7 @@ namespace NetworkView.AdvancedSample
             object feedbackIndicator = null;
             bool connectionOk = true;
 
-            this.ViewModel.QueryConnnectionFeedback(draggedOutConnector, draggedOverConnector, out feedbackIndicator, out connectionOk);
+            ViewModel.QueryConnnectionFeedback(draggedOutConnector, draggedOverConnector, out feedbackIndicator, out connectionOk);
 
             //
             // Return the feedback object to NetworkView.
@@ -100,7 +100,7 @@ namespace NetworkView.AdvancedSample
         {
             Point curDragPoint = Mouse.GetPosition(networkControl);
             var connection = (ConnectionViewModel)e.Connection;
-            this.ViewModel.ConnectionDragging(curDragPoint, connection);
+            ViewModel.ConnectionDragging(curDragPoint, connection);
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace NetworkView.AdvancedSample
             var connectorDraggedOut = (ConnectorViewModel)e.ConnectorDraggedOut;
             var connectorDraggedOver = (ConnectorViewModel)e.ConnectorDraggedOver;
             var newConnection = (ConnectionViewModel)e.Connection;
-            this.ViewModel.ConnectionDragCompleted(newConnection, connectorDraggedOut, connectorDraggedOver);
+            ViewModel.ConnectionDragCompleted(newConnection, connectorDraggedOut, connectorDraggedOver);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace NetworkView.AdvancedSample
         /// </summary>
         private void DeleteSelectedNodes_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            this.ViewModel.DeleteSelectedNodes();
+            ViewModel.DeleteSelectedNodes();
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace NetworkView.AdvancedSample
         private void DeleteNode_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var node = (NodeViewModel)e.Parameter;
-            this.ViewModel.DeleteNode(node);
+            ViewModel.DeleteNode(node);
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace NetworkView.AdvancedSample
         private void DeleteConnection_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var connection = (ConnectionViewModel)e.Parameter;
-            this.ViewModel.DeleteConnection(connection);
+            ViewModel.DeleteConnection(connection);
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace NetworkView.AdvancedSample
         private void CreateNode()
         {
             var newNodePosition = Mouse.GetPosition(networkControl);
-            this.ViewModel.CreateNode("New Node!", newNodePosition, true);
+            ViewModel.CreateNode("New Node!", newNodePosition, true);
         }
 
         /// <summary>

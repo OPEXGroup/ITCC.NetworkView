@@ -22,7 +22,7 @@ namespace NetworkView.SimpleSample
         {
             get
             {
-                return (MainWindowViewModel)this.DataContext;
+                return (MainWindowViewModel)DataContext;
             }
         }
 
@@ -35,8 +35,8 @@ namespace NetworkView.SimpleSample
             // Display help text for the sample app.
             //
             HelpTextWindow helpTextWindow = new HelpTextWindow();
-            helpTextWindow.Left = this.Left + this.Width + 5;
-            helpTextWindow.Top = this.Top;
+            helpTextWindow.Left = Left + Width + 5;
+            helpTextWindow.Top = Top;
             helpTextWindow.Owner = this;
             helpTextWindow.Show();
         }
@@ -52,7 +52,7 @@ namespace NetworkView.SimpleSample
             //
             // Delegate the real work to the view model.
             //
-            var connection = this.ViewModel.ConnectionDragStarted(draggedOutConnector, curDragPoint);
+            var connection = ViewModel.ConnectionDragStarted(draggedOutConnector, curDragPoint);
 
             //
             // Must return the view-model object that represents the connection via the event args.
@@ -68,7 +68,7 @@ namespace NetworkView.SimpleSample
         {
             var curDragPoint = Mouse.GetPosition(networkControl);
             var connection = (ConnectionViewModel)e.Connection;
-            this.ViewModel.ConnectionDragging(connection, curDragPoint);
+            ViewModel.ConnectionDragging(connection, curDragPoint);
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace NetworkView.SimpleSample
             var connectorDraggedOut = (ConnectorViewModel)e.ConnectorDraggedOut;
             var connectorDraggedOver = (ConnectorViewModel)e.ConnectorDraggedOver;
             var newConnection = (ConnectionViewModel)e.Connection;
-            this.ViewModel.ConnectionDragCompleted(newConnection, connectorDraggedOut, connectorDraggedOver);
+            ViewModel.ConnectionDragCompleted(newConnection, connectorDraggedOut, connectorDraggedOver);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace NetworkView.SimpleSample
         /// </summary>
         private void DeleteSelectedNodes_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            this.ViewModel.DeleteSelectedNodes();
+            ViewModel.DeleteSelectedNodes();
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace NetworkView.SimpleSample
         private void CreateNode_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Point newNodeLocation = Mouse.GetPosition(networkControl);
-            this.ViewModel.CreateNode("New Node!", newNodeLocation);
+            ViewModel.CreateNode("New Node!", newNodeLocation);
         }
 
 

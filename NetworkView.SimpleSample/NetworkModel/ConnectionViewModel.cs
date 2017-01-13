@@ -51,7 +51,7 @@ namespace NetworkView.SimpleNetworkModel
                     Trace.Assert(sourceConnector.AttachedConnection == this);
 
                     sourceConnector.AttachedConnection = null;
-                    sourceConnector.HotspotUpdated -= new EventHandler<EventArgs>(sourceConnector_HotspotUpdated);
+                    sourceConnector.HotspotUpdated -= sourceConnector_HotspotUpdated;
                 }
 
                 sourceConnector = value;
@@ -61,8 +61,8 @@ namespace NetworkView.SimpleNetworkModel
                     Trace.Assert(sourceConnector.AttachedConnection == null);
 
                     sourceConnector.AttachedConnection = this;
-                    sourceConnector.HotspotUpdated += new EventHandler<EventArgs>(sourceConnector_HotspotUpdated);
-                    this.SourceConnectorHotspot = sourceConnector.Hotspot;
+                    sourceConnector.HotspotUpdated += sourceConnector_HotspotUpdated;
+                    SourceConnectorHotspot = sourceConnector.Hotspot;
                 }
 
                 OnPropertyChanged("SourceConnector");
@@ -90,7 +90,7 @@ namespace NetworkView.SimpleNetworkModel
                     Trace.Assert(destConnector.AttachedConnection == this);
 
                     destConnector.AttachedConnection = null;
-                    destConnector.HotspotUpdated += new EventHandler<EventArgs>(destConnector_HotspotUpdated);
+                    destConnector.HotspotUpdated += destConnector_HotspotUpdated;
                 }
 
                 destConnector = value;
@@ -100,8 +100,8 @@ namespace NetworkView.SimpleNetworkModel
                     Trace.Assert(destConnector.AttachedConnection == null);
 
                     destConnector.AttachedConnection = this;
-                    destConnector.HotspotUpdated += new EventHandler<EventArgs>(destConnector_HotspotUpdated);
-                    this.DestConnectorHotspot = destConnector.Hotspot;
+                    destConnector.HotspotUpdated += destConnector_HotspotUpdated;
+                    DestConnectorHotspot = destConnector.Hotspot;
                 }
 
                 OnPropertyChanged("DestConnector");
@@ -146,7 +146,7 @@ namespace NetworkView.SimpleNetworkModel
         /// </summary>
         private void sourceConnector_HotspotUpdated(object sender, EventArgs e)
         {
-            this.SourceConnectorHotspot = this.SourceConnector.Hotspot;
+            SourceConnectorHotspot = SourceConnector.Hotspot;
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace NetworkView.SimpleNetworkModel
         /// </summary>
         private void destConnector_HotspotUpdated(object sender, EventArgs e)
         {
-            this.DestConnectorHotspot = this.DestConnector.Hotspot;
+            DestConnectorHotspot = DestConnector.Hotspot;
         }
 
         #endregion Private Methods

@@ -60,7 +60,7 @@ namespace NetworkView.NetworkUI
         {
             base.OnMouseDown(e);
 
-            this.Focus();
+            Focus();
 
             if (e.ChangedButton == MouseButton.Left &&
                 (Keyboard.Modifiers & ModifierKeys.Control) != 0)
@@ -68,12 +68,12 @@ namespace NetworkView.NetworkUI
                 //
                 //  Clear selection immediately when starting drag selection.
                 //
-                this.SelectedNodes.Clear();
+                SelectedNodes.Clear();
 
                 isControlAndLeftMouseButtonDown = true;
                 origMouseDownPoint = e.GetPosition(this);
 
-                this.CaptureMouse();
+                CaptureMouse();
 
                 e.Handled = true;
             }
@@ -106,7 +106,7 @@ namespace NetworkView.NetworkUI
                 if (isControlAndLeftMouseButtonDown)
                 {
                     isControlAndLeftMouseButtonDown = false;
-                    this.ReleaseMouseCapture();
+                    ReleaseMouseCapture();
 
 
                     e.Handled = true;
@@ -117,7 +117,7 @@ namespace NetworkView.NetworkUI
                     //
                     // A click and release in empty space clears the selection.
                     //
-                    this.SelectedNodes.Clear();
+                    SelectedNodes.Clear();
                 }
             }
         }
@@ -241,7 +241,7 @@ namespace NetworkView.NetworkUI
             //
             // Find and select all the list box items.
             //
-            for (int nodeIndex = 0; nodeIndex < this.Nodes.Count; ++nodeIndex) 
+            for (int nodeIndex = 0; nodeIndex < Nodes.Count; ++nodeIndex) 
             {
                 var nodeItem = (NodeItem) nodeItemsControl.ItemContainerGenerator.ContainerFromIndex(nodeIndex);
                 var transformToAncestor = nodeItem.TransformToAncestor(this);

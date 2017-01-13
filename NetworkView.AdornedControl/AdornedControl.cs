@@ -84,11 +84,11 @@ namespace NetworkView.AdornedControl
 
         public AdornedControl()
         {
-            this.Focusable = false; // By default don't want 'AdornedControl' to be focusable.
+            Focusable = false; // By default don't want 'AdornedControl' to be focusable.
 
-            this.DataContextChanged += new DependencyPropertyChangedEventHandler(AdornedControl_DataContextChanged);
+            DataContextChanged += AdornedControl_DataContextChanged;
 
-            closeAdornerTimer.Tick += new EventHandler(closeAdornerTimer_Tick);
+            closeAdornerTimer.Tick += closeAdornerTimer_Tick;
             closeAdornerTimer.Interval = TimeSpan.FromSeconds(CloseAdornerTimeOut);
         }
 
@@ -130,7 +130,7 @@ namespace NetworkView.AdornedControl
                 return;
             }
 
-            this.ShowAdorner();
+            ShowAdorner();
 
             if (adornerShowState != AdornerShowState.FadingOut)
             {
@@ -138,10 +138,10 @@ namespace NetworkView.AdornedControl
             }
 
             DoubleAnimation doubleAnimation = new DoubleAnimation(1.0, new Duration(TimeSpan.FromSeconds(FadeInTime)));
-            doubleAnimation.Completed += new EventHandler(fadeInAnimation_Completed);
+            doubleAnimation.Completed += fadeInAnimation_Completed;
             doubleAnimation.Freeze();
                 
-            adorner.BeginAnimation(FrameworkElement.OpacityProperty, doubleAnimation);
+            adorner.BeginAnimation(OpacityProperty, doubleAnimation);
 
             adornerShowState = AdornerShowState.FadingIn;
         }
@@ -168,10 +168,10 @@ namespace NetworkView.AdornedControl
             }
 
             DoubleAnimation fadeOutAnimation = new DoubleAnimation(0.0, new Duration(TimeSpan.FromSeconds(FadeOutTime)));
-            fadeOutAnimation.Completed += new EventHandler(fadeOutAnimation_Completed);
+            fadeOutAnimation.Completed += fadeOutAnimation_Completed;
             fadeOutAnimation.Freeze();
 
-            adorner.BeginAnimation(FrameworkElement.OpacityProperty, fadeOutAnimation);
+            adorner.BeginAnimation(OpacityProperty, fadeOutAnimation);
 
             adornerShowState = AdornerShowState.FadingOut;
         }
@@ -438,9 +438,9 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private void UpdateAdornerDataContext()
         {
-            if (this.AdornerContent != null)
+            if (AdornerContent != null)
             {
-                this.AdornerContent.DataContext = this.DataContext;
+                AdornerContent.DataContext = DataContext;
             }
         }
 
@@ -527,15 +527,15 @@ namespace NetworkView.AdornedControl
             FrameworkElement oldAdornerContent = (FrameworkElement)e.OldValue;
             if (oldAdornerContent != null)
             {
-                oldAdornerContent.MouseEnter -= new MouseEventHandler(c.adornerContent_MouseEnter);
-                oldAdornerContent.MouseLeave -= new MouseEventHandler(c.adornerContent_MouseLeave);
+                oldAdornerContent.MouseEnter -= c.adornerContent_MouseEnter;
+                oldAdornerContent.MouseLeave -= c.adornerContent_MouseLeave;
             }
 
             FrameworkElement newAdornerContent = (FrameworkElement)e.NewValue;
             if (newAdornerContent != null)
             {
-                newAdornerContent.MouseEnter += new MouseEventHandler(c.adornerContent_MouseEnter);
-                newAdornerContent.MouseLeave += new MouseEventHandler(c.adornerContent_MouseLeave);
+                newAdornerContent.MouseEnter += c.adornerContent_MouseEnter;
+                newAdornerContent.MouseLeave += c.adornerContent_MouseLeave;
             }
         }
 
@@ -602,7 +602,7 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private void ShowAdornerInternal()
         {
-            if (this.adorner != null)
+            if (adorner != null)
             {
                 // Already adorned.
                 return;
@@ -610,7 +610,7 @@ namespace NetworkView.AdornedControl
 
             AddAdorner();
 
-            RaiseEvent(new AdornerEventArgs(AdornerShownEvent, this, this.adorner.Child));
+            RaiseEvent(new AdornerEventArgs(AdornerShownEvent, this, adorner.Child));
         }
 
         /// <summary>
@@ -618,13 +618,13 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private void HideAdornerInternal()
         {
-            if (this.adornerLayer == null || this.adorner == null)
+            if (adornerLayer == null || adorner == null)
             {
                 // Not already adorned.
                 return;
             }
 
-            RaiseEvent(new AdornerEventArgs(AdornerHiddenEvent, this, this.adorner.Child));
+            RaiseEvent(new AdornerEventArgs(AdornerHiddenEvent, this, adorner.Child));
 
             RemoveAdorner();
         }
@@ -718,7 +718,7 @@ namespace NetworkView.AdornedControl
             if (adornerShowState == AdornerShowState.FadingOut)
             {
                 // Still fading out, eg it wasn't aborted.
-                this.HideAdorner();
+                HideAdorner();
             }
         }
 
@@ -727,41 +727,41 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private void AddAdorner()
         {
-            if (this.AdornerContent != null)
+            if (AdornerContent != null)
             {
-                if (this.adornerLayer == null)
+                if (adornerLayer == null)
                 {
-                    this.adornerLayer = AdornerLayer.GetAdornerLayer(this);
+                    adornerLayer = AdornerLayer.GetAdornerLayer(this);
                 }
 
-                if (this.adornerLayer != null)
+                if (adornerLayer != null)
                 {
                     FrameworkElement adornedControl = this; // The control to be adorned defaults to 'this'.
 
-                    if (!string.IsNullOrEmpty(this.AdornedTemplatePartName))
+                    if (!string.IsNullOrEmpty(AdornedTemplatePartName))
                     {
                         //
                         // If 'AdornedTemplatePartName' is set to a valid string then search the visual-tree
                         // for a UI element that has the specified part name.  If we find it then use it as the
                         // adorned control, otherwise throw an exception.
                         //
-                        adornedControl = FindNamedChild(this, this.AdornedTemplatePartName);
+                        adornedControl = FindNamedChild(this, AdornedTemplatePartName);
                         if (adornedControl == null)
                         {
-                            throw new ApplicationException("Failed to find a FrameworkElement in the visual-tree with the part name '" + this.AdornedTemplatePartName + "'.");
+                            throw new ApplicationException("Failed to find a FrameworkElement in the visual-tree with the part name '" + AdornedTemplatePartName + "'.");
                         }
                     }
 
-                    this.adorner = new FrameworkElementAdorner(this.AdornerContent, adornedControl, 
-                                                               this.HorizontalAdornerPlacement, this.VerticalAdornerPlacement,
-                                                               this.AdornerOffsetX, this.AdornerOffsetY);
-                    this.adornerLayer.Add(this.adorner);
+                    adorner = new FrameworkElementAdorner(AdornerContent, adornedControl, 
+                                                               HorizontalAdornerPlacement, VerticalAdornerPlacement,
+                                                               AdornerOffsetX, AdornerOffsetY);
+                    adornerLayer.Add(adorner);
 
 					//
 					// Update the layout of the adorner layout so that clients that depend
 					// on the 'AdornerShown' event can use the visual tree of the adorner.
 					//
-					this.adornerLayer.UpdateLayout();
+					adornerLayer.UpdateLayout();
 
                     UpdateAdornerDataContext();
                 }
@@ -778,21 +778,21 @@ namespace NetworkView.AdornedControl
             //
             closeAdornerTimer.Stop();
 
-            if (this.adornerLayer != null && this.adorner != null)
+            if (adornerLayer != null && adorner != null)
             {
-                this.adornerLayer.Remove(this.adorner);
-                this.adorner.DisconnectChild();
+                adornerLayer.Remove(adorner);
+                adorner.DisconnectChild();
             }
 
-            this.adorner = null;
-            this.adornerLayer = null;
+            adorner = null;
+            adornerLayer = null;
 
             //
             // Ensure that the state of the adorned control reflects that
             // the the adorner is no longer.
             //
-            this.IsAdornerVisible = false;
-            this.adornerShowState = AdornerShowState.Hidden;
+            IsAdornerVisible = false;
+            adornerShowState = AdornerShowState.Hidden;
 		}
 
         #endregion
