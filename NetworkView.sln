@@ -10,9 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoomAndPan", "ZoomAndPan\ZoomAndPan.csproj", "{468ADEDE-6F5E-40C0-99C9-C6DAC4FAC934}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkView.ZoomAndPan", "NetworkView.ZoomAndPan\NetworkView.ZoomAndPan.csproj", "{468ADEDE-6F5E-40C0-99C9-C6DAC4FAC934}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{E7D6707B-D6EF-4FA8-9374-DC3B7D3CDFD6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkView.Utils", "NetworkView.Utils\NetworkView.Utils.csproj", "{E7D6707B-D6EF-4FA8-9374-DC3B7D3CDFD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
