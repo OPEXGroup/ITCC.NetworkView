@@ -4,18 +4,18 @@
     xmlns:networkUi="clr-namespace:NetworkView.NetworkUI;assembly=NetworkView.NetworkUI">
     
     <BooleanToVisibilityConverter
-        x:Key="booleanToVisibilityConverter" 
+        x:Key="BooleanToVisibilityConverter" 
         />
  
     <!-- The border brush for nodes. -->
     <SolidColorBrush
-        x:Key="nodeBorderBrush"
+        x:Key="NodeBorderBrush"
         Color="Black"
         />
 
     <!-- The fill brush for nodes. -->
     <LinearGradientBrush
-        x:Key="nodeFillBrush"
+        x:Key="NodeFillBrush"
         StartPoint="0,0"
         EndPoint="0,1"
         >
@@ -25,13 +25,13 @@
 
     <!-- The brush for connections. -->
     <SolidColorBrush
-        x:Key="connectionBrush"
+        x:Key="ConnectionBrush"
         Color="Black"
         />
     
     <!-- The brush for connectors. -->
     <SolidColorBrush
-        x:Key="connectorBackgroundBrush"
+        x:Key="ConnectorBackgroundBrush"
         Color="White"
         />
 
@@ -66,7 +66,7 @@
     A data-template that defines the UI for input connectors.
     -->
     <DataTemplate
-        x:Key="inputConnectorTemplate"
+        x:Key="InputConnectorTemplate"
         >
         <Grid
             Margin="0,2,0,0"
@@ -98,7 +98,7 @@
     A data-template that defines the UI for output connectors.
     -->
     <DataTemplate
-        x:Key="outputConnectorTemplate"
+        x:Key="OutputConnectorTemplate"
         >
         <Grid
             HorizontalAlignment="Right"
@@ -129,9 +129,9 @@
                     
                 <!-- Show a black dot at the start of the arrow when connected. -->
                 <Ellipse
-                    Visibility="{Binding IsConnectionAttached, Converter={StaticResource booleanToVisibilityConverter}}"
+                    Visibility="{Binding IsConnectionAttached, Converter={StaticResource BooleanToVisibilityConverter}}"
                     Margin="3"
-                    Fill="{StaticResource connectionBrush}"
+                    Fill="{StaticResource ConnectionBrush}"
                     IsHitTestVisible="False"
                     />
             </Grid>

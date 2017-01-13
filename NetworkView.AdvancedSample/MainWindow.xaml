@@ -115,8 +115,8 @@
                             >
                             <!-- The visual for the connector. -->
                             <Ellipse
-                                Stroke="{StaticResource nodeBorderBrush}"
-                                Fill="{StaticResource connectorBackgroundBrush}"
+                                Stroke="{StaticResource NodeBorderBrush}"
+                                Fill="{StaticResource ConnectorBackgroundBrush}"
                                 />
                         </ControlTemplate>
                     </Setter.Value>
@@ -246,9 +246,9 @@
 
                     <!-- The connection is represented by a curved arrow. -->                                
                     <advancedSample:CurvedArrow
-                        Stroke="{StaticResource connectionBrush}"
+                        Stroke="{StaticResource ConnectionBrush}"
                         StrokeThickness="2"
-                        Fill="{StaticResource connectionBrush}"
+                        Fill="{StaticResource ConnectionBrush}"
                         Points="{Binding Points}"
                         />
 
@@ -319,11 +319,11 @@
                         <!-- This rectangle is the main visual for the node. -->
                         
                         <Rectangle
-                            Stroke="{StaticResource nodeBorderBrush}"
+                            Stroke="{StaticResource NodeBorderBrush}"
                             StrokeThickness="1.3"
                             RadiusX="4"
                             RadiusY="4"
-                            Fill="{StaticResource nodeFillBrush}"
+                            Fill="{StaticResource NodeFillBrush}"
                             />
 
                         <!-- 
@@ -360,7 +360,7 @@
                                 Grid.Column="0"
                                 Grid.Row="2"
                                 ItemsSource="{Binding InputConnectors}"
-                                ItemTemplate="{StaticResource inputConnectorTemplate}"
+                                ItemTemplate="{StaticResource InputConnectorTemplate}"
                                 Focusable="False"
                                 />
 
@@ -369,7 +369,7 @@
                                 Grid.Column="2"
                                 Grid.Row="2"
                                 ItemsSource="{Binding OutputConnectors}"
-                                ItemTemplate="{StaticResource outputConnectorTemplate}"
+                                ItemTemplate="{StaticResource OutputConnectorTemplate}"
                                 Focusable="False"
                                 />
                         </Grid>
