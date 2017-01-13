@@ -198,20 +198,20 @@ namespace NetworkView.AdvancedNetworkModel
         /// </summary>
         private void ComputeConnectionPoints()
         {
-            PointCollection computedPoints = new PointCollection();
+            var computedPoints = new PointCollection();
             computedPoints.Add(SourceConnectorHotspot);
 
-            double deltaX = Math.Abs(DestConnectorHotspot.X - SourceConnectorHotspot.X);
-            double deltaY = Math.Abs(DestConnectorHotspot.Y - SourceConnectorHotspot.Y);
+            var deltaX = Math.Abs(DestConnectorHotspot.X - SourceConnectorHotspot.X);
+            var deltaY = Math.Abs(DestConnectorHotspot.Y - SourceConnectorHotspot.Y);
             if (deltaX > deltaY)
             {
-                double midPointX = SourceConnectorHotspot.X + ((DestConnectorHotspot.X - SourceConnectorHotspot.X) / 2);
+                var midPointX = SourceConnectorHotspot.X + ((DestConnectorHotspot.X - SourceConnectorHotspot.X) / 2);
                 computedPoints.Add(new Point(midPointX, SourceConnectorHotspot.Y));
                 computedPoints.Add(new Point(midPointX, DestConnectorHotspot.Y));
             }
             else
             {
-                double midPointY = SourceConnectorHotspot.Y + ((DestConnectorHotspot.Y - SourceConnectorHotspot.Y) / 2);
+                var midPointY = SourceConnectorHotspot.Y + ((DestConnectorHotspot.Y - SourceConnectorHotspot.Y) / 2);
                 computedPoints.Add(new Point(SourceConnectorHotspot.X, midPointY));
                 computedPoints.Add(new Point(DestConnectorHotspot.X, midPointY));
             }

@@ -137,7 +137,7 @@ namespace NetworkView.AdornedControl
                 adorner.Opacity = 0.0;
             }
 
-            DoubleAnimation doubleAnimation = new DoubleAnimation(1.0, new Duration(TimeSpan.FromSeconds(FadeInTime)));
+            var doubleAnimation = new DoubleAnimation(1.0, new Duration(TimeSpan.FromSeconds(FadeInTime)));
             doubleAnimation.Completed += fadeInAnimation_Completed;
             doubleAnimation.Freeze();
                 
@@ -167,7 +167,7 @@ namespace NetworkView.AdornedControl
                 return;
             }
 
-            DoubleAnimation fadeOutAnimation = new DoubleAnimation(0.0, new Duration(TimeSpan.FromSeconds(FadeOutTime)));
+            var fadeOutAnimation = new DoubleAnimation(0.0, new Duration(TimeSpan.FromSeconds(FadeOutTime)));
             fadeOutAnimation.Completed += fadeOutAnimation_Completed;
             fadeOutAnimation.Freeze();
 
@@ -449,7 +449,7 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private static void ShowAdornerCommand_Executed(object target, ExecutedRoutedEventArgs e)
         {
-            AdornedControl c = (AdornedControl)target;
+            var c = (AdornedControl)target;
             c.ShowAdorner();
         }
 
@@ -458,7 +458,7 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private static void FadeInAdornerCommand_Executed(object target, ExecutedRoutedEventArgs e)
         {
-            AdornedControl c = (AdornedControl)target;
+            var c = (AdornedControl)target;
             c.FadeOutAdorner();
         }
 
@@ -467,7 +467,7 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private static void HideAdornerCommand_Executed(object target, ExecutedRoutedEventArgs e)
         {
-            AdornedControl c = (AdornedControl)target;
+            var c = (AdornedControl)target;
             c.HideAdorner();
         }
 
@@ -476,7 +476,7 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private static void FadeOutAdornerCommand_Executed(object target, ExecutedRoutedEventArgs e)
         {
-            AdornedControl c = (AdornedControl)target;
+            var c = (AdornedControl)target;
             c.FadeOutAdorner();
         }
 
@@ -485,7 +485,7 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private static void IsAdornerVisible_PropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            AdornedControl c = (AdornedControl)o;
+            var c = (AdornedControl)o;
             if (c.AdornerContent == null)
             {
                 //
@@ -502,7 +502,7 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private static void IsMouseOverShowEnabled_PropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            AdornedControl c = (AdornedControl)o;
+            var c = (AdornedControl)o;
             c.closeAdornerTimer.Stop();
             c.HideAdorner();
         }
@@ -512,7 +512,7 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private static void CloseAdornerTimeOut_PropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            AdornedControl c = (AdornedControl)o;
+            var c = (AdornedControl)o;
             c.closeAdornerTimer.Interval = TimeSpan.FromSeconds(c.CloseAdornerTimeOut);
         }
 
@@ -521,17 +521,17 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private static void AdornerContent_PropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            AdornedControl c = (AdornedControl)o;
+            var c = (AdornedControl)o;
             c.ShowOrHideAdornerInternal();
 
-            FrameworkElement oldAdornerContent = (FrameworkElement)e.OldValue;
+            var oldAdornerContent = (FrameworkElement)e.OldValue;
             if (oldAdornerContent != null)
             {
                 oldAdornerContent.MouseEnter -= c.adornerContent_MouseEnter;
                 oldAdornerContent.MouseLeave -= c.adornerContent_MouseLeave;
             }
 
-            FrameworkElement newAdornerContent = (FrameworkElement)e.NewValue;
+            var newAdornerContent = (FrameworkElement)e.NewValue;
             if (newAdornerContent != null)
             {
                 newAdornerContent.MouseEnter += c.adornerContent_MouseEnter;
@@ -576,17 +576,17 @@ namespace NetworkView.AdornedControl
         /// </summary>
         public static FrameworkElement FindNamedChild(FrameworkElement rootElement, string childName)
         {
-            int numChildren = VisualTreeHelper.GetChildrenCount(rootElement);
-            for (int i = 0; i < numChildren; ++i)
+            var numChildren = VisualTreeHelper.GetChildrenCount(rootElement);
+            for (var i = 0; i < numChildren; ++i)
             {
-                DependencyObject child = VisualTreeHelper.GetChild(rootElement, i);
-                FrameworkElement childElement = child as FrameworkElement;
+                var child = VisualTreeHelper.GetChild(rootElement, i);
+                var childElement = child as FrameworkElement;
                 if (childElement != null && childElement.Name == childName)
                 {
                     return childElement;
                 }
 
-                FrameworkElement foundElement = FindNamedChild(childElement, childName);
+                var foundElement = FindNamedChild(childElement, childName);
                 if (foundElement != null)
                 {
                     return foundElement;

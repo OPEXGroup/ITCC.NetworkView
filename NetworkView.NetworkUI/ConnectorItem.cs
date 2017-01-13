@@ -139,25 +139,16 @@ namespace NetworkView.NetworkUI
         {
             base.OnMouseDown(e);
 
-            if (ParentNodeItem != null)
-            {
-                ParentNodeItem.BringToFront();
-            }
+            ParentNodeItem?.BringToFront();
 
-            if (ParentNetworkView != null)
-            {
-                ParentNetworkView.Focus();
-            }
+            ParentNetworkView?.Focus();
 
             if (e.ChangedButton == MouseButton.Left)
             {
-                if (ParentNodeItem != null)
-                {
-                    //
-                    // Delegate to parent node to execute selection logic.
-                    //
-                    ParentNodeItem.LeftMouseDownSelectionLogic();
-                }
+                //
+                // Delegate to parent node to execute selection logic.
+                //
+                ParentNodeItem?.LeftMouseDownSelectionLogic();
 
                 lastMousePoint = e.GetPosition(ParentNetworkView);
                 isLeftMouseDown = true;
@@ -165,13 +156,10 @@ namespace NetworkView.NetworkUI
             }
             else if (e.ChangedButton == MouseButton.Right)
             {
-                if (ParentNodeItem != null)
-                {
-                    //
-                    // Delegate to parent node to execute selection logic.
-                    //
-                    ParentNodeItem.RightMouseDownSelectionLogic();
-                }
+                //
+                // Delegate to parent node to execute selection logic.
+                //
+                ParentNodeItem?.RightMouseDownSelectionLogic();
             }
         }
 
@@ -188,8 +176,8 @@ namespace NetworkView.NetworkUI
                 // Raise the event to notify that dragging is in progress.
                 //
 
-                Point curMousePoint = e.GetPosition(ParentNetworkView);
-                Vector offset = curMousePoint - lastMousePoint;
+                var curMousePoint = e.GetPosition(ParentNetworkView);
+                var offset = curMousePoint - lastMousePoint;
                 if (offset.X != 0.0 &&
                     offset.Y != 0.0)
                 {
@@ -210,9 +198,9 @@ namespace NetworkView.NetworkUI
                     // but don't initiate the drag operation until 
                     // the mouse cursor has moved more than the threshold distance.
                     //
-                    Point curMousePoint = e.GetPosition(ParentNetworkView);
+                    var curMousePoint = e.GetPosition(ParentNetworkView);
                     var dragDelta = curMousePoint - lastMousePoint;
-                    double dragDistance = Math.Abs(dragDelta.Length);
+                    var dragDistance = Math.Abs(dragDelta.Length);
                     if (dragDistance > DragThreshold)
                     {
                         //
@@ -304,7 +292,7 @@ namespace NetworkView.NetworkUI
         /// </summary>
         private static void ParentNetworkView_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ConnectorItem c = (ConnectorItem)d;
+            var c = (ConnectorItem)d;
             c.UpdateHotspot();
         }
 

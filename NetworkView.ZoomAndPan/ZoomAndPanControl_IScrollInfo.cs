@@ -293,8 +293,8 @@ namespace NetworkView.ZoomAndPan
         {
             if (content.IsAncestorOf(visual))
             {
-                Rect transformedRect = visual.TransformToAncestor(content).TransformBounds(rectangle);
-                Rect viewportRect = new Rect(ContentOffsetX, ContentOffsetY, ContentViewportWidth, ContentViewportHeight);
+                var transformedRect = visual.TransformToAncestor(content).TransformBounds(rectangle);
+                var viewportRect = new Rect(ContentOffsetX, ContentOffsetY, ContentViewportWidth, ContentViewportHeight);
                 if (!transformedRect.Contains(viewportRect))
                 {
                     double horizOffset = 0;

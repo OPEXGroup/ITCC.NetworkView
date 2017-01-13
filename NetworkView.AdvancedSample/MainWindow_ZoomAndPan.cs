@@ -146,8 +146,8 @@ namespace NetworkView.AdvancedSample
         {
             if (mouseHandlingMode == MouseHandlingMode.Panning)
             {
-                Point curZoomAndPanControlMousePoint = e.GetPosition(zoomAndPanControl);
-                Vector dragOffset = curZoomAndPanControlMousePoint - origZoomAndPanControlMouseDownPoint;
+                var curZoomAndPanControlMousePoint = e.GetPosition(zoomAndPanControl);
+                var dragOffset = curZoomAndPanControlMousePoint - origZoomAndPanControlMouseDownPoint;
                 double dragThreshold = 10;
                 if (Math.Abs(dragOffset.X) > dragThreshold ||
                     Math.Abs(dragOffset.Y) > dragThreshold)
@@ -169,8 +169,8 @@ namespace NetworkView.AdvancedSample
                 // The user is left-dragging the mouse.
                 // Pan the viewport by the appropriate amount.
                 //
-                Point curContentMousePoint = e.GetPosition(networkControl);
-                Vector dragOffset = curContentMousePoint - origContentMouseDownPoint;
+                var curContentMousePoint = e.GetPosition(networkControl);
+                var dragOffset = curContentMousePoint - origContentMouseDownPoint;
 
                 zoomAndPanControl.ContentOffsetX -= dragOffset.X;
                 zoomAndPanControl.ContentOffsetY -= dragOffset.Y;
@@ -179,8 +179,8 @@ namespace NetworkView.AdvancedSample
             }
             else if (mouseHandlingMode == MouseHandlingMode.Zooming)
             {
-                Point curZoomAndPanControlMousePoint = e.GetPosition(zoomAndPanControl);
-                Vector dragOffset = curZoomAndPanControlMousePoint - origZoomAndPanControlMouseDownPoint;
+                var curZoomAndPanControlMousePoint = e.GetPosition(zoomAndPanControl);
+                var dragOffset = curZoomAndPanControlMousePoint - origZoomAndPanControlMouseDownPoint;
                 double dragThreshold = 10;
                 if (mouseButtonDown == MouseButton.Left &&
                     (Math.Abs(dragOffset.X) > dragThreshold ||
@@ -192,7 +192,7 @@ namespace NetworkView.AdvancedSample
                     // to zoom in on.
                     //
                     mouseHandlingMode = MouseHandlingMode.DragZooming;
-                    Point curContentMousePoint = e.GetPosition(networkControl);
+                    var curContentMousePoint = e.GetPosition(networkControl);
                     InitDragZoomRect(origContentMouseDownPoint, curContentMousePoint);
                 }
 
@@ -204,7 +204,7 @@ namespace NetworkView.AdvancedSample
                 // When in drag zooming mode continously update the position of the rectangle
                 // that the user is dragging out.
                 //
-                Point curContentMousePoint = e.GetPosition(networkControl);
+                var curContentMousePoint = e.GetPosition(networkControl);
                 SetDragZoomRect(origContentMouseDownPoint, curContentMousePoint);
 
                 e.Handled = true;
@@ -220,12 +220,12 @@ namespace NetworkView.AdvancedSample
 
             if (e.Delta > 0)
             {
-                Point curContentMousePoint = e.GetPosition(networkControl);
+                var curContentMousePoint = e.GetPosition(networkControl);
                 ZoomIn(curContentMousePoint);
             }
             else if (e.Delta < 0)
             {
-                Point curContentMousePoint = e.GetPosition(networkControl);
+                var curContentMousePoint = e.GetPosition(networkControl);
                 ZoomOut(curContentMousePoint);
             }
         }
@@ -237,7 +237,7 @@ namespace NetworkView.AdvancedSample
         {
             if ((Keyboard.Modifiers & ModifierKeys.Shift) == 0)
             {
-                Point doubleClickPoint = e.GetPosition(networkControl);
+                var doubleClickPoint = e.GetPosition(networkControl);
                 zoomAndPanControl.AnimatedSnapTo(doubleClickPoint);
             }
         }
@@ -298,7 +298,7 @@ namespace NetworkView.AdvancedSample
 
             SavePrevZoomRect();
 
-            Rect actualContentRect = DetermineAreaOfNodes(nodes);
+            var actualContentRect = DetermineAreaOfNodes(nodes);
 
             //
             // Inflate the content rect by a fraction of the actual size of the total content area.
@@ -314,13 +314,13 @@ namespace NetworkView.AdvancedSample
         /// </summary>
         private Rect DetermineAreaOfNodes(IList nodes)
         {
-            NodeViewModel firstNode = (NodeViewModel)nodes[0];
-            Rect actualContentRect = new Rect(firstNode.X, firstNode.Y, firstNode.Size.Width, firstNode.Size.Height);
+            var firstNode = (NodeViewModel)nodes[0];
+            var actualContentRect = new Rect(firstNode.X, firstNode.Y, firstNode.Size.Width, firstNode.Size.Height);
 
-            for (int i = 1; i < nodes.Count; ++i)
+            for (var i = 1; i < nodes.Count; ++i)
             {
-                NodeViewModel node = (NodeViewModel)nodes[i];
-                Rect nodeRect = new Rect(node.X, node.Y, node.Size.Width, node.Size.Height);
+                var node = (NodeViewModel)nodes[i];
+                var nodeRect = new Rect(node.X, node.Y, node.Size.Width, node.Size.Height);
                 actualContentRect = Rect.Union(actualContentRect, nodeRect);
             }
             return actualContentRect;
@@ -439,10 +439,10 @@ namespace NetworkView.AdvancedSample
             //
             // Retreive the rectangle that the user draggged out and zoom in on it.
             //
-            double contentX = Canvas.GetLeft(dragZoomBorder);
-            double contentY = Canvas.GetTop(dragZoomBorder);
-            double contentWidth = dragZoomBorder.Width;
-            double contentHeight = dragZoomBorder.Height;
+            var contentX = Canvas.GetLeft(dragZoomBorder);
+            var contentY = Canvas.GetTop(dragZoomBorder);
+            var contentWidth = dragZoomBorder.Width;
+            var contentHeight = dragZoomBorder.Height;
             zoomAndPanControl.AnimatedZoomTo(new Rect(contentX, contentY, contentWidth, contentHeight));
 
             FadeOutDragZoomRect();

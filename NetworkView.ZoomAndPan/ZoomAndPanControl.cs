@@ -399,9 +399,9 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         public void AnimatedZoomTo(Rect contentRect)
         {
-            double scaleX = ContentViewportWidth / contentRect.Width;
-            double scaleY = ContentViewportHeight / contentRect.Height;
-            double newScale = ContentScale * Math.Min(scaleX, scaleY);
+            var scaleX = ContentViewportWidth / contentRect.Width;
+            var scaleY = ContentViewportHeight / contentRect.Height;
+            var newScale = ContentScale * Math.Min(scaleX, scaleY);
 
             AnimatedZoomPointToViewportCenter(newScale, new Point(contentRect.X + (contentRect.Width / 2), contentRect.Y + (contentRect.Height / 2)), null);
         }
@@ -411,9 +411,9 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         public void ZoomTo(Rect contentRect)
         {
-            double scaleX = ContentViewportWidth / contentRect.Width;
-            double scaleY = ContentViewportHeight / contentRect.Height;
-            double newScale = ContentScale * Math.Min(scaleX, scaleY);
+            var scaleX = ContentViewportWidth / contentRect.Width;
+            var scaleY = ContentViewportHeight / contentRect.Height;
+            var newScale = ContentScale * Math.Min(scaleX, scaleY);
 
             ZoomPointToViewportCenter(newScale, new Point(contentRect.X + (contentRect.Width / 2), contentRect.Y + (contentRect.Height / 2)));
         }
@@ -447,8 +447,8 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         public void AnimatedSnapTo(Point contentPoint)
         {
-            double newX = contentPoint.X - (ContentViewportWidth / 2);
-            double newY = contentPoint.Y - (ContentViewportHeight / 2);
+            var newX = contentPoint.X - (ContentViewportWidth / 2);
+            var newY = contentPoint.Y - (ContentViewportHeight / 2);
 
             AnimationHelper.StartAnimation(this, ContentOffsetXProperty, newX, AnimationDuration);
             AnimationHelper.StartAnimation(this, ContentOffsetYProperty, newY, AnimationDuration);
@@ -494,12 +494,12 @@ namespace NetworkView.ZoomAndPan
         {
             newContentScale = Math.Min(Math.Max(newContentScale, MinContentScale), MaxContentScale);
 
-            double screenSpaceZoomOffsetX = (contentZoomFocus.X - ContentOffsetX) * ContentScale;
-            double screenSpaceZoomOffsetY = (contentZoomFocus.Y - ContentOffsetY) * ContentScale;
-            double contentSpaceZoomOffsetX = screenSpaceZoomOffsetX / newContentScale;
-            double contentSpaceZoomOffsetY = screenSpaceZoomOffsetY / newContentScale;
-            double newContentOffsetX = contentZoomFocus.X - contentSpaceZoomOffsetX;
-            double newContentOffsetY = contentZoomFocus.Y - contentSpaceZoomOffsetY;
+            var screenSpaceZoomOffsetX = (contentZoomFocus.X - ContentOffsetX) * ContentScale;
+            var screenSpaceZoomOffsetY = (contentZoomFocus.Y - ContentOffsetY) * ContentScale;
+            var contentSpaceZoomOffsetX = screenSpaceZoomOffsetX / newContentScale;
+            var contentSpaceZoomOffsetY = screenSpaceZoomOffsetY / newContentScale;
+            var newContentOffsetX = contentZoomFocus.X - contentSpaceZoomOffsetX;
+            var newContentOffsetY = contentZoomFocus.Y - contentSpaceZoomOffsetY;
 
             AnimationHelper.CancelAnimation(this, ContentScaleProperty);
             AnimationHelper.CancelAnimation(this, ContentOffsetXProperty);
@@ -515,7 +515,7 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         public void AnimatedZoomTo(double contentScale)
         {
-            Point zoomCenter = new Point(ContentOffsetX + (ContentViewportWidth / 2), ContentOffsetY + (ContentViewportHeight / 2));
+            var zoomCenter = new Point(ContentOffsetX + (ContentViewportWidth / 2), ContentOffsetY + (ContentViewportHeight / 2));
             AnimatedZoomAboutPoint(contentScale, zoomCenter);
         }
 
@@ -524,7 +524,7 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         public void ZoomTo(double contentScale)
         {
-            Point zoomCenter = new Point(ContentOffsetX + (ContentViewportWidth / 2), ContentOffsetY + (ContentViewportHeight / 2));
+            var zoomCenter = new Point(ContentOffsetX + (ContentViewportWidth / 2), ContentOffsetY + (ContentViewportHeight / 2));
             ZoomAboutPoint(contentScale, zoomCenter);
         }
 
@@ -590,7 +590,7 @@ namespace NetworkView.ZoomAndPan
                 // Setup a transform group to contain the translation and scale transforms, and then
                 // assign this to the content's 'RenderTransform'.
                 //
-                TransformGroup transformGroup = new TransformGroup();
+                var transformGroup = new TransformGroup();
                 transformGroup.Children.Add(contentOffsetTransform);
                 transformGroup.Children.Add(contentScaleTransform);
                 content.RenderTransform = transformGroup;
@@ -655,7 +655,7 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         private static void ContentScale_PropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            ZoomAndPanControl c = (ZoomAndPanControl)o;
+            var c = (ZoomAndPanControl)o;
 
             if (c.contentScaleTransform != null)
             {
@@ -687,10 +687,10 @@ namespace NetworkView.ZoomAndPan
                     // focused on the content focus point (and also so that the content focus is locked to the 
                     // viewport focus point - this is how the google maps style zooming works).
                     //
-                    double viewportOffsetX = c.ViewportZoomFocusX - (c.ViewportWidth / 2);
-                    double viewportOffsetY = c.ViewportZoomFocusY - (c.ViewportHeight / 2);
-                    double contentOffsetX = viewportOffsetX / c.ContentScale;
-                    double contentOffsetY = viewportOffsetY / c.ContentScale;
+                    var viewportOffsetX = c.ViewportZoomFocusX - (c.ViewportWidth / 2);
+                    var viewportOffsetY = c.ViewportZoomFocusY - (c.ViewportHeight / 2);
+                    var contentOffsetX = viewportOffsetX / c.ContentScale;
+                    var contentOffsetY = viewportOffsetY / c.ContentScale;
                     c.ContentOffsetX = (c.ContentZoomFocusX - (c.ContentViewportWidth / 2)) - contentOffsetX;
                     c.ContentOffsetY = (c.ContentZoomFocusY - (c.ContentViewportHeight / 2)) - contentOffsetY;
                 }
@@ -716,8 +716,8 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         private static object ContentScale_Coerce(DependencyObject d, object baseValue)
         {
-            ZoomAndPanControl c = (ZoomAndPanControl)d;
-            double value = (double) baseValue;
+            var c = (ZoomAndPanControl)d;
+            var value = (double) baseValue;
             value = Math.Min(Math.Max(value, c.MinContentScale), c.MaxContentScale);
             return value;
         }
@@ -727,7 +727,7 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         private static void MinOrMaxContentScale_PropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            ZoomAndPanControl c = (ZoomAndPanControl)o;
+            var c = (ZoomAndPanControl)o;
             c.ContentScale = Math.Min(Math.Max(c.ContentScale, c.MinContentScale), c.MaxContentScale);
         }
 
@@ -736,7 +736,7 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         private static void ContentOffsetX_PropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            ZoomAndPanControl c = (ZoomAndPanControl)o;
+            var c = (ZoomAndPanControl)o;
 
             c.UpdateTranslationX();
 
@@ -771,10 +771,10 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         private static object ContentOffsetX_Coerce(DependencyObject d, object baseValue)
         {
-            ZoomAndPanControl c = (ZoomAndPanControl)d;
-            double value = (double)baseValue;
-            double minOffsetX = 0.0;
-            double maxOffsetX = Math.Max(0.0, c.unScaledExtent.Width - c.constrainedContentViewportWidth);
+            var c = (ZoomAndPanControl)d;
+            var value = (double)baseValue;
+            var minOffsetX = 0.0;
+            var maxOffsetX = Math.Max(0.0, c.unScaledExtent.Width - c.constrainedContentViewportWidth);
             value = Math.Min(Math.Max(value, minOffsetX), maxOffsetX);
             return value;
         }
@@ -784,7 +784,7 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         private static void ContentOffsetY_PropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            ZoomAndPanControl c = (ZoomAndPanControl)o;
+            var c = (ZoomAndPanControl)o;
 
             c.UpdateTranslationY();
 
@@ -820,10 +820,10 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         private static object ContentOffsetY_Coerce(DependencyObject d, object baseValue)
         {
-            ZoomAndPanControl c = (ZoomAndPanControl)d;
-            double value = (double)baseValue;
-            double minOffsetY = 0.0;
-            double maxOffsetY = Math.Max(0.0, c.unScaledExtent.Height - c.constrainedContentViewportHeight);
+            var c = (ZoomAndPanControl)d;
+            var value = (double)baseValue;
+            var minOffsetY = 0.0;
+            var maxOffsetY = Math.Max(0.0, c.unScaledExtent.Height - c.constrainedContentViewportHeight);
             value = Math.Min(Math.Max(value, minOffsetY), maxOffsetY);
             return value;
         }
@@ -906,7 +906,7 @@ namespace NetworkView.ZoomAndPan
         {
             if (contentOffsetTransform != null)
             {
-                double scaledContentWidth = unScaledExtent.Width * ContentScale;
+                var scaledContentWidth = unScaledExtent.Width * ContentScale;
                 if (scaledContentWidth < ViewportWidth)
                 {
                     //
@@ -928,7 +928,7 @@ namespace NetworkView.ZoomAndPan
         {
             if (contentOffsetTransform != null)
             {
-                double scaledContentHeight = unScaledExtent.Height * ContentScale;
+                var scaledContentHeight = unScaledExtent.Height * ContentScale;
                 if (scaledContentHeight < ViewportHeight)
                 {
                     //
@@ -964,8 +964,8 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         protected override Size MeasureOverride(Size constraint)
         {
-            Size infiniteSize = new Size(double.PositiveInfinity, double.PositiveInfinity);
-            Size childSize = base.MeasureOverride(infiniteSize);
+            var infiniteSize = new Size(double.PositiveInfinity, double.PositiveInfinity);
+            var childSize = base.MeasureOverride(infiniteSize);
 
             if (childSize != unScaledExtent)
             {
@@ -985,8 +985,8 @@ namespace NetworkView.ZoomAndPan
             //
             UpdateViewportSize(constraint);
 
-            double width = constraint.Width;
-            double height = constraint.Height;
+            var width = constraint.Width;
+            var height = constraint.Height;
 
             if (double.IsInfinity(width))
             {
@@ -1015,7 +1015,7 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         protected override Size ArrangeOverride(Size arrangeBounds)
         {
-            Size size = base.ArrangeOverride(DesiredSize);
+            var size = base.ArrangeOverride(DesiredSize);
 
             if (content.DesiredSize != unScaledExtent)
             {

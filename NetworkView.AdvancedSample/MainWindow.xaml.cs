@@ -34,13 +34,13 @@ namespace NetworkView.AdvancedSample
             //
             // Display help text for the sample app.
             //
-            HelpTextWindow helpTextWindow = new HelpTextWindow();
+            var helpTextWindow = new HelpTextWindow();
             helpTextWindow.Left = Left + Width + 5;
             helpTextWindow.Top = Top;
             helpTextWindow.Owner = this;
             helpTextWindow.Show();
 
-            OverviewWindow overviewWindow = new OverviewWindow();
+            var overviewWindow = new OverviewWindow();
             overviewWindow.Left = Left;
             overviewWindow.Top = Top + Height + 5;
             overviewWindow.Owner = this;
@@ -76,7 +76,7 @@ namespace NetworkView.AdvancedSample
             var draggedOutConnector = (ConnectorViewModel)e.ConnectorDraggedOut;
             var draggedOverConnector= (ConnectorViewModel)e.DraggedOverConnector;
             object feedbackIndicator = null;
-            bool connectionOk = true;
+            var connectionOk = true;
 
             ViewModel.QueryConnnectionFeedback(draggedOutConnector, draggedOverConnector, out feedbackIndicator, out connectionOk);
 
@@ -98,7 +98,7 @@ namespace NetworkView.AdvancedSample
         /// </summary>
         private void networkControl_ConnectionDragging(object sender, ConnectionDraggingEventArgs e)
         {
-            Point curDragPoint = Mouse.GetPosition(networkControl);
+            var curDragPoint = Mouse.GetPosition(networkControl);
             var connection = (ConnectionViewModel)e.Connection;
             ViewModel.ConnectionDragging(curDragPoint, connection);
         }

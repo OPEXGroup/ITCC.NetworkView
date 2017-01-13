@@ -34,7 +34,7 @@ namespace NetworkView.SimpleSample
             //
             // Display help text for the sample app.
             //
-            HelpTextWindow helpTextWindow = new HelpTextWindow();
+            var helpTextWindow = new HelpTextWindow();
             helpTextWindow.Left = Left + Width + 5;
             helpTextWindow.Top = Top;
             helpTextWindow.Owner = this;
@@ -95,7 +95,7 @@ namespace NetworkView.SimpleSample
         /// </summary>
         private void CreateNode_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Point newNodeLocation = Mouse.GetPosition(networkControl);
+            var newNodeLocation = Mouse.GetPosition(networkControl);
             ViewModel.CreateNode("New Node!", newNodeLocation);
         }
 

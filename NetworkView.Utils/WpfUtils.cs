@@ -22,13 +22,13 @@ namespace NetworkView.Utils
                 return null;
             }
 
-            Window window = element.Parent as Window;
+            var window = element.Parent as Window;
             if (window != null)
             {
                 return window;
             }
 
-            FrameworkElement parentElement = element.Parent as FrameworkElement;
+            var parentElement = element.Parent as FrameworkElement;
             if (parentElement != null)
             {
                 return FindParentWindow(parentElement);
@@ -40,10 +40,10 @@ namespace NetworkView.Utils
         public static FrameworkElement FindParentWithDataContextAndName<DataContextT>(FrameworkElement childElement, string name)
             where DataContextT : class
         {
-            FrameworkElement parent = (FrameworkElement)childElement.Parent;
+            var parent = (FrameworkElement)childElement.Parent;
             if (parent != null)
             {
-                DataContextT data = parent.DataContext as DataContextT;
+                var data = parent.DataContext as DataContextT;
                 if (data != null)
                 {
                     if (parent.Name == name)
@@ -62,7 +62,7 @@ namespace NetworkView.Utils
             parent = (FrameworkElement)childElement.TemplatedParent;
             if (parent != null)
             {
-                DataContextT data = parent.DataContext as DataContextT;
+                var data = parent.DataContext as DataContextT;
                 if (data != null)
                 {
                     if (parent.Name == name)
@@ -86,13 +86,13 @@ namespace NetworkView.Utils
         {
             if (childElement.Parent != null)
             {
-                DataContextT data = ((FrameworkElement)childElement.Parent).DataContext as DataContextT;
+                var data = ((FrameworkElement)childElement.Parent).DataContext as DataContextT;
                 if (data != null)
                 {
                     return (FrameworkElement)childElement.Parent;
                 }
 
-                FrameworkElement parent = FindParentWithDataContext<DataContextT>((FrameworkElement)childElement.Parent);
+                var parent = FindParentWithDataContext<DataContextT>((FrameworkElement)childElement.Parent);
                 if (parent != null)
                 {
                     return parent;
@@ -101,13 +101,13 @@ namespace NetworkView.Utils
 
             if (childElement.TemplatedParent != null)
             {
-                DataContextT data = ((FrameworkElement)childElement.TemplatedParent).DataContext as DataContextT;
+                var data = ((FrameworkElement)childElement.TemplatedParent).DataContext as DataContextT;
                 if (data != null)
                 {
                     return (FrameworkElement)childElement.TemplatedParent;
                 }
 
-                FrameworkElement parent = FindParentWithDataContext<DataContextT>((FrameworkElement)childElement.TemplatedParent);
+                var parent = FindParentWithDataContext<DataContextT>((FrameworkElement)childElement.TemplatedParent);
                 if (parent != null)
                 {
                     return parent;
@@ -120,10 +120,10 @@ namespace NetworkView.Utils
         public static ParentT FindVisualParentWithType<ParentT>(FrameworkElement childElement)
             where ParentT : class
         {
-            FrameworkElement parentElement = (FrameworkElement)VisualTreeHelper.GetParent(childElement);
+            var parentElement = (FrameworkElement)VisualTreeHelper.GetParent(childElement);
             if (parentElement != null)
             {
-                ParentT parent = parentElement as ParentT;
+                var parent = parentElement as ParentT;
                 if (parent != null)
                 {
                     return parent;
@@ -140,7 +140,7 @@ namespace NetworkView.Utils
         {
             if (childElement.Parent != null)
             {
-                ParentT parent = childElement.Parent as ParentT;
+                var parent = childElement.Parent as ParentT;
                 if (parent != null)
                 {
                     return parent;
@@ -155,7 +155,7 @@ namespace NetworkView.Utils
 
             if (childElement.TemplatedParent != null)
             {
-                ParentT parent = childElement.TemplatedParent as ParentT;
+                var parent = childElement.TemplatedParent as ParentT;
                 if (parent != null)
                 {
                     return parent;
@@ -168,10 +168,10 @@ namespace NetworkView.Utils
                 }
             }
 
-            FrameworkElement parentElement = (FrameworkElement)VisualTreeHelper.GetParent(childElement);
+            var parentElement = (FrameworkElement)VisualTreeHelper.GetParent(childElement);
             if (parentElement != null)
             {
-                ParentT parent = parentElement as ParentT;
+                var parent = parentElement as ParentT;
                 if (parent != null)
                 {
                     return parent;
@@ -188,7 +188,7 @@ namespace NetworkView.Utils
         {
             if (childElement.Parent != null)
             {
-                ParentT parent = childElement.Parent as ParentT;
+                var parent = childElement.Parent as ParentT;
                 if (parent != null)
                 {
                     if (parent.DataContext == dataContext)
@@ -206,7 +206,7 @@ namespace NetworkView.Utils
 
             if (childElement.TemplatedParent != null)
             {
-                ParentT parent = childElement.TemplatedParent as ParentT;
+                var parent = childElement.TemplatedParent as ParentT;
                 if (parent != null)
                 {
                     if (parent.DataContext == dataContext)
@@ -222,10 +222,10 @@ namespace NetworkView.Utils
                 }
             }
 
-            FrameworkElement parentElement = (FrameworkElement)VisualTreeHelper.GetParent(childElement);
+            var parentElement = (FrameworkElement)VisualTreeHelper.GetParent(childElement);
             if (parentElement != null)
             {
-                ParentT parent = parentElement as ParentT;
+                var parent = parentElement as ParentT;
                 if (parent != null)
                 {
                     return parent;
@@ -263,7 +263,7 @@ namespace NetworkView.Utils
             hitFrameworkElement = null;
 
             FrameworkElement hitElement = null;
-            T hitData = HitTestForDataContext<T, FrameworkElement>(rootElement, point, out hitElement);
+            var hitData = HitTestForDataContext<T, FrameworkElement>(rootElement, point, out hitElement);
             if (hitData == null)
             {
                 return null;
@@ -383,13 +383,13 @@ namespace NetworkView.Utils
         {
             if (element.Parent != null)
             {
-                T ancestor = element.Parent as T;
+                var ancestor = element.Parent as T;
                 if (ancestor != null)
                 {
                     return ancestor;
                 }
 
-                FrameworkElement parent = element.Parent as FrameworkElement;
+                var parent = element.Parent as FrameworkElement;
                 if (parent != null)
                 {
                     return FindAncestor<T>(parent);
@@ -398,29 +398,29 @@ namespace NetworkView.Utils
 
             if (element.TemplatedParent != null)
             {
-                T ancestor = element.TemplatedParent as T;
+                var ancestor = element.TemplatedParent as T;
                 if (ancestor != null)
                 {
                     return ancestor;
                 }
 
-                FrameworkElement parent = element.TemplatedParent as FrameworkElement;
+                var parent = element.TemplatedParent as FrameworkElement;
                 if (parent != null)
                     {
                     return FindAncestor<T>(parent);
                     }
                 }
 
-            DependencyObject visualParent = VisualTreeHelper.GetParent(element);
+            var visualParent = VisualTreeHelper.GetParent(element);
             if (visualParent != null)
             {
-                T visualAncestor = visualParent as T;
+                var visualAncestor = visualParent as T;
                 if (visualAncestor != null)
                 {
                     return visualAncestor;
             }
 
-                FrameworkElement visualElement = visualParent as FrameworkElement;
+                var visualElement = visualParent as FrameworkElement;
                 if (visualElement != null)
             {
                     return FindAncestor<T>(visualElement);
@@ -435,7 +435,7 @@ namespace NetworkView.Utils
         /// </summary>
         public static Point TransformPointToAncestor<T>(FrameworkElement element, Point point) where T : Visual
         {
-            T ancestor = FindAncestor<T>(element);
+            var ancestor = FindAncestor<T>(element);
             if (ancestor == null)
             {
                 throw new ApplicationException("Find to find '" + typeof(T).Name + "' for element '" + element.GetType().Name + "'.");
@@ -458,18 +458,18 @@ namespace NetworkView.Utils
         public static ElementT FindElementWithName<ElementT>(Visual rootElement, string name)
             where ElementT : FrameworkElement
         {
-            FrameworkElement rootFrameworkElement = rootElement as FrameworkElement;
+            var rootFrameworkElement = rootElement as FrameworkElement;
             if (rootFrameworkElement != null)
             {
                 rootFrameworkElement.UpdateLayout();
             }
 
-            int numChildren = VisualTreeHelper.GetChildrenCount(rootElement);
-            for (int i = 0; i < numChildren; ++i)
+            var numChildren = VisualTreeHelper.GetChildrenCount(rootElement);
+            for (var i = 0; i < numChildren; ++i)
             {
-                Visual childElement = (Visual)VisualTreeHelper.GetChild(rootElement, i);
+                var childElement = (Visual)VisualTreeHelper.GetChild(rootElement, i);
 
-                ElementT typedChildElement = childElement as ElementT;
+                var typedChildElement = childElement as ElementT;
                 if (typedChildElement != null)
                 {
                     if (typedChildElement.Name == name)
@@ -478,7 +478,7 @@ namespace NetworkView.Utils
                     }
                 }
 
-                ElementT foundElement = FindElementWithName<ElementT>(childElement, name);
+                var foundElement = FindElementWithName<ElementT>(childElement, name);
                 if (foundElement != null)
                 {
                     return foundElement;
@@ -497,18 +497,18 @@ namespace NetworkView.Utils
         {
             Trace.Assert(rootElement != null);
 
-            FrameworkElement rootFrameworkElement = rootElement as FrameworkElement;
+            var rootFrameworkElement = rootElement as FrameworkElement;
             if (rootFrameworkElement != null)
         {
                 rootFrameworkElement.UpdateLayout();
         }
 
-            int numChildren = VisualTreeHelper.GetChildrenCount(rootElement);
-            for (int i = 0; i < numChildren; ++i)
+            var numChildren = VisualTreeHelper.GetChildrenCount(rootElement);
+            for (var i = 0; i < numChildren; ++i)
             {
-                Visual childElement = (Visual)VisualTreeHelper.GetChild(rootElement, i);
+                var childElement = (Visual)VisualTreeHelper.GetChild(rootElement, i);
 
-                ElementT typedChildElement = childElement as ElementT;
+                var typedChildElement = childElement as ElementT;
                 if (typedChildElement != null &&
                     typedChildElement.DataContext == data)
                 {
@@ -518,7 +518,7 @@ namespace NetworkView.Utils
                     }
                 }
 
-                ElementT foundElement = FindElementWithDataContextAndName<DataContextT, ElementT>(childElement, data, name);
+                var foundElement = FindElementWithDataContextAndName<DataContextT, ElementT>(childElement, data, name);
                 if (foundElement != null)
                 {
                     return foundElement;
@@ -539,7 +539,7 @@ namespace NetworkView.Utils
                 throw new ArgumentNullException("rootElement");
             }            
 
-            FrameworkElement rootFrameworkElement = rootElement as FrameworkElement;
+            var rootFrameworkElement = rootElement as FrameworkElement;
             if (rootFrameworkElement != null)
         {
                 rootFrameworkElement.UpdateLayout();
@@ -548,12 +548,12 @@ namespace NetworkView.Utils
             //
             // Check each child.
             //
-            int numChildren = VisualTreeHelper.GetChildrenCount(rootElement);
-            for (int i = 0; i < numChildren; ++i)
+            var numChildren = VisualTreeHelper.GetChildrenCount(rootElement);
+            for (var i = 0; i < numChildren; ++i)
             {
-                Visual childElement = (Visual)VisualTreeHelper.GetChild(rootElement, i);
+                var childElement = (Visual)VisualTreeHelper.GetChild(rootElement, i);
 
-                ElementT typedChildElement = childElement as ElementT;
+                var typedChildElement = childElement as ElementT;
                 if (typedChildElement != null)
                     {
                     return typedChildElement;
@@ -563,11 +563,11 @@ namespace NetworkView.Utils
             //
             // Check sub-trees.
             //
-            for (int i = 0; i < numChildren; ++i)
+            for (var i = 0; i < numChildren; ++i)
             {
-                Visual childElement = (Visual)VisualTreeHelper.GetChild(rootElement, i);
+                var childElement = (Visual)VisualTreeHelper.GetChild(rootElement, i);
 
-                ElementT foundElement = FindElementWithType<ElementT>(childElement);
+                var foundElement = FindElementWithType<ElementT>(childElement);
                 if (foundElement != null)
                 {
                     return foundElement;
@@ -589,25 +589,25 @@ namespace NetworkView.Utils
                 throw new ArgumentNullException("rootElement");
             }
             
-            FrameworkElement rootFrameworkElement = rootElement as FrameworkElement;
+            var rootFrameworkElement = rootElement as FrameworkElement;
             if (rootFrameworkElement != null)
             {
                 rootFrameworkElement.UpdateLayout();
             }
 
-            int numChildren = VisualTreeHelper.GetChildrenCount(rootElement);
-            for (int i = 0; i < numChildren; ++i)
+            var numChildren = VisualTreeHelper.GetChildrenCount(rootElement);
+            for (var i = 0; i < numChildren; ++i)
             {
-                Visual childElement = (Visual)VisualTreeHelper.GetChild(rootElement, i);
+                var childElement = (Visual)VisualTreeHelper.GetChild(rootElement, i);
 
-                ElementT typedChildElement = childElement as ElementT;
+                var typedChildElement = childElement as ElementT;
                 if (typedChildElement != null &&
                     typedChildElement.DataContext == data)
                 {
                     return typedChildElement;
                 }
 
-                ElementT foundElement = FindElementWithDataContext<DataContextT, ElementT>(childElement, data);
+                var foundElement = FindElementWithDataContext<DataContextT, ElementT>(childElement, data);
                 if (foundElement != null)
                 {
                     return foundElement;
@@ -624,8 +624,8 @@ namespace NetworkView.Utils
         public static DataTemplateT FindTemplateForType<DataTemplateT>(Type type, FrameworkElement element)
             where DataTemplateT : class
                     {
-            object resource = element.TryFindResource(new DataTemplateKey(type));
-            DataTemplateT dataTemplate = resource as DataTemplateT;
+            var resource = element.TryFindResource(new DataTemplateKey(type));
+            var dataTemplate = resource as DataTemplateT;
             if (dataTemplate != null)
                         {
                 return dataTemplate;
@@ -641,7 +641,7 @@ namespace NetworkView.Utils
                     }
                 }
 
-            foreach (Type interfaceType in type.GetInterfaces())
+            foreach (var interfaceType in type.GetInterfaces())
             {
                 dataTemplate = FindTemplateForType<DataTemplateT>(interfaceType, element);
                 if (dataTemplate != null)
@@ -658,13 +658,13 @@ namespace NetworkView.Utils
         /// </summary>
         public static FrameworkElement CreateVisual(Type type, FrameworkElement element, object dataContext)
         {
-            DataTemplate template = FindTemplateForType<DataTemplate>(type, element);
+            var template = FindTemplateForType<DataTemplate>(type, element);
             if (template == null)
             {
                 throw new ApplicationException("Failed to find DataTemplate for type " + type.Name);
             }
 
-            FrameworkElement visual = (FrameworkElement)template.LoadContent();
+            var visual = (FrameworkElement)template.LoadContent();
             visual.Resources = element.Resources;
             visual.DataContext = dataContext;
             return visual;
@@ -686,7 +686,7 @@ namespace NetworkView.Utils
         /// </summary>
         public static ICollection<T> FindTypedElements<T>(DependencyObject rootElement) where T : DependencyObject
         {
-            List<T> foundElements = new List<T>();
+            var foundElements = new List<T>();
             FindTypedElements(rootElement, foundElements);
             return foundElements;
         }
@@ -696,10 +696,10 @@ namespace NetworkView.Utils
         /// </summary>
         private static void FindTypedElements<T>(DependencyObject rootElement, List<T> foundElements) where T : DependencyObject
         {
-            int numChildren = VisualTreeHelper.GetChildrenCount(rootElement);
-            for (int i = 0; i < numChildren; ++i)
+            var numChildren = VisualTreeHelper.GetChildrenCount(rootElement);
+            for (var i = 0; i < numChildren; ++i)
             {
-                DependencyObject childElement = VisualTreeHelper.GetChild(rootElement, i);
+                var childElement = VisualTreeHelper.GetChild(rootElement, i);
                 if (childElement is T)
                 {
                     foundElements.Add((T)childElement);
@@ -723,11 +723,11 @@ namespace NetworkView.Utils
         /// </summary>
         private static void DumpVisualTree(Visual root, int indentLevel)
         {
-            string indentStr = new string(' ', indentLevel * 2);
+            var indentStr = new string(' ', indentLevel * 2);
             Trace.Write(indentStr);
             Trace.Write(root.GetType().Name);
 
-            FrameworkElement rootElement = root as FrameworkElement;
+            var rootElement = root as FrameworkElement;
             if (rootElement != null)
         {
                 if (rootElement.DataContext != null)
@@ -740,15 +740,15 @@ namespace NetworkView.Utils
 
             Trace.WriteLine("");
 
-            int numChildren = VisualTreeHelper.GetChildrenCount(root);
+            var numChildren = VisualTreeHelper.GetChildrenCount(root);
             if (numChildren > 0)
             {
                 Trace.Write(indentStr);
                 Trace.WriteLine("{");
 
-                for (int i = 0; i < numChildren; ++i)
+                for (var i = 0; i < numChildren; ++i)
                 {
-                    Visual child = (Visual)VisualTreeHelper.GetChild(root, i);
+                    var child = (Visual)VisualTreeHelper.GetChild(root, i);
                     DumpVisualTree(child, indentLevel + 1);
             }
 

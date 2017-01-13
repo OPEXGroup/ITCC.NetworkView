@@ -149,8 +149,8 @@ namespace NetworkView.Utils
                 {
                     if (horizontalAdornerPlacement == AdornerPlacement.Mouse)
                     {
-                        double adornerWidth = child.DesiredSize.Width;
-                        Point position = Mouse.GetPosition(AdornerLayer.GetAdornerLayer(AdornedElement));
+                        var adornerWidth = child.DesiredSize.Width;
+                        var position = Mouse.GetPosition(AdornerLayer.GetAdornerLayer(AdornedElement));
                         return (position.X - adornerWidth) + offsetX;
                     }
                     else if (horizontalAdornerPlacement == AdornerPlacement.Outside)
@@ -166,35 +166,35 @@ namespace NetworkView.Utils
                 {
                     if (horizontalAdornerPlacement == AdornerPlacement.Mouse)
                     {
-                        Point position = Mouse.GetPosition(AdornerLayer.GetAdornerLayer(AdornedElement));
+                        var position = Mouse.GetPosition(AdornerLayer.GetAdornerLayer(AdornedElement));
                         return position.X + offsetX;
                     }
                     else if (horizontalAdornerPlacement == AdornerPlacement.Outside)
                     {
-                        double adornedWidth = AdornedElement.ActualWidth;
+                        var adornedWidth = AdornedElement.ActualWidth;
                         return adornedWidth + offsetX;
                     }
                     else
                     {
-                        double adornerWidth = child.DesiredSize.Width;
-                        double adornedWidth = AdornedElement.ActualWidth;
-                        double x = adornedWidth - adornerWidth;
+                        var adornerWidth = child.DesiredSize.Width;
+                        var adornedWidth = AdornedElement.ActualWidth;
+                        var x = adornedWidth - adornerWidth;
                         return x + offsetX;
                     }
                 }
                 case HorizontalAlignment.Center:
                 {
-                    double adornerWidth = child.DesiredSize.Width;
+                    var adornerWidth = child.DesiredSize.Width;
 
                     if (horizontalAdornerPlacement == AdornerPlacement.Mouse)
                     {
-                        Point position = Mouse.GetPosition(AdornerLayer.GetAdornerLayer(AdornedElement));
+                        var position = Mouse.GetPosition(AdornerLayer.GetAdornerLayer(AdornedElement));
                         return (position.X - (adornerWidth / 2)) + offsetX;
                     }
                     else
                     {
-                        double adornedWidth = AdornedElement.ActualWidth;
-                        double x = (adornedWidth / 2) - (adornerWidth / 2);
+                        var adornedWidth = AdornedElement.ActualWidth;
+                        var x = (adornedWidth / 2) - (adornerWidth / 2);
                         return x + offsetX;
                     }
                 }
@@ -218,8 +218,8 @@ namespace NetworkView.Utils
                 {
                     if (verticalAdornerPlacement == AdornerPlacement.Mouse)
                     {
-                        double adornerWidth = child.DesiredSize.Width;
-                        Point position = Mouse.GetPosition(AdornerLayer.GetAdornerLayer(AdornedElement));
+                        var adornerWidth = child.DesiredSize.Width;
+                        var position = Mouse.GetPosition(AdornerLayer.GetAdornerLayer(AdornedElement));
                         return (position.Y - adornerWidth) + offsetY;
                     }
                     else if (verticalAdornerPlacement == AdornerPlacement.Outside)
@@ -235,35 +235,35 @@ namespace NetworkView.Utils
                 {
                     if (verticalAdornerPlacement == AdornerPlacement.Mouse)
                     {
-                        Point position = Mouse.GetPosition(AdornerLayer.GetAdornerLayer(AdornedElement));
+                        var position = Mouse.GetPosition(AdornerLayer.GetAdornerLayer(AdornedElement));
                         return position.Y + offsetY;
                     }
                     else if (verticalAdornerPlacement == AdornerPlacement.Outside)
                     {
-                        double adornedHeight = AdornedElement.ActualHeight;
+                        var adornedHeight = AdornedElement.ActualHeight;
                         return adornedHeight + offsetY;
                     }
                     else
                     {
-                        double adornerHeight = child.DesiredSize.Height;
-                        double adornedHeight = AdornedElement.ActualHeight;
-                        double x = adornedHeight - adornerHeight;
+                        var adornerHeight = child.DesiredSize.Height;
+                        var adornedHeight = AdornedElement.ActualHeight;
+                        var x = adornedHeight - adornerHeight;
                         return x + offsetY;
                     }
                 }
                 case VerticalAlignment.Center:
                 {
-                    double adornerHeight = child.DesiredSize.Height;
+                    var adornerHeight = child.DesiredSize.Height;
 
                     if (verticalAdornerPlacement == AdornerPlacement.Mouse)
                     {
-                        Point position = Mouse.GetPosition(AdornerLayer.GetAdornerLayer(AdornedElement));
+                        var position = Mouse.GetPosition(AdornerLayer.GetAdornerLayer(AdornedElement));
                         return (position.Y - (adornerHeight/2)) + offsetY;
                     }
                     else
                     {
-                        double adornedHeight = AdornedElement.ActualHeight;
-                        double y = (adornedHeight / 2) - (adornerHeight / 2);
+                        var adornedHeight = AdornedElement.ActualHeight;
+                        var y = (adornedHeight / 2) - (adornerHeight / 2);
                         return y + offsetY;
                     }
                 }
@@ -344,18 +344,18 @@ namespace NetworkView.Utils
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            double x = PositionX;
+            var x = PositionX;
             if (Double.IsNaN(x))
             {
                 x = DetermineX();
             }
-            double y = PositionY;
+            var y = PositionY;
             if (Double.IsNaN(y))
             {
                 y = DetermineY();
             }
-            double adornerWidth = DetermineWidth();
-            double adornerHeight = DetermineHeight();
+            var adornerWidth = DetermineWidth();
+            var adornerHeight = DetermineHeight();
             child.Arrange(new Rect(x, y, adornerWidth, adornerHeight));
             return finalSize;
         }
@@ -374,7 +374,7 @@ namespace NetworkView.Utils
         {
             get
             {
-                ArrayList list = new ArrayList();
+                var list = new ArrayList();
                 list.Add(child);
                 return (IEnumerator)list.GetEnumerator();
             }

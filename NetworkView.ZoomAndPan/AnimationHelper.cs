@@ -23,9 +23,9 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         public static void StartAnimation(UIElement animatableElement, DependencyProperty dependencyProperty, double toValue, double animationDurationSeconds, EventHandler completedEvent)
         {
-            double fromValue = (double)animatableElement.GetValue(dependencyProperty);
+            var fromValue = (double)animatableElement.GetValue(dependencyProperty);
 
-            DoubleAnimation animation = new DoubleAnimation();
+            var animation = new DoubleAnimation();
             animation.From = fromValue;
             animation.To = toValue;
             animation.Duration = TimeSpan.FromSeconds(animationDurationSeconds);

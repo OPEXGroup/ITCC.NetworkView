@@ -325,7 +325,7 @@ namespace NetworkView.AdvancedSample
             // connector must have a different type).
             // Also only allocation from one node to another, never one node back to the same node.
             //
-            bool connectionOk = connectorDraggedOut.ParentNode != connectorDraggedOver.ParentNode &&
+            var connectionOk = connectorDraggedOut.ParentNode != connectorDraggedOver.ParentNode &&
                                 connectorDraggedOut.Type != connectorDraggedOver.Type;
 
             if (!connectionOk)
@@ -518,13 +518,13 @@ namespace NetworkView.AdvancedSample
             //
             // Create some nodes and add them to the view-model.
             //
-            NodeViewModel node1 = CreateNode("Node1", new Point(100, 60), false);
-            NodeViewModel node2 = CreateNode("Node2", new Point(350, 80), false);
+            var node1 = CreateNode("Node1", new Point(100, 60), false);
+            var node2 = CreateNode("Node2", new Point(350, 80), false);
 
             //
             // Create a connection between the nodes.
             //
-            ConnectionViewModel connection = new ConnectionViewModel();
+            var connection = new ConnectionViewModel();
             connection.SourceConnector = node1.OutputConnectors[0];
             connection.DestConnector = node2.InputConnectors[0];
 

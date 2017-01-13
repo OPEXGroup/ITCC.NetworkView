@@ -45,7 +45,7 @@ namespace NetworkView.NetworkUI
 
                 foreach (var selectedNode in SelectedNodes)
                 {
-                    NodeItem nodeItem = FindAssociatedNodeItem(selectedNode);
+                    var nodeItem = FindAssociatedNodeItem(selectedNode);
                     if (nodeItem == null)
                     {
                         throw new ApplicationException("Unexpected code path!");

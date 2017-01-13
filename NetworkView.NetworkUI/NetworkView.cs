@@ -632,12 +632,12 @@ namespace NetworkView.NetworkUI
                 return;
             }
 
-            Rect rect = Rect.Empty;
+            var rect = Rect.Empty;
 
             foreach (var node in nodes)
             {
-                NodeItem nodeItem = FindAssociatedNodeItem(node);
-                Rect nodeRect = new Rect(nodeItem.X, nodeItem.Y, nodeItem.ActualWidth, nodeItem.ActualHeight);
+                var nodeItem = FindAssociatedNodeItem(node);
+                var nodeRect = new Rect(nodeItem.X, nodeItem.Y, nodeItem.ActualWidth, nodeItem.ActualHeight);
 
                 if (rect == Rect.Empty)
                 {
@@ -728,7 +728,7 @@ namespace NetworkView.NetworkUI
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NetworkView), new FrameworkPropertyMetadata(typeof(NetworkView)));
 
-            InputGestureCollection inputs = new InputGestureCollection();
+            var inputs = new InputGestureCollection();
             inputs.Add(new KeyGesture(Key.A, ModifierKeys.Control));
             SelectAllCommand = new RoutedCommand("SelectAll", typeof(NetworkView), inputs);
 
@@ -742,7 +742,7 @@ namespace NetworkView.NetworkUI
 
             CancelConnectionDraggingCommand = new RoutedCommand("CancelConnectionDragging", typeof(NetworkView));
 
-            CommandBinding binding = new CommandBinding();
+            var binding = new CommandBinding();
             binding.Command = SelectAllCommand;
             binding.Executed += SelectAll_Executed;
             CommandManager.RegisterClassCommandBinding(typeof(NetworkView), binding);
@@ -768,7 +768,7 @@ namespace NetworkView.NetworkUI
         /// </summary>
         private static void SelectAll_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            NetworkView c = (NetworkView)sender;
+            var c = (NetworkView)sender;
             c.SelectAll();
         }
 
@@ -777,7 +777,7 @@ namespace NetworkView.NetworkUI
         /// </summary>
         private static void SelectNone_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            NetworkView c = (NetworkView)sender;
+            var c = (NetworkView)sender;
             c.SelectNone();
         }
 
@@ -786,7 +786,7 @@ namespace NetworkView.NetworkUI
         /// </summary>
         private static void InvertSelection_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            NetworkView c = (NetworkView)sender;
+            var c = (NetworkView)sender;
             c.InvertSelection();
         }
 
@@ -795,7 +795,7 @@ namespace NetworkView.NetworkUI
         /// </summary>
         private static void CancelConnectionDragging_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            NetworkView c = (NetworkView)sender;
+            var c = (NetworkView)sender;
             c.CancelConnectionDragging();
         }
 
@@ -804,7 +804,7 @@ namespace NetworkView.NetworkUI
         /// </summary>
         private static void NodesSource_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            NetworkView c = (NetworkView)d;
+            var c = (NetworkView)d;
 
             //
             // Clear 'Nodes'.
@@ -831,7 +831,7 @@ namespace NetworkView.NetworkUI
                     //
                     // Populate 'Nodes' from 'NodesSource'.
                     //
-                    foreach (object obj in enumerable)
+                    foreach (var obj in enumerable)
                     {
                         c.Nodes.Add(obj);
                     }
@@ -867,7 +867,7 @@ namespace NetworkView.NetworkUI
                     //
                     // For each item that has been removed from 'NodesSource' also remove it from 'Nodes'.
                     //
-                    foreach (object obj in e.OldItems)
+                    foreach (var obj in e.OldItems)
                     {
                         Nodes.Remove(obj);
                     }
@@ -878,7 +878,7 @@ namespace NetworkView.NetworkUI
                     //
                     // For each item that has been added to 'NodesSource' also add it to 'Nodes'.
                     //
-                    foreach (object obj in e.NewItems)
+                    foreach (var obj in e.NewItems)
                     {
                         Nodes.Add(obj);
                     }
@@ -891,7 +891,7 @@ namespace NetworkView.NetworkUI
         /// </summary>
         private static void ConnectionsSource_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            NetworkView c = (NetworkView)d;
+            var c = (NetworkView)d;
 
             //
             // Clear 'Connections'.
@@ -900,7 +900,7 @@ namespace NetworkView.NetworkUI
 
             if (e.OldValue != null)
             {
-                INotifyCollectionChanged notifyCollectionChanged = e.NewValue as INotifyCollectionChanged;
+                var notifyCollectionChanged = e.NewValue as INotifyCollectionChanged;
                 if (notifyCollectionChanged != null)
                 {
                     //
@@ -912,19 +912,19 @@ namespace NetworkView.NetworkUI
 
             if (e.NewValue != null)
             {
-                IEnumerable enumerable = e.NewValue as IEnumerable;
+                var enumerable = e.NewValue as IEnumerable;
                 if (enumerable != null)
                 {
                     //
                     // Populate 'Connections' from 'ConnectionsSource'.
                     //
-                    foreach (object obj in enumerable)
+                    foreach (var obj in enumerable)
                     {
                         c.Connections.Add(obj);
                     }
                 }
 
-                INotifyCollectionChanged notifyCollectionChanged = e.NewValue as INotifyCollectionChanged;
+                var notifyCollectionChanged = e.NewValue as INotifyCollectionChanged;
                 if (notifyCollectionChanged != null)
                 {
                     //
@@ -954,7 +954,7 @@ namespace NetworkView.NetworkUI
                     //
                     // For each item that has been removed from 'ConnectionsSource' also remove it from 'Connections'.
                     //
-                    foreach (object obj in e.OldItems)
+                    foreach (var obj in e.OldItems)
                     {
                         Connections.Remove(obj);
                     }
@@ -965,7 +965,7 @@ namespace NetworkView.NetworkUI
                     //
                     // For each item that has been added to 'ConnectionsSource' also add it to 'Connections'.
                     //
-                    foreach (object obj in e.NewItems)
+                    foreach (var obj in e.NewItems)
                     {
                         Connections.Add(obj);
                     }
@@ -1046,11 +1046,11 @@ namespace NetworkView.NetworkUI
                 return 0;
             }
 
-            int maxZ = 0;
+            var maxZ = 0;
 
-            for (int nodeIndex = 0; ; ++nodeIndex)
+            for (var nodeIndex = 0; ; ++nodeIndex)
             {
-                NodeItem nodeItem = (NodeItem)nodeItemsControl.ItemContainerGenerator.ContainerFromIndex(nodeIndex);
+                var nodeItem = (NodeItem)nodeItemsControl.ItemContainerGenerator.ContainerFromIndex(nodeIndex);
                 if (nodeItem == null)
                 {
                     break;
@@ -1074,7 +1074,7 @@ namespace NetworkView.NetworkUI
         /// </summary>
         internal NodeItem FindAssociatedNodeItem(object node)
         {
-            NodeItem nodeItem = node as NodeItem;
+            var nodeItem = node as NodeItem;
             if (nodeItem == null)
             {
                 nodeItem = nodeItemsControl.FindAssociatedNodeItem(node);

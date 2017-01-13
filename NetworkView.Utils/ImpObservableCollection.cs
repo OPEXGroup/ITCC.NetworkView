@@ -65,7 +65,7 @@ namespace NetworkView.Utils
 
         public void AddRange(T[] range)
         {
-            foreach (T item in range)
+            foreach (var item in range)
             {
                 Add(item);
             }
@@ -81,7 +81,7 @@ namespace NetworkView.Utils
 
         public void AddRange(ICollection<T> range)
         {
-            foreach (T item in range)
+            foreach (var item in range)
             {
                 Add(item);
             }
@@ -89,7 +89,7 @@ namespace NetworkView.Utils
 
         public void RemoveRange(T[] range)
         {
-            foreach (T item in range)
+            foreach (var item in range)
             {
                 Remove(item);
             }
@@ -105,7 +105,7 @@ namespace NetworkView.Utils
 
         public void RemoveRange(ImpObservableCollection<T> range)
         {
-            foreach (T item in range)
+            foreach (var item in range)
             {
                 Remove(item);
             }
@@ -113,7 +113,7 @@ namespace NetworkView.Utils
 
         public void RemoveRangeAt(int index, int count)
         {
-            for (int i = 0; i < count; ++i)
+            for (var i = 0; i < count; ++i)
             {
                 RemoveAt(index);
             }
@@ -121,7 +121,7 @@ namespace NetworkView.Utils
 
         public void RemoveRange(ICollection<T> range)
         {
-            foreach (T item in range)
+            foreach (var item in range)
             {
                 Remove(item);
             }
@@ -215,9 +215,9 @@ namespace NetworkView.Utils
         public T2[] ToArray<T2>()
             where T2 : class
         {
-            T2[] array = new T2[Count];
-            int i = 0;
-            foreach (T obj in this)
+            var array = new T2[Count];
+            var i = 0;
+            foreach (var obj in this)
             {
                 array[i] = obj as T2;
                 ++i;
@@ -228,7 +228,7 @@ namespace NetworkView.Utils
 
         public object Clone()
         {
-            ImpObservableCollection<T> clone = new ImpObservableCollection<T>();
+            var clone = new ImpObservableCollection<T>();
             foreach (ICloneable obj in this)
             {
                 clone.Add((T)obj.Clone());

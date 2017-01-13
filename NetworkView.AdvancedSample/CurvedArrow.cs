@@ -89,9 +89,9 @@ namespace NetworkView.AdvancedSample
                 // Geometry has not yet been generated.
                 // Generate geometry and cache it.
                 //
-                Geometry geometry = GenerateGeometry();
+                var geometry = GenerateGeometry();
 
-                GeometryGroup group = new GeometryGroup();
+                var group = new GeometryGroup();
                 group.Children.Add(geometry);
 
                 GenerateArrowHeadGeometry(group);
@@ -108,16 +108,16 @@ namespace NetworkView.AdvancedSample
         /// </summary>
         private void GenerateArrowHeadGeometry(GeometryGroup geometryGroup)
         {
-            Point startPoint = Points[0];
+            var startPoint = Points[0];
 
-            Point penultimatePoint = Points[Points.Count - 2];
-            Point arrowHeadTip = Points[Points.Count - 1];
-            Vector startDir = arrowHeadTip - penultimatePoint;
+            var penultimatePoint = Points[Points.Count - 2];
+            var arrowHeadTip = Points[Points.Count - 1];
+            var startDir = arrowHeadTip - penultimatePoint;
             startDir.Normalize();
-            Point basePoint = arrowHeadTip - (startDir * ArrowHeadLength);
-            Vector crossDir = new Vector(-startDir.Y, startDir.X);
+            var basePoint = arrowHeadTip - (startDir * ArrowHeadLength);
+            var crossDir = new Vector(-startDir.Y, startDir.X);
 
-            Point[] arrowHeadPoints = new Point[3];
+            var arrowHeadPoints = new Point[3];
             arrowHeadPoints[0] = arrowHeadTip;
             arrowHeadPoints[1] = basePoint - (crossDir * (ArrowHeadWidth / 2));
             arrowHeadPoints[2] = basePoint + (crossDir * (ArrowHeadWidth / 2));
@@ -125,14 +125,14 @@ namespace NetworkView.AdvancedSample
             //
             // Build geometry for the arrow head.
             //
-            PathFigure arrowHeadFig = new PathFigure();
+            var arrowHeadFig = new PathFigure();
             arrowHeadFig.IsClosed = true;
             arrowHeadFig.IsFilled = true;
             arrowHeadFig.StartPoint = arrowHeadPoints[0];
             arrowHeadFig.Segments.Add(new LineSegment(arrowHeadPoints[1], true));
             arrowHeadFig.Segments.Add(new LineSegment(arrowHeadPoints[2], true));
 
-            PathGeometry pathGeometry = new PathGeometry();
+            var pathGeometry = new PathGeometry();
             pathGeometry.Figures.Add(arrowHeadFig);
 
             geometryGroup.Children.Add(pathGeometry);
@@ -143,17 +143,17 @@ namespace NetworkView.AdvancedSample
         /// </summary>
         protected Geometry GenerateGeometry()
         {
-            PathGeometry pathGeometry = new PathGeometry();
+            var pathGeometry = new PathGeometry();
 
             if (Points.Count == 2 || Points.Count == 3)
             {
                 // Make a straight line.
-                PathFigure fig = new PathFigure();
+                var fig = new PathFigure();
                 fig.IsClosed = false;
                 fig.IsFilled = false;
                 fig.StartPoint = Points[0];
 
-                for (int i = 1; i < Points.Count; ++i)
+                for (var i = 1; i < Points.Count; ++i)
                 {
                     fig.Segments.Add(new LineSegment(Points[i], true));
                 }
@@ -162,9 +162,9 @@ namespace NetworkView.AdvancedSample
             }
             else
             {
-                PointCollection adjustedPoints = new PointCollection();
+                var adjustedPoints = new PointCollection();
                 adjustedPoints.Add(Points[0]);
-                for (int i = 1; i < Points.Count; ++i)
+                for (var i = 1; i < Points.Count; ++i)
                 {
                     adjustedPoints.Add(Points[i]);
                 }
@@ -172,7 +172,7 @@ namespace NetworkView.AdvancedSample
                 if (adjustedPoints.Count == 4)
                 {
                     // Make a curved line.
-                    PathFigure fig = new PathFigure();
+                    var fig = new PathFigure();
                     fig.IsClosed = false;
                     fig.IsFilled = false;
                     fig.StartPoint = adjustedPoints[0];
@@ -183,7 +183,7 @@ namespace NetworkView.AdvancedSample
                 else if (adjustedPoints.Count >= 5)
                 {
                     // Make a curved line.
-                    PathFigure fig = new PathFigure();
+                    var fig = new PathFigure();
                     fig.IsClosed = false;
                     fig.IsFilled = false;
                     fig.StartPoint = adjustedPoints[0];
@@ -192,7 +192,7 @@ namespace NetworkView.AdvancedSample
 
                     while (adjustedPoints.Count > 3)
                     {
-                        Point generatedPoint = adjustedPoints[1] + ((adjustedPoints[2] - adjustedPoints[1]) / 2);
+                        var generatedPoint = adjustedPoints[1] + ((adjustedPoints[2] - adjustedPoints[1]) / 2);
 
                         fig.Segments.Add(new BezierSegment(adjustedPoints[0], adjustedPoints[1], generatedPoint, true));
 

@@ -139,7 +139,7 @@ namespace NetworkView.SimpleNetworkModel
         {
             get
             {
-                List<ConnectionViewModel> attachedConnections = new List<ConnectionViewModel>();
+                var attachedConnections = new List<ConnectionViewModel>();
 
                 foreach (var connector in Connectors)
                 {

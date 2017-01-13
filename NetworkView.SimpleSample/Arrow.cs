@@ -121,11 +121,11 @@ namespace NetworkView.SimpleSample
                 // Geometry has not yet been generated.
                 // Generate geometry and cache it.
                 //
-                LineGeometry geometry = new LineGeometry();
+                var geometry = new LineGeometry();
                 geometry.StartPoint = Start;
                 geometry.EndPoint = End;
 
-                GeometryGroup group = new GeometryGroup();
+                var group = new GeometryGroup();
                 group.Children.Add(geometry);
 
                 GenerateArrowHeadGeometry(group);
@@ -142,15 +142,15 @@ namespace NetworkView.SimpleSample
         /// </summary>
         private void GenerateArrowHeadGeometry(GeometryGroup geometryGroup)
         {
-            EllipseGeometry ellipse = new EllipseGeometry(Start, DotSize, DotSize);
+            var ellipse = new EllipseGeometry(Start, DotSize, DotSize);
             geometryGroup.Children.Add(ellipse);
 
-            Vector startDir = End - Start;
+            var startDir = End - Start;
             startDir.Normalize();
-            Point basePoint = End - (startDir * ArrowHeadLength);
-            Vector crossDir = new Vector(-startDir.Y, startDir.X);
+            var basePoint = End - (startDir * ArrowHeadLength);
+            var crossDir = new Vector(-startDir.Y, startDir.X);
 
-            Point[] arrowHeadPoints = new Point[3];
+            var arrowHeadPoints = new Point[3];
             arrowHeadPoints[0] = End;
             arrowHeadPoints[1] = basePoint - (crossDir * (ArrowHeadWidth / 2));
             arrowHeadPoints[2] = basePoint + (crossDir * (ArrowHeadWidth / 2));
@@ -158,14 +158,14 @@ namespace NetworkView.SimpleSample
             //
             // Build geometry for the arrow head.
             //
-            PathFigure arrowHeadFig = new PathFigure();
+            var arrowHeadFig = new PathFigure();
             arrowHeadFig.IsClosed = true;
             arrowHeadFig.IsFilled = true;
             arrowHeadFig.StartPoint = arrowHeadPoints[0];
             arrowHeadFig.Segments.Add(new LineSegment(arrowHeadPoints[1], true));
             arrowHeadFig.Segments.Add(new LineSegment(arrowHeadPoints[2], true));
 
-            PathGeometry pathGeometry = new PathGeometry();
+            var pathGeometry = new PathGeometry();
             pathGeometry.Figures.Add(arrowHeadFig);
 
             geometryGroup.Children.Add(pathGeometry);

@@ -88,7 +88,7 @@ namespace NetworkView.NetworkUI
 
             if (e.ChangedButton == MouseButton.Left)
             {
-                bool wasDragSelectionApplied = false;
+                var wasDragSelectionApplied = false;
 
                 if (isDraggingSelectionRect)
                 {
@@ -134,7 +134,7 @@ namespace NetworkView.NetworkUI
                 //
                 // Drag selection is in progress.
                 //
-                Point curMouseDownPoint = e.GetPosition(this);
+                var curMouseDownPoint = e.GetPosition(this);
                 UpdateDragSelectionRect(origMouseDownPoint, curMouseDownPoint);
 
                 e.Handled = true;
@@ -146,9 +146,9 @@ namespace NetworkView.NetworkUI
                 // but don't initiate drag selection until
                 // they have dragged past the threshold value.
                 //
-                Point curMouseDownPoint = e.GetPosition(this);
+                var curMouseDownPoint = e.GetPosition(this);
                 var dragDelta = curMouseDownPoint - origMouseDownPoint;
-                double dragDistance = Math.Abs(dragDelta.Length);
+                var dragDistance = Math.Abs(dragDelta.Length);
                 if (dragDistance > DragThreshold)
                 {
                     //
@@ -221,11 +221,11 @@ namespace NetworkView.NetworkUI
         {
             dragSelectionCanvas.Visibility = Visibility.Collapsed;
 
-            double x = Canvas.GetLeft(dragSelectionBorder);
-            double y = Canvas.GetTop(dragSelectionBorder);
-            double width = dragSelectionBorder.Width;
-            double height = dragSelectionBorder.Height;
-            Rect dragRect = new Rect(x, y, width, height);
+            var x = Canvas.GetLeft(dragSelectionBorder);
+            var y = Canvas.GetTop(dragSelectionBorder);
+            var width = dragSelectionBorder.Width;
+            var height = dragSelectionBorder.Height;
+            var dragRect = new Rect(x, y, width, height);
 
             //
             // Inflate the drag selection-rectangle by 1/10 of its size to 
@@ -241,13 +241,13 @@ namespace NetworkView.NetworkUI
             //
             // Find and select all the list box items.
             //
-            for (int nodeIndex = 0; nodeIndex < Nodes.Count; ++nodeIndex) 
+            for (var nodeIndex = 0; nodeIndex < Nodes.Count; ++nodeIndex) 
             {
                 var nodeItem = (NodeItem) nodeItemsControl.ItemContainerGenerator.ContainerFromIndex(nodeIndex);
                 var transformToAncestor = nodeItem.TransformToAncestor(this);
-                Point itemPt1 = transformToAncestor.Transform(new Point(0, 0));
-                Point itemPt2 = transformToAncestor.Transform(new Point(nodeItem.ActualWidth, nodeItem.ActualHeight));
-                Rect itemRect = new Rect(itemPt1, itemPt2);
+                var itemPt1 = transformToAncestor.Transform(new Point(0, 0));
+                var itemPt2 = transformToAncestor.Transform(new Point(nodeItem.ActualWidth, nodeItem.ActualHeight));
+                var itemRect = new Rect(itemPt1, itemPt2);
                 if (dragRect.Contains(itemRect))
                 {
                     nodeItem.IsSelected = true;

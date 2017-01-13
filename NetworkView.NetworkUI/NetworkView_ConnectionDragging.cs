@@ -69,7 +69,7 @@ namespace NetworkView.NetworkUI
             // Raise an event so that application code can create a connection and
             // add it to the view-model.
             //
-            ConnectionDragStartedEventArgs eventArgs = new ConnectionDragStartedEventArgs(ConnectionDragStartedEvent, this, draggedOutNodeDataContext, draggedOutConnectorDataContext);
+            var eventArgs = new ConnectionDragStartedEventArgs(ConnectionDragStartedEvent, this, draggedOutNodeDataContext, draggedOutConnectorDataContext);
             RaiseEvent(eventArgs);
 
             //
@@ -96,7 +96,7 @@ namespace NetworkView.NetworkUI
 
             Trace.Assert((ConnectorItem)e.OriginalSource == draggedOutConnectorItem);
 
-            Point mousePoint = Mouse.GetPosition(this);
+            var mousePoint = Mouse.GetPosition(this);
             //
             // Raise an event so that application code can compute intermediate connection points.
             //
@@ -113,7 +113,7 @@ namespace NetworkView.NetworkUI
 
             ConnectorItem connectorDraggedOver = null;
             object connectorDataContextDraggedOver = null;
-            bool dragOverSuccess = DetermineConnectorItemDraggedOver(mousePoint, out connectorDraggedOver, out connectorDataContextDraggedOver);
+            var dragOverSuccess = DetermineConnectorItemDraggedOver(mousePoint, out connectorDraggedOver, out connectorDataContextDraggedOver);
             if (connectorDraggedOver != null)
             {
                 //
@@ -162,7 +162,7 @@ namespace NetworkView.NetworkUI
 
             Trace.Assert((ConnectorItem)e.OriginalSource == draggedOutConnectorItem);
 
-            Point mousePoint = Mouse.GetPosition(this);
+            var mousePoint = Mouse.GetPosition(this);
 
             //
             // Figure out if the end of the connection was dropped on a connector.
@@ -274,7 +274,7 @@ namespace NetworkView.NetworkUI
         /// </summary>
         private void AddFeedbackAdorner(FrameworkElement adornedElement, object indicator)
         {
-            AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this);
+            var adornerLayer = AdornerLayer.GetAdornerLayer(this);
 
             if (feedbackAdorner != null)
             {
@@ -293,7 +293,7 @@ namespace NetworkView.NetworkUI
             // The view-model object 'indicator' is transformed into a UI element using
             // normal WPF data-template rules.
             //
-            ContentControl adornerElement = new ContentControl();
+            var adornerElement = new ContentControl();
             adornerElement.HorizontalAlignment = HorizontalAlignment.Center;
             adornerElement.VerticalAlignment = VerticalAlignment.Center;
             adornerElement.Content = indicator;
@@ -315,7 +315,7 @@ namespace NetworkView.NetworkUI
                 return;
             }
 
-            AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this);
+            var adornerLayer = AdornerLayer.GetAdornerLayer(this);
             adornerLayer.Remove(feedbackAdorner);
             feedbackAdorner = null;
         }
