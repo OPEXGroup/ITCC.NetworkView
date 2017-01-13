@@ -9,9 +9,8 @@ namespace NetworkView.Utils
     {
 #if DEBUG
         private static int _nextObjectId;
-        private readonly int _objectDebugId = _nextObjectId++;
 
-        public int ObjectDebugId => _objectDebugId;
+        public int ObjectDebugId { get; } = _nextObjectId++;
 #endif //  DEBUG
 
         /// <summary>

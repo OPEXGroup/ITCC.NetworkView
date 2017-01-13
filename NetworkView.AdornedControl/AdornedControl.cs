@@ -88,8 +88,8 @@ namespace NetworkView.AdornedControl
 
             DataContextChanged += AdornedControl_DataContextChanged;
 
-            closeAdornerTimer.Tick += closeAdornerTimer_Tick;
-            closeAdornerTimer.Interval = TimeSpan.FromSeconds(CloseAdornerTimeOut);
+            _closeAdornerTimer.Tick += closeAdornerTimer_Tick;
+            _closeAdornerTimer.Interval = TimeSpan.FromSeconds(CloseAdornerTimeOut);
         }
 
         /// <summary>
@@ -99,11 +99,11 @@ namespace NetworkView.AdornedControl
         {
             IsAdornerVisible = true;
 
-            adornerShowState = AdornerShowState.Visible;
+            _adornerShowState = AdornerShowState.Visible;
 
             if (IsMouseOverShowEnabled && !IsMouseOver)
             {
-                closeAdornerTimer.Start();
+                _closeAdornerTimer.Start();
             }
         }
 
@@ -114,8 +114,8 @@ namespace NetworkView.AdornedControl
         {
             IsAdornerVisible = false;
 
-            closeAdornerTimer.Stop();
-            adornerShowState = AdornerShowState.Hidden;
+            _closeAdornerTimer.Stop();
+            _adornerShowState = AdornerShowState.Hidden;
         }
 
         /// <summary>
@@ -123,8 +123,8 @@ namespace NetworkView.AdornedControl
         /// </summary>
         public void FadeInAdorner()
         {
-            if (adornerShowState == AdornerShowState.Visible ||
-                adornerShowState == AdornerShowState.FadingIn)
+            if (_adornerShowState == AdornerShowState.Visible ||
+                _adornerShowState == AdornerShowState.FadingIn)
             {
                 // Already visible or fading in.
                 return;
@@ -132,18 +132,18 @@ namespace NetworkView.AdornedControl
 
             ShowAdorner();
 
-            if (adornerShowState != AdornerShowState.FadingOut)
+            if (_adornerShowState != AdornerShowState.FadingOut)
             {
-                adorner.Opacity = 0.0;
+                _adorner.Opacity = 0.0;
             }
 
             var doubleAnimation = new DoubleAnimation(1.0, new Duration(TimeSpan.FromSeconds(FadeInTime)));
             doubleAnimation.Completed += fadeInAnimation_Completed;
             doubleAnimation.Freeze();
                 
-            adorner.BeginAnimation(OpacityProperty, doubleAnimation);
+            _adorner.BeginAnimation(OpacityProperty, doubleAnimation);
 
-            adornerShowState = AdornerShowState.FadingIn;
+            _adornerShowState = AdornerShowState.FadingIn;
         }
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace NetworkView.AdornedControl
         /// </summary>
         public void FadeOutAdorner()
         {
-            if (adornerShowState == AdornerShowState.FadingOut)
+            if (_adornerShowState == AdornerShowState.FadingOut)
             {
                 //
                 // Already fading out.
@@ -159,7 +159,7 @@ namespace NetworkView.AdornedControl
                 return;
             }
 
-            if (adornerShowState == AdornerShowState.Hidden)
+            if (_adornerShowState == AdornerShowState.Hidden)
             {
                 //
                 // Adorner has already been hidden.
@@ -171,9 +171,9 @@ namespace NetworkView.AdornedControl
             fadeOutAnimation.Completed += fadeOutAnimation_Completed;
             fadeOutAnimation.Freeze();
 
-            adorner.BeginAnimation(OpacityProperty, fadeOutAnimation);
+            _adorner.BeginAnimation(OpacityProperty, fadeOutAnimation);
 
-            adornerShowState = AdornerShowState.FadingOut;
+            _adornerShowState = AdornerShowState.FadingOut;
         }
 
         /// <summary>
@@ -393,22 +393,22 @@ namespace NetworkView.AdornedControl
         /// <summary>
         /// Specifies the current show/hide state of the adorner.
         /// </summary>
-        private AdornerShowState adornerShowState = AdornerShowState.Hidden;
+        private AdornerShowState _adornerShowState = AdornerShowState.Hidden;
 
         /// <summary>
         /// Caches the adorner layer.
         /// </summary>
-        private AdornerLayer adornerLayer;
+        private AdornerLayer _adornerLayer;
 
         /// <summary>
         /// The actual adorner create to contain our 'adorner UI content'.
         /// </summary>
-        private FrameworkElementAdorner adorner;
+        private FrameworkElementAdorner _adorner;
 
         /// <summary>
         /// This timer is used to fade out and close the adorner.
         /// </summary>
-        private readonly DispatcherTimer closeAdornerTimer = new DispatcherTimer();
+        private readonly DispatcherTimer _closeAdornerTimer = new DispatcherTimer();
         
         #endregion
 
@@ -500,7 +500,7 @@ namespace NetworkView.AdornedControl
         private static void IsMouseOverShowEnabled_PropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
             var c = (AdornedControl)o;
-            c.closeAdornerTimer.Stop();
+            c._closeAdornerTimer.Stop();
             c.HideAdorner();
         }
 
@@ -510,7 +510,7 @@ namespace NetworkView.AdornedControl
         private static void CloseAdornerTimeOut_PropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
             var c = (AdornedControl)o;
-            c.closeAdornerTimer.Interval = TimeSpan.FromSeconds(c.CloseAdornerTimeOut);
+            c._closeAdornerTimer.Interval = TimeSpan.FromSeconds(c.CloseAdornerTimeOut);
         }
 
         /// <summary>
@@ -593,7 +593,7 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private void ShowAdornerInternal()
         {
-            if (adorner != null)
+            if (_adorner != null)
             {
                 // Already adorned.
                 return;
@@ -601,7 +601,7 @@ namespace NetworkView.AdornedControl
 
             AddAdorner();
 
-            RaiseEvent(new AdornerEventArgs(AdornerShownEvent, this, adorner.Child));
+            RaiseEvent(new AdornerEventArgs(AdornerShownEvent, this, _adorner.Child));
         }
 
         /// <summary>
@@ -609,13 +609,13 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private void HideAdornerInternal()
         {
-            if (adornerLayer == null || adorner == null)
+            if (_adornerLayer == null || _adorner == null)
             {
                 // Not already adorned.
                 return;
             }
 
-            RaiseEvent(new AdornerEventArgs(AdornerHiddenEvent, this, adorner.Child));
+            RaiseEvent(new AdornerEventArgs(AdornerHiddenEvent, this, _adorner.Child));
 
             RemoveAdorner();
         }
@@ -660,7 +660,7 @@ namespace NetworkView.AdornedControl
                 return;
             }
 
-            closeAdornerTimer.Stop();
+            _closeAdornerTimer.Stop();
 
             FadeInAdorner();
         }
@@ -675,7 +675,7 @@ namespace NetworkView.AdornedControl
                 return;
             }
 
-            closeAdornerTimer.Start();
+            _closeAdornerTimer.Start();
         }
 
         /// <summary>
@@ -684,7 +684,7 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private void closeAdornerTimer_Tick(object sender, EventArgs e)
         {
-            closeAdornerTimer.Stop();
+            _closeAdornerTimer.Stop();
 
             FadeOutAdorner();
         }
@@ -694,10 +694,10 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private void fadeInAnimation_Completed(object sender, EventArgs e)
         {
-            if (adornerShowState == AdornerShowState.FadingIn)
+            if (_adornerShowState == AdornerShowState.FadingIn)
             {
                 // Still fading in, eg it wasn't aborted.
-                adornerShowState = AdornerShowState.Visible;
+                _adornerShowState = AdornerShowState.Visible;
             }
         }
 
@@ -706,7 +706,7 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private void fadeOutAnimation_Completed(object sender, EventArgs e)
         {
-            if (adornerShowState == AdornerShowState.FadingOut)
+            if (_adornerShowState == AdornerShowState.FadingOut)
             {
                 // Still fading out, eg it wasn't aborted.
                 HideAdorner();
@@ -720,12 +720,12 @@ namespace NetworkView.AdornedControl
         {
             if (AdornerContent != null)
             {
-                if (adornerLayer == null)
+                if (_adornerLayer == null)
                 {
-                    adornerLayer = AdornerLayer.GetAdornerLayer(this);
+                    _adornerLayer = AdornerLayer.GetAdornerLayer(this);
                 }
 
-                if (adornerLayer != null)
+                if (_adornerLayer != null)
                 {
                     FrameworkElement adornedControl = this; // The control to be adorned defaults to 'this'.
 
@@ -743,16 +743,16 @@ namespace NetworkView.AdornedControl
                         }
                     }
 
-                    adorner = new FrameworkElementAdorner(AdornerContent, adornedControl, 
+                    _adorner = new FrameworkElementAdorner(AdornerContent, adornedControl, 
                                                                HorizontalAdornerPlacement, VerticalAdornerPlacement,
                                                                AdornerOffsetX, AdornerOffsetY);
-                    adornerLayer.Add(adorner);
+                    _adornerLayer.Add(_adorner);
 
 					//
 					// Update the layout of the adorner layout so that clients that depend
 					// on the 'AdornerShown' event can use the visual tree of the adorner.
 					//
-					adornerLayer.UpdateLayout();
+					_adornerLayer.UpdateLayout();
 
                     UpdateAdornerDataContext();
                 }
@@ -767,23 +767,23 @@ namespace NetworkView.AdornedControl
             //
             // Stop the timer that might be about to fade out the adorner.
             //
-            closeAdornerTimer.Stop();
+            _closeAdornerTimer.Stop();
 
-            if (adornerLayer != null && adorner != null)
+            if (_adornerLayer != null && _adorner != null)
             {
-                adornerLayer.Remove(adorner);
-                adorner.DisconnectChild();
+                _adornerLayer.Remove(_adorner);
+                _adorner.DisconnectChild();
             }
 
-            adorner = null;
-            adornerLayer = null;
+            _adorner = null;
+            _adornerLayer = null;
 
             //
             // Ensure that the state of the adorned control reflects that
             // the the adorner is no longer.
             //
             IsAdornerVisible = false;
-            adornerShowState = AdornerShowState.Hidden;
+            _adornerShowState = AdornerShowState.Hidden;
 		}
 
         #endregion
