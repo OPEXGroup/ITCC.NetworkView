@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Media.Animation;
 
-namespace ZoomAndPan
+namespace NetworkView.ZoomAndPan
 {
     /// <summary>
     /// A helper class to simplify animation.

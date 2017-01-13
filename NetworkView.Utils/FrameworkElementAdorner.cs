@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Documents;
-using System.Windows;
-using System.Windows.Media;
 using System.Collections;
-using System.Diagnostics;
+using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 
 //
 // This code based on code available here:
 //
 //  http://www.codeproject.com/KB/WPF/WPFJoshSmith.aspx
 //
-namespace Utils
+namespace NetworkView.Utils
 {
     //
     // This class is an adorner that allows a FrameworkElement derived class to adorn another FrameworkElement.
