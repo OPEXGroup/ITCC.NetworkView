@@ -624,10 +624,7 @@ namespace NetworkView.ZoomAndPan
                 {
                     enableContentOffsetUpdateFromScale = false;
 
-                    if (callback != null)
-                    {
-                        callback(this, EventArgs.Empty);
-                    }
+                    callback?.Invoke(this, EventArgs.Empty);
                 });
 
             AnimationHelper.StartAnimation(this, ViewportZoomFocusXProperty, ViewportWidth / 2, AnimationDuration);
@@ -700,10 +697,7 @@ namespace NetworkView.ZoomAndPan
                 }
             }
 
-            if (c.ContentScaleChanged != null)
-            {
-                c.ContentScaleChanged(c, EventArgs.Empty);
-            }
+            c.ContentScaleChanged?.Invoke(c, EventArgs.Empty);
 
             if (c.scrollOwner != null)
             {
@@ -749,13 +743,10 @@ namespace NetworkView.ZoomAndPan
                 c.UpdateContentZoomFocusX();
             }
 
-            if (c.ContentOffsetXChanged != null)
-            {
-                //
-                // Raise an event to let users of the control know that the content offset has changed.
-                //
-                c.ContentOffsetXChanged(c, EventArgs.Empty);
-            }
+            //
+            // Raise an event to let users of the control know that the content offset has changed.
+            //
+            c.ContentOffsetXChanged?.Invoke(c, EventArgs.Empty);
 
             if (!c.disableScrollOffsetSync && c.scrollOwner != null)
             {
@@ -797,13 +788,10 @@ namespace NetworkView.ZoomAndPan
                 c.UpdateContentZoomFocusY();
             }
 
-            if (c.ContentOffsetYChanged != null)
-            {
-                //
-                // Raise an event to let users of the control know that the content offset has changed.
-                //
-                c.ContentOffsetYChanged(c, EventArgs.Empty);
-            }
+            //
+            // Raise an event to let users of the control know that the content offset has changed.
+            //
+            c.ContentOffsetYChanged?.Invoke(c, EventArgs.Empty);
 
             if (!c.disableScrollOffsetSync && c.scrollOwner != null)
             {

@@ -1016,13 +1016,7 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// Event raised when the selection in 'nodeItemsControl' changes.
         /// </summary>
-        private void nodeItemsControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (SelectionChanged != null)
-            {
-                SelectionChanged(this, new SelectionChangedEventArgs(Selector.SelectionChangedEvent, e.RemovedItems, e.AddedItems));
-            }
-        }
+        private void nodeItemsControl_SelectionChanged(object sender, SelectionChangedEventArgs e) => SelectionChanged?.Invoke(this, new SelectionChangedEventArgs(Selector.SelectionChangedEvent, e.RemovedItems, e.AddedItems));
 
         /// <summary>
         /// Find the max ZIndex of all the nodes.

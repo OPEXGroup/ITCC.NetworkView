@@ -195,10 +195,7 @@ namespace NetworkView.AdvancedNetworkModel
         {
             OnPropertyChanged("Hotspot");
 
-            if (HotspotUpdated != null)
-            {
-                HotspotUpdated(this, EventArgs.Empty);
-            }
+            HotspotUpdated?.Invoke(this, EventArgs.Empty);
         }
 
         #endregion Private Methods

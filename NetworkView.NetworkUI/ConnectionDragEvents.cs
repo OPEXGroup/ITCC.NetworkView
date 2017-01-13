@@ -12,12 +12,12 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// The NodeItem or it's DataContext (when non-NULL).
         /// </summary>
-        private object node;
+        private readonly object node;
 
         /// <summary>
         /// The ConnectorItem or it's DataContext (when non-NULL).
         /// </summary>
-        private object draggedOutConnector;
+        private readonly object draggedOutConnector;
 
         /// <summary>
         /// The connector that will be dragged out.
@@ -106,7 +106,7 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// The ConnectorItem or it's DataContext (when non-NULL).
         /// </summary>
-        private object draggedOverConnector;
+        private readonly object draggedOverConnector;
 
         /// <summary>
         /// Set to 'true' / 'false' to indicate that the connection from the dragged out connection to the dragged over connector is valid.
@@ -231,7 +231,7 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// The ConnectorItem or it's DataContext (when non-NULL).
         /// </summary>
-        private object connectorDraggedOver;
+        private readonly object connectorDraggedOver;
 
         #endregion Private Data Members
 

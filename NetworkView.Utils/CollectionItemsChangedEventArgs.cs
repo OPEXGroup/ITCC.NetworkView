@@ -11,22 +11,16 @@ namespace NetworkView.Utils
         /// <summary>
         /// The collection of items that changed.
         /// </summary>
-        private ICollection items;
+        private readonly ICollection _items;
 
         public CollectionItemsChangedEventArgs(ICollection items)
         {
-            this.items = items;
+            _items = items;
         }
 
         /// <summary>
         /// The collection of items that changed.
         /// </summary>
-        public ICollection Items
-        {
-            get
-            {
-                return items;
-            }
-        }
+        public ICollection Items => _items;
     }
 }

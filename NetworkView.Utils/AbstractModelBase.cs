@@ -8,28 +8,17 @@ namespace NetworkView.Utils
     public abstract class AbstractModelBase : INotifyPropertyChanged
     {
 #if DEBUG
-        private static int nextObjectId;
-        private int objectDebugId = nextObjectId++;
+        private static int _nextObjectId;
+        private readonly int _objectDebugId = _nextObjectId++;
 
-        public int ObjectDebugId
-        {
-            get
-            {
-                return objectDebugId;
-            }
-        }
+        public int ObjectDebugId => _objectDebugId;
 #endif //  DEBUG
 
         /// <summary>
         /// Raises the PropertyChanged event.
         /// </summary>
         protected virtual void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         /// <summary>
         /// Event raised to indicate that a property value has changed.

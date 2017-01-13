@@ -4,7 +4,7 @@ namespace NetworkView.AdornedControl
 {
     public class AdornerEventArgs : RoutedEventArgs
     {
-        private FrameworkElement adorner;
+        private readonly FrameworkElement adorner;
 
         public AdornerEventArgs(RoutedEvent routedEvent, object source, FrameworkElement adorner) :
             base(routedEvent, source)

@@ -20,40 +20,40 @@ namespace NetworkView.Utils
         //
         // The framework element that is the adorner. 
         //
-        private FrameworkElement child;
+        private readonly FrameworkElement _child;
 
         //
         // Placement of the child.
         //
-        private AdornerPlacement horizontalAdornerPlacement = AdornerPlacement.Inside;
-        private AdornerPlacement verticalAdornerPlacement = AdornerPlacement.Inside;
+        private readonly AdornerPlacement _horizontalAdornerPlacement = AdornerPlacement.Inside;
+        private readonly AdornerPlacement _verticalAdornerPlacement = AdornerPlacement.Inside;
 
         //
         // Offset of the child.
         //
-        private double offsetX;
-        private double offsetY;
+        private readonly double _offsetX;
+        private readonly double _offsetY;
 
         //
         // Position of the child (when not set to NaN).
         //
-        private double positionX = Double.NaN;
-        private double positionY = Double.NaN;
+        private double _positionX = double.NaN;
+        private double _positionY = double.NaN;
 
         public FrameworkElementAdorner(FrameworkElement adornerChildElement, FrameworkElement adornedElement)
             : base(adornedElement)
         {
             if (adornedElement == null)
             {
-                throw new ArgumentNullException("adornedElement");
+                throw new ArgumentNullException(nameof(adornedElement));
             }
 
             if (adornerChildElement == null)
             {
-                throw new ArgumentNullException("adornerChildElement");
+                throw new ArgumentNullException(nameof(adornerChildElement));
             }
 
-            child = adornerChildElement;
+            _child = adornerChildElement;
 
             AddLogicalChild(adornerChildElement);
             AddVisualChild(adornerChildElement);
@@ -66,19 +66,19 @@ namespace NetworkView.Utils
         {
             if (adornedElement == null)
             {
-                throw new ArgumentNullException("adornedElement");
+                throw new ArgumentNullException(nameof(adornedElement));
             }
 
             if (adornerChildElement == null)
             {
-                throw new ArgumentNullException("adornerChildElement");
+                throw new ArgumentNullException(nameof(adornerChildElement));
             }
 
-            child = adornerChildElement;
-            this.horizontalAdornerPlacement = horizontalAdornerPlacement;
-            this.verticalAdornerPlacement = verticalAdornerPlacement;
-            this.offsetX = offsetX;
-            this.offsetY = offsetY;
+            _child = adornerChildElement;
+            _horizontalAdornerPlacement = horizontalAdornerPlacement;
+            _verticalAdornerPlacement = verticalAdornerPlacement;
+            _offsetX = offsetX;
+            _offsetY = offsetY;
 
             adornedElement.SizeChanged += adornedElement_SizeChanged;
 
@@ -98,7 +98,7 @@ namespace NetworkView.Utils
         {
             get
             {
-                return child;
+                return _child;
             }
         }
 
@@ -109,11 +109,11 @@ namespace NetworkView.Utils
         {
             get
             {
-                return positionX;
+                return _positionX;
             }
             set
             {
-                positionX = value;
+                _positionX = value;
             }
         }
 
@@ -121,18 +121,18 @@ namespace NetworkView.Utils
         {
             get
             {
-                return positionY;
+                return _positionY;
             }
             set
             {
-                positionY = value;
+                _positionY = value;
             }
         }
 
         protected override Size MeasureOverride(Size constraint)
         {
-            child.Measure(constraint);
-            return child.DesiredSize;
+            _child.Measure(constraint);
+            return _child.DesiredSize;
         }
 
         /// <summary>
@@ -140,54 +140,54 @@ namespace NetworkView.Utils
         /// </summary>
         private double DetermineX()
         {
-            switch (child.HorizontalAlignment)
+            switch (_child.HorizontalAlignment)
             {
                 case HorizontalAlignment.Left:
                 {
-                    if (horizontalAdornerPlacement == AdornerPlacement.Mouse)
+                    if (_horizontalAdornerPlacement == AdornerPlacement.Mouse)
                     {
-                        var adornerWidth = child.DesiredSize.Width;
+                        var adornerWidth = _child.DesiredSize.Width;
                         var position = Mouse.GetPosition(AdornerLayer.GetAdornerLayer(AdornedElement));
-                        return (position.X - adornerWidth) + offsetX;
+                        return (position.X - adornerWidth) + _offsetX;
                     }
-                    if (horizontalAdornerPlacement == AdornerPlacement.Outside)
+                    if (_horizontalAdornerPlacement == AdornerPlacement.Outside)
                     {
-                        return -child.DesiredSize.Width + offsetX;
+                        return -_child.DesiredSize.Width + _offsetX;
                     }
-                    return offsetX;
+                    return _offsetX;
                 }
                 case HorizontalAlignment.Right:
                 {
-                    if (horizontalAdornerPlacement == AdornerPlacement.Mouse)
+                    if (_horizontalAdornerPlacement == AdornerPlacement.Mouse)
                     {
                         var position = Mouse.GetPosition(AdornerLayer.GetAdornerLayer(AdornedElement));
-                        return position.X + offsetX;
+                        return position.X + _offsetX;
                     }
-                    if (horizontalAdornerPlacement == AdornerPlacement.Outside)
+                    if (_horizontalAdornerPlacement == AdornerPlacement.Outside)
                     {
                         var adornedWidth = AdornedElement.ActualWidth;
-                        return adornedWidth + offsetX;
+                        return adornedWidth + _offsetX;
                     }
                     else
                     {
-                        var adornerWidth = child.DesiredSize.Width;
+                        var adornerWidth = _child.DesiredSize.Width;
                         var adornedWidth = AdornedElement.ActualWidth;
                         var x = adornedWidth - adornerWidth;
-                        return x + offsetX;
+                        return x + _offsetX;
                     }
                 }
                 case HorizontalAlignment.Center:
                 {
-                    var adornerWidth = child.DesiredSize.Width;
+                    var adornerWidth = _child.DesiredSize.Width;
 
-                    if (horizontalAdornerPlacement == AdornerPlacement.Mouse)
+                    if (_horizontalAdornerPlacement == AdornerPlacement.Mouse)
                     {
                         var position = Mouse.GetPosition(AdornerLayer.GetAdornerLayer(AdornedElement));
-                        return (position.X - (adornerWidth / 2)) + offsetX;
+                        return (position.X - (adornerWidth / 2)) + _offsetX;
                     }
                     var adornedWidth = AdornedElement.ActualWidth;
                     var x = (adornedWidth / 2) - (adornerWidth / 2);
-                    return x + offsetX;
+                    return x + _offsetX;
                 }
                 case HorizontalAlignment.Stretch:
                 {
@@ -203,54 +203,54 @@ namespace NetworkView.Utils
         /// </summary>
         private double DetermineY()
         {
-            switch (child.VerticalAlignment)
+            switch (_child.VerticalAlignment)
             {
                 case VerticalAlignment.Top:
                 {
-                    if (verticalAdornerPlacement == AdornerPlacement.Mouse)
+                    if (_verticalAdornerPlacement == AdornerPlacement.Mouse)
                     {
-                        var adornerWidth = child.DesiredSize.Width;
+                        var adornerWidth = _child.DesiredSize.Width;
                         var position = Mouse.GetPosition(AdornerLayer.GetAdornerLayer(AdornedElement));
-                        return (position.Y - adornerWidth) + offsetY;
+                        return (position.Y - adornerWidth) + _offsetY;
                     }
-                    if (verticalAdornerPlacement == AdornerPlacement.Outside)
+                    if (_verticalAdornerPlacement == AdornerPlacement.Outside)
                     {
-                        return -child.DesiredSize.Height + offsetY;
+                        return -_child.DesiredSize.Height + _offsetY;
                     }
-                    return offsetY;
+                    return _offsetY;
                 }
                 case VerticalAlignment.Bottom:
                 {
-                    if (verticalAdornerPlacement == AdornerPlacement.Mouse)
+                    if (_verticalAdornerPlacement == AdornerPlacement.Mouse)
                     {
                         var position = Mouse.GetPosition(AdornerLayer.GetAdornerLayer(AdornedElement));
-                        return position.Y + offsetY;
+                        return position.Y + _offsetY;
                     }
-                    if (verticalAdornerPlacement == AdornerPlacement.Outside)
+                    if (_verticalAdornerPlacement == AdornerPlacement.Outside)
                     {
                         var adornedHeight = AdornedElement.ActualHeight;
-                        return adornedHeight + offsetY;
+                        return adornedHeight + _offsetY;
                     }
                     else
                     {
-                        var adornerHeight = child.DesiredSize.Height;
+                        var adornerHeight = _child.DesiredSize.Height;
                         var adornedHeight = AdornedElement.ActualHeight;
                         var x = adornedHeight - adornerHeight;
-                        return x + offsetY;
+                        return x + _offsetY;
                     }
                 }
                 case VerticalAlignment.Center:
                 {
-                    var adornerHeight = child.DesiredSize.Height;
+                    var adornerHeight = _child.DesiredSize.Height;
 
-                    if (verticalAdornerPlacement == AdornerPlacement.Mouse)
+                    if (_verticalAdornerPlacement == AdornerPlacement.Mouse)
                     {
                         var position = Mouse.GetPosition(AdornerLayer.GetAdornerLayer(AdornedElement));
-                        return (position.Y - (adornerHeight/2)) + offsetY;
+                        return (position.Y - (adornerHeight/2)) + _offsetY;
                     }
                     var adornedHeight = AdornedElement.ActualHeight;
                     var y = (adornedHeight / 2) - (adornerHeight / 2);
-                    return y + offsetY;
+                    return y + _offsetY;
                 }
                 case VerticalAlignment.Stretch:
                 {
@@ -266,24 +266,24 @@ namespace NetworkView.Utils
         /// </summary>
         private double DetermineWidth()
         {
-            if (!Double.IsNaN(PositionX))
+            if (!double.IsNaN(PositionX))
             {
-                return child.DesiredSize.Width;
+                return _child.DesiredSize.Width;
             }
 
-            switch (child.HorizontalAlignment)
+            switch (_child.HorizontalAlignment)
             {
                 case HorizontalAlignment.Left:
                 {
-                    return child.DesiredSize.Width;
+                    return _child.DesiredSize.Width;
                 }
                 case HorizontalAlignment.Right:
                 {
-                    return child.DesiredSize.Width;
+                    return _child.DesiredSize.Width;
                 }
                 case HorizontalAlignment.Center:
                 {
-                    return child.DesiredSize.Width;
+                    return _child.DesiredSize.Width;
                 }
                 case HorizontalAlignment.Stretch:
                 {
@@ -299,24 +299,24 @@ namespace NetworkView.Utils
         /// </summary>
         private double DetermineHeight()
         {
-            if (!Double.IsNaN(PositionY))
+            if (!double.IsNaN(PositionY))
             {
-                return child.DesiredSize.Height;
+                return _child.DesiredSize.Height;
             }
 
-            switch (child.VerticalAlignment)
+            switch (_child.VerticalAlignment)
             {
                 case VerticalAlignment.Top:
                 {
-                    return child.DesiredSize.Height;
+                    return _child.DesiredSize.Height;
                 }
                 case VerticalAlignment.Bottom:
                 {
-                    return child.DesiredSize.Height;
+                    return _child.DesiredSize.Height;
                 }
                 case VerticalAlignment.Center:
                 {
-                    return child.DesiredSize.Height; 
+                    return _child.DesiredSize.Height; 
                 }
                 case VerticalAlignment.Stretch:
                 {
@@ -330,34 +330,34 @@ namespace NetworkView.Utils
         protected override Size ArrangeOverride(Size finalSize)
         {
             var x = PositionX;
-            if (Double.IsNaN(x))
+            if (double.IsNaN(x))
             {
                 x = DetermineX();
             }
             var y = PositionY;
-            if (Double.IsNaN(y))
+            if (double.IsNaN(y))
             {
                 y = DetermineY();
             }
             var adornerWidth = DetermineWidth();
             var adornerHeight = DetermineHeight();
-            child.Arrange(new Rect(x, y, adornerWidth, adornerHeight));
+            _child.Arrange(new Rect(x, y, adornerWidth, adornerHeight));
             return finalSize;
         }
 
-        protected override Int32 VisualChildrenCount
+        protected override int VisualChildrenCount
         {
             get { return 1; }
         }
 
-        protected override Visual GetVisualChild(Int32 index) => child;
+        protected override Visual GetVisualChild(int index) => _child;
 
         protected override IEnumerator LogicalChildren
         {
             get
             {
                 var list = new ArrayList();
-                list.Add(child);
+                list.Add(_child);
                 return list.GetEnumerator();
             }
         }
@@ -367,8 +367,8 @@ namespace NetworkView.Utils
         /// </summary>
         public void DisconnectChild()
         {
-            RemoveLogicalChild(child);
-            RemoveVisualChild(child);
+            RemoveLogicalChild(_child);
+            RemoveVisualChild(_child);
         }
 
         /// <summary>

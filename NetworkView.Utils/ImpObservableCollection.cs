@@ -41,12 +41,12 @@ namespace NetworkView.Utils
         /// <summary>
         /// Inner list.
         /// </summary>
-        private List<T> inner = new List<T>();
+        private readonly List<T> _inner = new List<T>();
 
         /// <summary>
         /// Set to 'true' when in a collection changed event.
         /// </summary>
-        private bool inCollectionChangedEvent;
+        private bool _inCollectionChangedEvent;
 
         public ImpObservableCollection()
         {
@@ -60,7 +60,7 @@ namespace NetworkView.Utils
         public ImpObservableCollection(IList<T> list) :
             base(list)
         {
-            inner.AddRange(list);
+            _inner.AddRange(list);
         }
 
         public void AddRange(T[] range)
@@ -137,29 +137,29 @@ namespace NetworkView.Utils
 
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
-            Trace.Assert(!inCollectionChangedEvent);
+            Trace.Assert(!_inCollectionChangedEvent);
 
             base.OnCollectionChanged(e);
 
-            inCollectionChangedEvent = true;
+            _inCollectionChangedEvent = true;
 
             try
             {
                 if (e.Action == NotifyCollectionChangedAction.Reset)
                 {
-                    if (inner.Count > 0)
+                    if (_inner.Count > 0)
                     {
-                        OnItemsRemoved(inner);
+                        OnItemsRemoved(_inner);
                     }
 
-                    inner.Clear();
+                    _inner.Clear();
                 }
                 
                 if (e.OldItems != null)
                 {
                     foreach (T item in e.OldItems)
                     {
-                        inner.Remove(item);
+                        _inner.Remove(item);
                     }
 
                     OnItemsRemoved(e.OldItems);
@@ -169,7 +169,7 @@ namespace NetworkView.Utils
                 {
                     foreach (T item in e.NewItems)
                     {
-                        inner.Add(item);
+                        _inner.Add(item);
                     }
 
                     OnItemsAdded(e.NewItems);
@@ -177,25 +177,13 @@ namespace NetworkView.Utils
             }
             finally
             {
-                inCollectionChangedEvent = false;
+                _inCollectionChangedEvent = false;
             }
         }
 
-        protected virtual void OnItemsAdded(ICollection items)
-        {
-            if (ItemsAdded != null)
-            {
-                ItemsAdded(this, new CollectionItemsChangedEventArgs(items));
-            }
-        }
+        protected virtual void OnItemsAdded(ICollection items) => ItemsAdded?.Invoke(this, new CollectionItemsChangedEventArgs(items));
 
-        protected virtual void OnItemsRemoved(ICollection items)
-        {
-            if (ItemsRemoved != null)
-            {
-                ItemsRemoved(this, new CollectionItemsChangedEventArgs(items));
-            }
-        }
+        protected virtual void OnItemsRemoved(ICollection items) => ItemsRemoved?.Invoke(this, new CollectionItemsChangedEventArgs(items));
 
         /// <summary>
         /// Event raised when items have been added.
@@ -207,7 +195,7 @@ namespace NetworkView.Utils
         /// </summary>
         public event EventHandler<CollectionItemsChangedEventArgs> ItemsRemoved;
 
-        public T[] ToArray() => inner.ToArray();
+        public T[] ToArray() => _inner.ToArray();
 
         public T2[] ToArray<T2>()
             where T2 : class
@@ -226,8 +214,9 @@ namespace NetworkView.Utils
         public object Clone()
         {
             var clone = new ImpObservableCollection<T>();
-            foreach (ICloneable obj in this)
+            foreach (var unknown in this)
             {
+                var obj = (ICloneable) unknown;
                 clone.Add((T)obj.Clone());
             }
 

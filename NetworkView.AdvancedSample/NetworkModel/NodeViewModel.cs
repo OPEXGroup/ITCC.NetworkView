@@ -182,10 +182,7 @@ namespace NetworkView.AdvancedNetworkModel
 
                 size = value;
 
-                if (SizeChanged != null)
-                {
-                    SizeChanged(this, EventArgs.Empty);
-                }
+                SizeChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 

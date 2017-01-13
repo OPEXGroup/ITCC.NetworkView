@@ -533,7 +533,7 @@ namespace NetworkView.Utils
         {
             if (rootElement == null)
             {
-                throw new ArgumentNullException("rootElement");
+                throw new ArgumentNullException(nameof(rootElement));
             }            
 
             var rootFrameworkElement = rootElement as FrameworkElement;
@@ -583,7 +583,7 @@ namespace NetworkView.Utils
         {
             if (rootElement == null)
             {
-                throw new ArgumentNullException("rootElement");
+                throw new ArgumentNullException(nameof(rootElement));
             }
             
             var rootFrameworkElement = rootElement as FrameworkElement;
@@ -673,7 +673,7 @@ namespace NetworkView.Utils
         public static void InitaliseElement(FrameworkElement element)
         {
             element.UpdateLayout();
-            element.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
+            element.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
             element.Arrange(new Rect(0, 0, element.DesiredSize.Width, element.DesiredSize.Height));
         }
 

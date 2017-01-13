@@ -408,7 +408,7 @@ namespace NetworkView.AdornedControl
         /// <summary>
         /// This timer is used to fade out and close the adorner.
         /// </summary>
-        private DispatcherTimer closeAdornerTimer = new DispatcherTimer();
+        private readonly DispatcherTimer closeAdornerTimer = new DispatcherTimer();
         
         #endregion
 

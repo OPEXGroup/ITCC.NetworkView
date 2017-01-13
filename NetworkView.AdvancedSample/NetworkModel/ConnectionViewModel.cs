@@ -169,13 +169,7 @@ namespace NetworkView.AdvancedNetworkModel
         /// <summary>
         /// Raises the 'ConnectionChanged' event.
         /// </summary>
-        private void OnConnectionChanged()
-        {
-            if (ConnectionChanged != null)
-            {
-                ConnectionChanged(this, EventArgs.Empty);
-            }
-        }
+        private void OnConnectionChanged() => ConnectionChanged?.Invoke(this, EventArgs.Empty);
 
         /// <summary>
         /// Event raised when the hotspot of the source connector has been updated.
