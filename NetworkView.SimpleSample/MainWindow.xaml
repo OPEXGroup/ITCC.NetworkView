@@ -1,0 +1,271 @@
+﻿<Window x:Class="SampleCode.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:SampleCode"
+    xmlns:NetworkModel="clr-namespace:NetworkModel;assembly=NetworkModel"
+    xmlns:NetworkUI="clr-namespace:NetworkUI;assembly=NetworkUI"
+    xmlns:diagnostics="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+    Title="Main Window" 
+    x:Name="mainWindow"
+	Width="800"
+    Height="500"
+	Loaded="MainWindow_Loaded"
+    FocusManager.FocusedElement="{Binding ElementName=networkControl}"
+    >
+    
+    <!-- 
+    Including this in binding statements for diagnostics:
+    diagnostics:PresentationTraceSources.TraceLevel=High
+    -->
+
+    <Window.Resources>
+        
+		<!-- UI commands. -->
+        
+        <RoutedUICommand x:Key="Commands.DeleteSelectedNodes" />
+        <RoutedUICommand x:Key="Commands.CreateNode" />
+
+        <!-- 
+        Data-template for ConectionViewModel.
+        
+        Note that the 'Start' and 'End' of the arrow are bound to 'SourceConnectorHotspot' and 'DestConnectorHotspot' in 
+        the view-model.
+
+        In this sample a straight arrow represents connections between nodes.
+        -->
+        <DataTemplate
+            DataType="{x:Type NetworkModel:ConnectionViewModel}"
+            >
+
+            <!-- The connection is represented by a simple arrow. -->
+            <local:Arrow
+                Stroke="Black"
+                StrokeThickness="2"
+                Fill="Black"
+                Start="{Binding SourceConnectorHotspot}"
+                End="{Binding DestConnectorHotspot}"
+                IsHitTestVisible="False"
+                />
+
+            <!-- If you want someting even simpler, try this Line! 
+            <Line
+                Stroke="Black"
+                X1="{Binding SourceConnectorHotspot.X}"
+                Y1="{Binding SourceConnectorHotspot.Y}"
+                X2="{Binding DestConnectorHotspot.X}"
+                Y2="{Binding DestConnectorHotspot.Y}"
+                />
+            -->
+            
+        </DataTemplate>
+
+        <!--
+        Define the visual style for a 'NodeItem'.
+        
+        Binds 'X' and 'Y' in the view-model (the 'NodeViewModel' class)
+        to 'X' and 'Y' in the NodeItem class.
+        
+        This sets the position of the node within the Canvas.
+        -->
+        <Style TargetType="{x:Type NetworkUI:NodeItem}">
+            <Setter
+                Property="X"
+                Value="{Binding X}"
+                />
+            <Setter
+                Property="Y"
+                Value="{Binding Y}"
+                />
+            <Setter
+                Property="IsSelected"
+                Value="{Binding IsSelected}"
+                />
+        </Style>
+
+        <!-- 
+        Define the visual style for a 'ConnectorItem'.
+        -->
+        <Style 
+            TargetType="{x:Type NetworkUI:ConnectorItem}"
+            >
+            <!-- 
+            Data-binding for the connector hotspot.
+            ConnectorItem automatically computes its center 
+            points and assigns this value to the 'Hotspot' property.  
+            This data-binding in this style then 'pushes' the value into the 
+            application view-model.
+            -->
+            <Setter 
+                Property="Hotspot"
+                Value="{Binding Hotspot, Mode=OneWayToSource}"
+                />
+
+            <!-- The visual template. -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate 
+                        TargetType="{x:Type NetworkUI:ConnectorItem}"
+                        >
+                        <Rectangle
+                            Stroke="Black"
+                            Fill="White"                            
+                            Cursor="Hand"
+                            Width="12"
+                            Height="12"
+                            RadiusX="1"
+                            RadiusY="1"
+                            />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 
+        Define a data-template for the 'NodeViewModel' class.
+        This generates the UI for each node.
+        -->
+        <DataTemplate
+            DataType="{x:Type NetworkModel:NodeViewModel}"
+            >
+            <Grid
+                Width="120"
+                Height="60"
+                >
+                
+                <!-- This rectangle is the main visual for the node. -->                
+                <Rectangle
+                    Stroke="Black"
+                    Fill="White"
+                    RadiusX="4"
+                    RadiusY="4"
+                    />
+
+                <!-- 
+                This grid contains the node's name and connectors.
+                The margin is negative so that the connectors overlap the body of the node and it's selection border.
+                -->
+                <Grid
+                    Margin="-8"
+                    >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" MinWidth="10" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" /> 
+                        <RowDefinition Height="Auto" />                                
+                    </Grid.RowDefinitions>
+                    
+                    <!-- The name of the node. -->                    
+                    <TextBlock
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Text="{Binding Name}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        />
+                    
+                    <!-- 
+                    Define the node's four connectors, one on each edge of the node.
+                    -->
+                    
+                    <NetworkUI:ConnectorItem 
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        DataContext="{Binding Connectors[0]}"
+                        />
+                    
+
+                    <NetworkUI:ConnectorItem 
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        DataContext="{Binding Connectors[1]}"
+                        />
+
+                    <NetworkUI:ConnectorItem 
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        DataContext="{Binding Connectors[2]}"
+                        />
+
+                    <NetworkUI:ConnectorItem 
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        DataContext="{Binding Connectors[3]}"
+                        />
+                </Grid>
+            </Grid>
+        </DataTemplate>
+
+    </Window.Resources>
+    <Window.InputBindings>
+        
+        <!-- Bind input to commands. -->
+        
+        <KeyBinding
+			Key="Del"
+			Command="{StaticResource Commands.DeleteSelectedNodes}"
+			/>
+        
+    </Window.InputBindings>
+    
+    <Window.CommandBindings>
+
+        <!-- Bind commands to event handlers. -->
+        
+        <CommandBinding 
+            Command="{StaticResource Commands.DeleteSelectedNodes}" 
+            Executed="DeleteSelectedNodes_Executed" 
+            />
+        <CommandBinding 
+            Command="{StaticResource Commands.CreateNode}" 
+            Executed="CreateNode_Executed" 
+            />
+
+    </Window.CommandBindings>
+
+    <Window.ContextMenu>
+
+        <ContextMenu>
+
+            <!-- Clicking this menu item creates a new node. -->
+
+            <MenuItem
+                Header="Create Node"
+                Command="{StaticResource Commands.CreateNode}"
+                ToolTip="Creates a new node"
+                />
+        </ContextMenu>
+
+    </Window.ContextMenu>
+    
+    <Window.DataContext>
+        <local:MainWindowViewModel />  
+    </Window.DataContext>
+
+    <!-- 
+    The ScrollViewer displays scrollbars when the content is too big to fit in the viewport. 
+    Focusable is set to False because it is only that NetworkView that I want to be focusable.
+    -->
+    <ScrollViewer
+        HorizontalScrollBarVisibility="Auto"
+        Focusable="False"
+        >
+        
+        <!-- The NetworkView is the content of the ScrollViewer. -->
+        
+        <NetworkUI:NetworkView
+            x:Name="networkControl"
+            Width="2000"
+            Height="2000"
+            NodesSource="{Binding Network.Nodes}"
+            ConnectionsSource="{Binding Network.Connections}"
+            ConnectionDragStarted="networkControl_ConnectionDragStarted"
+            ConnectionDragging="networkControl_ConnectionDragging"
+            ConnectionDragCompleted="networkControl_ConnectionDragCompleted"
+            />
+        
+    </ScrollViewer>
+</Window>

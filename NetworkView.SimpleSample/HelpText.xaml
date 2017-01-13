@@ -1,0 +1,81 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--
+    This resource directionary contains the text and style for the help text
+    that is displayed in window.
+    I have put it in a separate resource file just to keep it separate from the main
+    sample code.
+    -->
+
+    <FlowDocument
+        x:Key="helpText"
+        >
+        <Paragraph>
+            <Bold>
+                Features and input controls:
+            </Bold>
+        </Paragraph>
+        <List>
+            <ListItem>
+                <Paragraph>
+                    Left mouse click selects a node.
+                </Paragraph>
+            </ListItem>
+            <ListItem>
+                <Paragraph>
+                    Left click in empty space deselects.
+                </Paragraph>
+            </ListItem>
+            <ListItem>
+                <Paragraph>
+                    Ctrl + left click multi-selects.
+                </Paragraph>
+            </ListItem>
+            <ListItem>
+                <Paragraph>
+                    Left-dragging a node moves it.
+                    Multiple-selected nodes can be dragged all at the same time.
+                </Paragraph>
+            </ListItem>
+            <ListItem>
+                <Paragraph>
+                    Ctrl + left mouse-drag outside a node drag-selects.
+                </Paragraph>
+            </ListItem>
+            <ListItem>
+                <Paragraph>
+                    Ctrl + A selects all.
+                </Paragraph>
+            </ListItem>
+            <ListItem>
+                <Paragraph>
+                    Ctrl + I inverts the selection.
+                </Paragraph>
+            </ListItem>
+            <ListItem>
+                <Paragraph>
+                    Escape clears the selection.
+                </Paragraph>
+            </ListItem>
+            <ListItem>
+                <Paragraph>
+                    Right-click invokes up a context menu that can be used to create a new node.
+                </Paragraph>
+            </ListItem>
+            <ListItem>
+                <Paragraph>
+                    The delete key deletes selected nodes.
+                </Paragraph>
+            </ListItem>
+            <ListItem>
+                <Paragraph>
+                    Left-drag a connector to create a connection.  To finalize creation of the connection 
+                    continue to drag it until you can drop in on a different connector.  
+                </Paragraph>
+            </ListItem>
+        </List>
+    </FlowDocument>
+
+</ResourceDictionary>
