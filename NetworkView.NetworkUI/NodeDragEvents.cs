@@ -22,13 +22,7 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// The NodeItem's or their DataContext (when non-NULL).
         /// </summary>
-        public ICollection Nodes
-        {
-            get
-            {
-                return nodes;
-            }
-        }
+        public ICollection Nodes => nodes;
     }
 
     /// <summary>
@@ -41,11 +35,6 @@ namespace NetworkView.NetworkUI
     /// </summary>
     public class NodeDragStartedEventArgs : NodeDragEventArgs
     {
-        /// <summary>
-        /// Set to 'false' to disallow dragging.
-        /// </summary>
-        private bool cancel;
-
         internal NodeDragStartedEventArgs(RoutedEvent routedEvent, object source, ICollection nodes) :
             base(routedEvent, source, nodes)
         {
@@ -54,17 +43,7 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// Set to 'false' to disallow dragging.
         /// </summary>
-        public bool Cancel
-        {
-            get
-            {
-                return cancel;
-            }
-            set
-            {
-                cancel = value;
-            }
-        }
+        public bool Cancel { get; set; }
     }
 
     /// <summary>
@@ -80,12 +59,12 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// The amount the node has been dragged horizontally.
         /// </summary>
-        public double horizontalChange;
+        public readonly double horizontalChange;
 
         /// <summary>
         /// The amount the node has been dragged vertically.
         /// </summary>
-        public double verticalChange;
+        public readonly double verticalChange;
 
         internal NodeDraggingEventArgs(RoutedEvent routedEvent, object source, ICollection nodes, double horizontalChange, double verticalChange) :
             base(routedEvent, source, nodes)
@@ -97,24 +76,12 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// The amount the node has been dragged horizontally.
         /// </summary>
-        public double HorizontalChange
-        {
-            get
-            {
-                return horizontalChange;
-            }
-        }
+        public double HorizontalChange => horizontalChange;
 
         /// <summary>
         /// The amount the node has been dragged vertically.
         /// </summary>
-        public double VerticalChange
-        {
-            get
-            {
-                return verticalChange;
-            }
-        }
+        public double VerticalChange => verticalChange;
     }
 
     /// <summary>

@@ -52,24 +52,12 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// The amount the node has been dragged horizontally.
         /// </summary>
-        public double HorizontalChange
-        {
-            get
-            {
-                return horizontalChange;
-            }
-        }
+        public double HorizontalChange => horizontalChange;
 
         /// <summary>
         /// The amount the node has been dragged vertically.
         /// </summary>
-        public double VerticalChange
-        {
-            get
-            {
-                return verticalChange;
-            }
-        }
+        public double VerticalChange => verticalChange;
     }
 
     /// <summary>

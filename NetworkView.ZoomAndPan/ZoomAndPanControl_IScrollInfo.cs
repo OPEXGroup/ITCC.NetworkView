@@ -51,46 +51,22 @@ namespace NetworkView.ZoomAndPan
         /// <summary>
         /// The width of the content (with 'ContentScale' applied).
         /// </summary>
-        public double ExtentWidth
-        {
-            get
-            {
-                return unScaledExtent.Width * ContentScale;
-            }
-        }
+        public double ExtentWidth => unScaledExtent.Width * ContentScale;
 
         /// <summary>
         /// The height of the content (with 'ContentScale' applied).
         /// </summary>
-        public double ExtentHeight
-        {
-            get
-            {
-                return unScaledExtent.Height * ContentScale;
-            }
-        }
+        public double ExtentHeight => unScaledExtent.Height * ContentScale;
 
         /// <summary>
         /// Get the width of the viewport onto the content.
         /// </summary>
-        public double ViewportWidth
-        {
-            get
-            {
-                return viewport.Width;
-            }
-        }
+        public double ViewportWidth => viewport.Width;
 
         /// <summary>
         /// Get the height of the viewport onto the content.
         /// </summary>
-        public double ViewportHeight
-        {
-            get
-            {
-                return viewport.Height;
-            }
-        }
+        public double ViewportHeight => viewport.Height;
 
         /// <summary>
         /// Reference to the ScrollViewer that is wrapped (in XAML) around the ZoomAndPanControl.
@@ -111,24 +87,12 @@ namespace NetworkView.ZoomAndPan
         /// <summary>
         /// The offset of the horizontal scrollbar.
         /// </summary>
-        public double HorizontalOffset
-        {
-            get
-            {
-                return ContentOffsetX * ContentScale;
-            }
-        }
+        public double HorizontalOffset => ContentOffsetX * ContentScale;
 
         /// <summary>
         /// The offset of the vertical scrollbar.
         /// </summary>
-        public double VerticalOffset
-        {
-            get
-            {
-                return ContentOffsetY * ContentScale;
-            }
-        }
+        public double VerticalOffset => ContentOffsetY * ContentScale;
 
         /// <summary>
         /// Called when the offset of the horizontal scrollbar has been set.

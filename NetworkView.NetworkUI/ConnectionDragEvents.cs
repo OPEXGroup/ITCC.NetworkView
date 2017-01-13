@@ -29,24 +29,12 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// The NodeItem or it's DataContext (when non-NULL).
         /// </summary>
-        public object Node
-        {
-            get
-            {
-                return node;
-            }
-        }
+        public object Node => node;
 
         /// <summary>
         /// The ConnectorItem or it's DataContext (when non-NULL).
         /// </summary>
-        public object ConnectorDraggedOut
-        {
-            get
-            {
-                return draggedOutConnector;
-            }
-        }
+        public object ConnectorDraggedOut => draggedOutConnector;
 
         #region Private Methods
 
@@ -123,24 +111,12 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// The ConnectorItem or it's DataContext (when non-NULL).
         /// </summary>
-        public object DraggedOverConnector
-        {
-            get
-            {
-                return draggedOverConnector;
-            }
-        }
+        public object DraggedOverConnector => draggedOverConnector;
 
         /// <summary>
         /// The connection that will be dragged out.
         /// </summary>
-        public object Connection
-        {
-            get
-            {
-                return connection;
-            }
-        }
+        public object Connection => connection;
 
         /// <summary>
         /// Set to 'true' / 'false' to indicate that the connection from the dragged out connection to the dragged over connector is valid.
@@ -197,13 +173,7 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// The connection being dragged out.
         /// </summary>
-        public object Connection
-        {
-            get
-            {
-                return connection;
-            }
-        }
+        public object Connection => connection;
 
         #region Private Methods
 
@@ -238,24 +208,12 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// The ConnectorItem or it's DataContext (when non-NULL).
         /// </summary>
-        public object ConnectorDraggedOver
-        {
-            get
-            {
-                return connectorDraggedOver;
-            }
-        }
+        public object ConnectorDraggedOver => connectorDraggedOver;
 
         /// <summary>
         /// The connection that will be dragged out.
         /// </summary>
-        public object Connection
-        {
-            get
-            {
-                return connection;
-            }
-        }
+        public object Connection => connection;
 
         #region Private Methods
 

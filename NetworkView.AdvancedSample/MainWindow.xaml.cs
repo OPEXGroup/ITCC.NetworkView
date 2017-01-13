@@ -18,13 +18,7 @@ namespace NetworkView.AdvancedSample
         /// <summary>
         /// Convenient accessor for the view-model.
         /// </summary>
-        public MainWindowViewModel ViewModel
-        {
-            get
-            {
-                return (MainWindowViewModel)DataContext;
-            }
-        }
+        public MainWindowViewModel ViewModel => (MainWindowViewModel)DataContext;
 
         /// <summary>
         /// Event raised when the Window has loaded.

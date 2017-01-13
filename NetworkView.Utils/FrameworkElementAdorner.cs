@@ -316,10 +316,7 @@ namespace NetworkView.Utils
             return finalSize;
         }
 
-        protected override int VisualChildrenCount
-        {
-            get { return 1; }
-        }
+        protected override int VisualChildrenCount => 1;
 
         protected override Visual GetVisualChild(int index) => Child;
 
@@ -344,12 +341,6 @@ namespace NetworkView.Utils
         /// <summary>
         /// Override AdornedElement from base class for less type-checking.
         /// </summary>
-        public new FrameworkElement AdornedElement
-        {
-            get
-            {
-                return (FrameworkElement)base.AdornedElement;
-            }
-        }
+        public new FrameworkElement AdornedElement => (FrameworkElement)base.AdornedElement;
     }
 }

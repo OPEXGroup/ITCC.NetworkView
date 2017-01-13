@@ -72,13 +72,7 @@ namespace NetworkView.AdvancedNetworkModel
         /// Returns 'true' if a connection is attached to the connector.
         /// The other end of the connection may or may not be attached to a node.
         /// </summary>
-        public bool IsConnectionAttached
-        {
-            get
-            {
-                return AttachedConnections.Count > 0;
-            }
-        }
+        public bool IsConnectionAttached => AttachedConnections.Count > 0;
 
         /// <summary>
         /// The connections that are attached to this connector, or null if no connections are attached.
