@@ -380,7 +380,7 @@ namespace NetworkView.AdornedControl
         private static readonly CommandBinding ShowAdornerCommandBinding = new CommandBinding(ShowAdornerCommand, ShowAdornerCommand_Executed);
         private static readonly CommandBinding FadeInAdornerCommandBinding = new CommandBinding(FadeInAdornerCommand, FadeInAdornerCommand_Executed);
         private static readonly CommandBinding HideAdornerCommandBinding = new CommandBinding(HideAdornerCommand, HideAdornerCommand_Executed);
-        private static readonly CommandBinding FadeOutAdornerCommandBinding = new CommandBinding(FadeInAdornerCommand, FadeOutAdornerCommand_Executed);
+        private static readonly CommandBinding FadeOutAdornerCommandBinding = new CommandBinding(FadeOutAdornerCommand, FadeOutAdornerCommand_Executed);
 
         /// <summary>
         /// Specifies the current show/hide state of the adorner.
@@ -458,7 +458,6 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private static void FadeInAdornerCommand_Executed(object target, ExecutedRoutedEventArgs e)
         {
-            Debug.WriteLine("fade IN");
             var c = (AdornedControl)target;
             c.FadeOutAdorner();
         }
@@ -477,7 +476,6 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private static void FadeOutAdornerCommand_Executed(object target, ExecutedRoutedEventArgs e)
         {
-            Debug.WriteLine("fade OUT");
             var c = (AdornedControl)target;
             c.FadeOutAdorner();
         }
