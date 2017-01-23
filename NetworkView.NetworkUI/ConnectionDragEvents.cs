@@ -91,29 +91,10 @@ namespace NetworkView.NetworkUI
     /// </summary>
     public class QueryConnectionFeedbackEventArgs : ConnectionDragEventArgs
     {
-        #region Private Data Members
-
         /// <summary>
         /// The ConnectorItem or it's DataContext (when non-NULL).
         /// </summary>
-        private readonly object _draggedOverConnector;
-
-        /// <summary>
-        /// Set to 'true' / 'false' to indicate that the connection from the dragged out connection to the dragged over connector is valid.
-        /// </summary>
-        private bool _connectionOk = true;
-
-        /// <summary>
-        /// The indicator to display.
-        /// </summary>
-        private object _feedbackIndicator;
-
-        #endregion Private Data Members
-
-        /// <summary>
-        /// The ConnectorItem or it's DataContext (when non-NULL).
-        /// </summary>
-        public object DraggedOverConnector => _draggedOverConnector;
+        public object DraggedOverConnector { get; }
 
         /// <summary>
         /// The connection that will be dragged out.
@@ -123,32 +104,12 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// Set to 'true' / 'false' to indicate that the connection from the dragged out connection to the dragged over connector is valid.
         /// </summary>
-        public bool ConnectionOk
-        {
-            get
-            {
-                return _connectionOk;
-            }
-            set
-            {
-                _connectionOk = value;
-            }
-        }
+        public bool ConnectionOk { get; set; } = true;
 
         /// <summary>
         /// The indicator to display.
         /// </summary>
-        public object FeedbackIndicator
-        {
-            get
-            {
-                return _feedbackIndicator;
-            }
-            set
-            {
-                _feedbackIndicator = value;
-            }
-        }
+        public object FeedbackIndicator { get; set; }
 
         #region Private Methods
 
@@ -156,7 +117,7 @@ namespace NetworkView.NetworkUI
             object node, object connection, object connector, object draggedOverConnector) :
             base(routedEvent, source, node, connection, connector)
         {
-            _draggedOverConnector = draggedOverConnector;
+            DraggedOverConnector = draggedOverConnector;
         }
 
         #endregion Private Methods
@@ -198,19 +159,10 @@ namespace NetworkView.NetworkUI
     /// </summary>
     public class ConnectionDragCompletedEventArgs : ConnectionDragEventArgs
     {
-        #region Private Data Members
-
         /// <summary>
         /// The ConnectorItem or it's DataContext (when non-NULL).
         /// </summary>
-        private readonly object _connectorDraggedOver;
-
-        #endregion Private Data Members
-
-        /// <summary>
-        /// The ConnectorItem or it's DataContext (when non-NULL).
-        /// </summary>
-        public object ConnectorDraggedOver => _connectorDraggedOver;
+        public object ConnectorDraggedOver { get; }
 
         /// <summary>
         /// The connection that will be dragged out.
@@ -222,7 +174,7 @@ namespace NetworkView.NetworkUI
         internal ConnectionDragCompletedEventArgs(RoutedEvent routedEvent, object source, object node, object connection, object connector, object connectorDraggedOver) :
             base(routedEvent, source, node, connection, connector)
         {
-            _connectorDraggedOver = connectorDraggedOver;
+            ConnectorDraggedOver = connectorDraggedOver;
         }
 
         #endregion Private Methods
