@@ -617,7 +617,7 @@ namespace NetworkView.NetworkUI
         {
             if (nodes == null)
             {
-                throw new ArgumentNullException("'nodes' argument shouldn't be null.");
+                throw new ArgumentNullException(nameof(nodes), "'nodes' argument shouldn't be null.");
             }
 
             if (nodes.Count == 0)
@@ -718,12 +718,10 @@ namespace NetworkView.NetworkUI
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NetworkView), new FrameworkPropertyMetadata(typeof(NetworkView)));
 
-            var inputs = new InputGestureCollection();
-            inputs.Add(new KeyGesture(Key.A, ModifierKeys.Control));
+            var inputs = new InputGestureCollection {new KeyGesture(Key.A, ModifierKeys.Control)};
             SelectAllCommand = new RoutedCommand("SelectAll", typeof(NetworkView), inputs);
 
-            inputs = new InputGestureCollection();
-            inputs.Add(new KeyGesture(Key.Escape));
+            inputs = new InputGestureCollection {new KeyGesture(Key.Escape)};
             SelectNoneCommand = new RoutedCommand("SelectNone", typeof(NetworkView), inputs);
 
             inputs = new InputGestureCollection();
@@ -732,23 +730,19 @@ namespace NetworkView.NetworkUI
 
             CancelConnectionDraggingCommand = new RoutedCommand("CancelConnectionDragging", typeof(NetworkView));
 
-            var binding = new CommandBinding();
-            binding.Command = SelectAllCommand;
+            var binding = new CommandBinding {Command = SelectAllCommand};
             binding.Executed += SelectAll_Executed;
             CommandManager.RegisterClassCommandBinding(typeof(NetworkView), binding);
 
-            binding = new CommandBinding();
-            binding.Command = SelectNoneCommand;
+            binding = new CommandBinding {Command = SelectNoneCommand};
             binding.Executed += SelectNone_Executed;
             CommandManager.RegisterClassCommandBinding(typeof(NetworkView), binding);
 
-            binding = new CommandBinding();
-            binding.Command = InvertSelectionCommand;
+            binding = new CommandBinding {Command = InvertSelectionCommand};
             binding.Executed += InvertSelection_Executed;
             CommandManager.RegisterClassCommandBinding(typeof(NetworkView), binding);
 
-            binding = new CommandBinding();
-            binding.Command = CancelConnectionDraggingCommand;
+            binding = new CommandBinding {Command = CancelConnectionDraggingCommand};
             binding.Executed += CancelConnectionDragging_Executed;
             CommandManager.RegisterClassCommandBinding(typeof(NetworkView), binding);
         }

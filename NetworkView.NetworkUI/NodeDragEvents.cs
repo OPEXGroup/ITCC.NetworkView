@@ -58,32 +58,22 @@ namespace NetworkView.NetworkUI
     /// </summary>
     public class NodeDraggingEventArgs : NodeDragEventArgs
     {
-        /// <summary>
-        /// The amount the node has been dragged horizontally.
-        /// </summary>
-        public readonly double horizontalChange;
-
-        /// <summary>
-        /// The amount the node has been dragged vertically.
-        /// </summary>
-        public readonly double verticalChange;
-
         internal NodeDraggingEventArgs(RoutedEvent routedEvent, object source, ICollection nodes, double horizontalChange, double verticalChange) :
             base(routedEvent, source, nodes)
         {
-            this.horizontalChange = horizontalChange;
-            this.verticalChange = verticalChange;
+            this.HorizontalChange = horizontalChange;
+            this.VerticalChange = verticalChange;
         }
 
         /// <summary>
         /// The amount the node has been dragged horizontally.
         /// </summary>
-        public double HorizontalChange => horizontalChange;
+        public double HorizontalChange { get; }
 
         /// <summary>
         /// The amount the node has been dragged vertically.
         /// </summary>
-        public double VerticalChange => verticalChange;
+        public double VerticalChange { get; }
     }
 
     /// <summary>

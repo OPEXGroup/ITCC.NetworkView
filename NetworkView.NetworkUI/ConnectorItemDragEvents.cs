@@ -34,32 +34,22 @@ namespace NetworkView.NetworkUI
     /// </summary>
     internal class ConnectorItemDraggingEventArgs : RoutedEventArgs
     {
-        /// <summary>
-        /// The amount the connector has been dragged horizontally.
-        /// </summary>
-        private readonly double _horizontalChange;
-
-        /// <summary>
-        /// The amount the connector has been dragged vertically.
-        /// </summary>
-        private readonly double _verticalChange;
-
         public ConnectorItemDraggingEventArgs(RoutedEvent routedEvent, object source, double horizontalChange, double verticalChange) :
             base(routedEvent, source)
         {
-            _horizontalChange = horizontalChange;
-            _verticalChange = verticalChange;
+            HorizontalChange = horizontalChange;
+            VerticalChange = verticalChange;
         }
 
         /// <summary>
         /// The amount the node has been dragged horizontally.
         /// </summary>
-        public double HorizontalChange => _horizontalChange;
+        public double HorizontalChange { get; }
 
         /// <summary>
         /// The amount the node has been dragged vertically.
         /// </summary>
-        public double VerticalChange => _verticalChange;
+        public double VerticalChange { get; }
     }
 
     /// <summary>
