@@ -213,7 +213,7 @@ namespace NetworkView.AdvancedNetworkModel
                 {
                     _inputConnectors = new ImpObservableCollection<ConnectorViewModel>();
                     _inputConnectors.ItemsAdded += inputConnectors_ItemsAdded;
-                    _inputConnectors.ItemsRemoved += inputConnectors_ItemsRemoved;
+                    _inputConnectors.ItemsRemoved += connectors_ItemsRemoved;
                 }
 
                 return _inputConnectors;
@@ -231,7 +231,7 @@ namespace NetworkView.AdvancedNetworkModel
                 {
                     _outputConnectors = new ImpObservableCollection<ConnectorViewModel>();
                     _outputConnectors.ItemsAdded += outputConnectors_ItemsAdded;
-                    _outputConnectors.ItemsRemoved += outputConnectors_ItemsRemoved;
+                    _outputConnectors.ItemsRemoved += connectors_ItemsRemoved;
                 }
 
                 return _outputConnectors;
@@ -300,7 +300,7 @@ namespace NetworkView.AdvancedNetworkModel
         /// <summary>
         /// Event raised when connectors are removed from the node.
         /// </summary>
-        private void inputConnectors_ItemsRemoved(object sender, CollectionItemsChangedEventArgs e)
+        private void connectors_ItemsRemoved(object sender, CollectionItemsChangedEventArgs e)
         {
             foreach (ConnectorViewModel connector in e.Items)
             {
@@ -318,18 +318,6 @@ namespace NetworkView.AdvancedNetworkModel
             {
                 connector.ParentNode = this;
                 connector.Type = ConnectorType.Output;
-            }
-        }
-
-        /// <summary>
-        /// Event raised when connectors are removed from the node.
-        /// </summary>
-        private void outputConnectors_ItemsRemoved(object sender, CollectionItemsChangedEventArgs e)
-        {
-            foreach (ConnectorViewModel connector in e.Items)
-            {
-                connector.ParentNode = null;
-                connector.Type = ConnectorType.Undefined;
             }
         }
 
