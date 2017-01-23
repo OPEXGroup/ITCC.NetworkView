@@ -24,7 +24,7 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// The connector that will be dragged out.
         /// </summary>
-        protected object Connection;
+        protected object BaseConnection;
 
         #endregion Private Data Members
 
@@ -43,9 +43,9 @@ namespace NetworkView.NetworkUI
         protected ConnectionDragEventArgs(RoutedEvent routedEvent, object source, object node, object connection, object connector) :
             base(routedEvent, source)
         {
-            this._node = node;
+            _node = node;
             _draggedOutConnector = connector;
-            this.Connection = connection;
+            BaseConnection = connection;
         }
 
         #endregion Private Methods
@@ -63,11 +63,11 @@ namespace NetworkView.NetworkUI
         {
             get
             {
-                return base.Connection;
+                return BaseConnection;
             }
             set
             {
-                base.Connection = value;
+                BaseConnection = value;
             }
         }
 
@@ -118,7 +118,7 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// The connection that will be dragged out.
         /// </summary>
-        public object Connection => base.Connection;
+        public object Connection => BaseConnection;
 
         /// <summary>
         /// Set to 'true' / 'false' to indicate that the connection from the dragged out connection to the dragged over connector is valid.
@@ -156,7 +156,7 @@ namespace NetworkView.NetworkUI
             object node, object connection, object connector, object draggedOverConnector) :
             base(routedEvent, source, node, connection, connector)
         {
-            this._draggedOverConnector = draggedOverConnector;
+            _draggedOverConnector = draggedOverConnector;
         }
 
         #endregion Private Methods
@@ -175,7 +175,7 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// The connection being dragged out.
         /// </summary>
-        public object Connection => base.Connection;
+        public object Connection => BaseConnection;
 
         #region Private Methods
 
@@ -215,14 +215,14 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// The connection that will be dragged out.
         /// </summary>
-        public object Connection => base.Connection;
+        public object Connection => BaseConnection;
 
         #region Private Methods
 
         internal ConnectionDragCompletedEventArgs(RoutedEvent routedEvent, object source, object node, object connection, object connector, object connectorDraggedOver) :
             base(routedEvent, source, node, connection, connector)
         {
-            this._connectorDraggedOver = connectorDraggedOver;
+            _connectorDraggedOver = connectorDraggedOver;
         }
 
         #endregion Private Methods

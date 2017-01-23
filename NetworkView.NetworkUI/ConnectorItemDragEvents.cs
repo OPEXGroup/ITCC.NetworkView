@@ -47,8 +47,8 @@ namespace NetworkView.NetworkUI
         public ConnectorItemDraggingEventArgs(RoutedEvent routedEvent, object source, double horizontalChange, double verticalChange) :
             base(routedEvent, source)
         {
-            this._horizontalChange = horizontalChange;
-            this._verticalChange = verticalChange;
+            _horizontalChange = horizontalChange;
+            _verticalChange = verticalChange;
         }
 
         /// <summary>
