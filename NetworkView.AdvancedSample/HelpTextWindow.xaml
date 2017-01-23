@@ -26,6 +26,6 @@
     Some text that describes the input bindings.
     -->
     <FlowDocumentPageViewer
-        Document="{StaticResource helpText}"
+        Document="{StaticResource HelpText}"
         />
 </Window>

@@ -10,7 +10,7 @@
     -->
 
     <FlowDocument
-        x:Key="helpText"
+        x:Key="HelpText"
         >
         <Paragraph>
             <Bold>

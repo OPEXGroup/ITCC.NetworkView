@@ -71,8 +71,8 @@ namespace NetworkView.AdvancedSample
         {
             var draggedOutConnector = (ConnectorViewModel)e.ConnectorDraggedOut;
             var draggedOverConnector= (ConnectorViewModel)e.DraggedOverConnector;
-            object feedbackIndicator = null;
-            var connectionOk = true;
+            object feedbackIndicator;
+            bool connectionOk;
 
             ViewModel.QueryConnnectionFeedback(draggedOutConnector, draggedOverConnector, out feedbackIndicator, out connectionOk);
 

@@ -59,7 +59,7 @@ namespace NetworkView.AdvancedSample
             Keyboard.Focus(NetworkControl);
 
             _mouseButtonDown = e.ChangedButton;
-            _origZoomAndPanControlMouseDownPoint = e.GetPosition(zoomAndPanControl);
+            _origZoomAndPanControlMouseDownPoint = e.GetPosition(ZoomAndPanControl);
             _origContentMouseDownPoint = e.GetPosition(NetworkControl);
 
             if ((Keyboard.Modifiers & ModifierKeys.Shift) != 0 &&
@@ -148,7 +148,7 @@ namespace NetworkView.AdvancedSample
         {
             if (_mouseHandlingMode == MouseHandlingMode.Panning)
             {
-                var curZoomAndPanControlMousePoint = e.GetPosition(zoomAndPanControl);
+                var curZoomAndPanControlMousePoint = e.GetPosition(ZoomAndPanControl);
                 var dragOffset = curZoomAndPanControlMousePoint - _origZoomAndPanControlMouseDownPoint;
                 double dragThreshold = 10;
                 if (Math.Abs(dragOffset.X) > dragThreshold ||
@@ -174,14 +174,14 @@ namespace NetworkView.AdvancedSample
                 var curContentMousePoint = e.GetPosition(NetworkControl);
                 var dragOffset = curContentMousePoint - _origContentMouseDownPoint;
 
-                zoomAndPanControl.ContentOffsetX -= dragOffset.X;
-                zoomAndPanControl.ContentOffsetY -= dragOffset.Y;
+                ZoomAndPanControl.ContentOffsetX -= dragOffset.X;
+                ZoomAndPanControl.ContentOffsetY -= dragOffset.Y;
 
                 e.Handled = true;
             }
             else if (_mouseHandlingMode == MouseHandlingMode.Zooming)
             {
-                var curZoomAndPanControlMousePoint = e.GetPosition(zoomAndPanControl);
+                var curZoomAndPanControlMousePoint = e.GetPosition(ZoomAndPanControl);
                 var dragOffset = curZoomAndPanControlMousePoint - _origZoomAndPanControlMouseDownPoint;
                 double dragThreshold = 10;
                 if (_mouseButtonDown == MouseButton.Left &&
@@ -240,7 +240,7 @@ namespace NetworkView.AdvancedSample
             if ((Keyboard.Modifiers & ModifierKeys.Shift) == 0)
             {
                 var doubleClickPoint = e.GetPosition(NetworkControl);
-                zoomAndPanControl.AnimatedSnapTo(doubleClickPoint);
+                ZoomAndPanControl.AnimatedSnapTo(doubleClickPoint);
             }
         }
 
@@ -251,13 +251,13 @@ namespace NetworkView.AdvancedSample
         {
             var o = NetworkControl.SelectedNode;
 
-            ZoomIn(new Point(zoomAndPanControl.ContentZoomFocusX, zoomAndPanControl.ContentZoomFocusY));
+            ZoomIn(new Point(ZoomAndPanControl.ContentZoomFocusX, ZoomAndPanControl.ContentZoomFocusY));
         }
 
         /// <summary>
         /// The 'ZoomOut' command (bound to the minus key) was executed.
         /// </summary>
-        private void ZoomOut_Executed(object sender, ExecutedRoutedEventArgs e) => ZoomOut(new Point(zoomAndPanControl.ContentZoomFocusX, zoomAndPanControl.ContentZoomFocusY));
+        private void ZoomOut_Executed(object sender, ExecutedRoutedEventArgs e) => ZoomOut(new Point(ZoomAndPanControl.ContentZoomFocusX, ZoomAndPanControl.ContentZoomFocusY));
 
         /// <summary>
         /// The 'JumpBackToPrevZoom' command was executed.
@@ -302,7 +302,7 @@ namespace NetworkView.AdvancedSample
             //
             actualContentRect.Inflate(NetworkControl.ActualWidth / 40, NetworkControl.ActualHeight / 40);
 
-            zoomAndPanControl.AnimatedZoomTo(actualContentRect);
+            ZoomAndPanControl.AnimatedZoomTo(actualContentRect);
         }
 
         /// <summary>
@@ -329,7 +329,7 @@ namespace NetworkView.AdvancedSample
         {
             SavePrevZoomRect();
 
-            zoomAndPanControl.AnimatedScaleToFit();
+            ZoomAndPanControl.AnimatedScaleToFit();
         }
 
         /// <summary>
@@ -339,7 +339,7 @@ namespace NetworkView.AdvancedSample
         {
             SavePrevZoomRect();
 
-            zoomAndPanControl.AnimatedZoomTo(1.0);
+            ZoomAndPanControl.AnimatedZoomTo(1.0);
         }
 
         /// <summary>
@@ -347,7 +347,7 @@ namespace NetworkView.AdvancedSample
         /// </summary>
         private void JumpBackToPrevZoom()
         {
-            zoomAndPanControl.AnimatedZoomTo(_prevZoomScale, _prevZoomRect);
+            ZoomAndPanControl.AnimatedZoomTo(_prevZoomScale, _prevZoomRect);
 
             ClearPrevZoomRect();
         }
@@ -355,12 +355,12 @@ namespace NetworkView.AdvancedSample
         /// <summary>
         /// Zoom the viewport out, centering on the specified point (in content coordinates).
         /// </summary>
-        private void ZoomOut(Point contentZoomCenter) => zoomAndPanControl.ZoomAboutPoint(zoomAndPanControl.ContentScale - 0.1, contentZoomCenter);
+        private void ZoomOut(Point contentZoomCenter) => ZoomAndPanControl.ZoomAboutPoint(ZoomAndPanControl.ContentScale - 0.1, contentZoomCenter);
 
         /// <summary>
         /// Zoom the viewport in, centering on the specified point (in content coordinates).
         /// </summary>
-        private void ZoomIn(Point contentZoomCenter) => zoomAndPanControl.ZoomAboutPoint(zoomAndPanControl.ContentScale + 0.1, contentZoomCenter);
+        private void ZoomIn(Point contentZoomCenter) => ZoomAndPanControl.ZoomAboutPoint(ZoomAndPanControl.ContentScale + 0.1, contentZoomCenter);
 
         /// <summary>
         /// Initialize the rectangle that the use is dragging out.
@@ -369,8 +369,8 @@ namespace NetworkView.AdvancedSample
         {
             SetDragZoomRect(pt1, pt2);
 
-            dragZoomCanvas.Visibility = Visibility.Visible;
-            dragZoomBorder.Opacity = 0.5;
+            DragZoomCanvas.Visibility = Visibility.Visible;
+            DragZoomBorder.Opacity = 0.5;
         }
 
         /// <summary>
@@ -410,10 +410,10 @@ namespace NetworkView.AdvancedSample
             // Update the coordinates of the rectangle that is being dragged out by the user.
             // The we offset and rescale to convert from content coordinates.
             //
-            Canvas.SetLeft(dragZoomBorder, x);
-            Canvas.SetTop(dragZoomBorder, y);
-            dragZoomBorder.Width = width;
-            dragZoomBorder.Height = height;
+            Canvas.SetLeft(DragZoomBorder, x);
+            Canvas.SetTop(DragZoomBorder, y);
+            DragZoomBorder.Width = width;
+            DragZoomBorder.Height = height;
         }
 
         /// <summary>
@@ -429,11 +429,11 @@ namespace NetworkView.AdvancedSample
             //
             // Retreive the rectangle that the user draggged out and zoom in on it.
             //
-            var contentX = Canvas.GetLeft(dragZoomBorder);
-            var contentY = Canvas.GetTop(dragZoomBorder);
-            var contentWidth = dragZoomBorder.Width;
-            var contentHeight = dragZoomBorder.Height;
-            zoomAndPanControl.AnimatedZoomTo(new Rect(contentX, contentY, contentWidth, contentHeight));
+            var contentX = Canvas.GetLeft(DragZoomBorder);
+            var contentY = Canvas.GetTop(DragZoomBorder);
+            var contentWidth = DragZoomBorder.Width;
+            var contentHeight = DragZoomBorder.Height;
+            ZoomAndPanControl.AnimatedZoomTo(new Rect(contentX, contentY, contentWidth, contentHeight));
 
             FadeOutDragZoomRect();
         }
@@ -443,9 +443,9 @@ namespace NetworkView.AdvancedSample
         //
         private void FadeOutDragZoomRect()
         {
-            AnimationHelper.StartAnimation(dragZoomBorder, OpacityProperty, 0.0, 0.1,
+            AnimationHelper.StartAnimation(DragZoomBorder, OpacityProperty, 0.0, 0.1,
                 delegate {
-                    dragZoomCanvas.Visibility = Visibility.Collapsed;
+                    DragZoomCanvas.Visibility = Visibility.Collapsed;
                 });
         }
 
@@ -454,8 +454,8 @@ namespace NetworkView.AdvancedSample
         //
         private void SavePrevZoomRect()
         {
-            _prevZoomRect = new Rect(zoomAndPanControl.ContentOffsetX, zoomAndPanControl.ContentOffsetY, zoomAndPanControl.ContentViewportWidth, zoomAndPanControl.ContentViewportHeight);
-            _prevZoomScale = zoomAndPanControl.ContentScale;
+            _prevZoomRect = new Rect(ZoomAndPanControl.ContentOffsetX, ZoomAndPanControl.ContentOffsetY, ZoomAndPanControl.ContentViewportWidth, ZoomAndPanControl.ContentViewportHeight);
+            _prevZoomScale = ZoomAndPanControl.ContentScale;
             _prevZoomRectSet = true;
         }
 
