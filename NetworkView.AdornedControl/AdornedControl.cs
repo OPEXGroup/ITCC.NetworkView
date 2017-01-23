@@ -1,6 +1,7 @@
 ﻿// This is an open source non-commercial project. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -457,6 +458,7 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private static void FadeInAdornerCommand_Executed(object target, ExecutedRoutedEventArgs e)
         {
+            Debug.WriteLine("fade IN");
             var c = (AdornedControl)target;
             c.FadeOutAdorner();
         }
@@ -475,6 +477,7 @@ namespace NetworkView.AdornedControl
         /// </summary>
         private static void FadeOutAdornerCommand_Executed(object target, ExecutedRoutedEventArgs e)
         {
+            Debug.WriteLine("fade OUT");
             var c = (AdornedControl)target;
             c.FadeOutAdorner();
         }
