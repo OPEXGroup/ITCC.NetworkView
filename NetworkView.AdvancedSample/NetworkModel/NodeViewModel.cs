@@ -18,22 +18,22 @@ namespace NetworkView.AdvancedNetworkModel
         /// <summary>
         /// The name of the node.
         /// </summary>
-        private string name = string.Empty;
+        private string _name = string.Empty;
 
         /// <summary>
         /// The X coordinate for the position of the node.
         /// </summary>
-        private double x;
+        private double _x;
 
         /// <summary>
         /// The Y coordinate for the position of the node.
         /// </summary>
-        private double y;
+        private double _y;
 
         /// <summary>
         /// The Z index of the node.
         /// </summary>
-        private int zIndex;
+        private int _zIndex;
 
         /// <summary>
         /// The size of the node.
@@ -44,22 +44,22 @@ namespace NetworkView.AdvancedNetworkModel
         ///     When the size is computed via the UI it is then pushed into the view-model
         ///     so that our application code has access to the size of a node.
         /// </summary>
-        private Size size = Size.Empty;
+        private Size _size = Size.Empty;
 
         /// <summary>
         /// List of input connectors (connections points) attached to the node.
         /// </summary>
-        private ImpObservableCollection<ConnectorViewModel> inputConnectors;
+        private ImpObservableCollection<ConnectorViewModel> _inputConnectors;
 
         /// <summary>
         /// List of output connectors (connections points) attached to the node.
         /// </summary>
-        private ImpObservableCollection<ConnectorViewModel> outputConnectors;
+        private ImpObservableCollection<ConnectorViewModel> _outputConnectors;
 
         /// <summary>
         /// Set to 'true' when the node is selected.
         /// </summary>
-        private bool isSelected;
+        private bool _isSelected;
 
         #endregion Private Data Members
 
@@ -69,7 +69,7 @@ namespace NetworkView.AdvancedNetworkModel
 
         public NodeViewModel(string name)
         {
-            this.name = name;
+            this._name = name;
         }
 
         /// <summary>
@@ -79,16 +79,16 @@ namespace NetworkView.AdvancedNetworkModel
         {
             get
             {
-                return name;
+                return _name;
             }
             set
             {
-                if (name == value)
+                if (_name == value)
                 {
                     return;
                 }
 
-                name = value;
+                _name = value;
 
                 OnPropertyChanged("Name");
             }
@@ -101,16 +101,16 @@ namespace NetworkView.AdvancedNetworkModel
         {
             get
             {
-                return x;
+                return _x;
             }
             set
             {
-                if (x == value)
+                if (_x == value)
                 {
                     return;
                 }
 
-                x = value;
+                _x = value;
 
                 OnPropertyChanged("X");
             }
@@ -123,16 +123,16 @@ namespace NetworkView.AdvancedNetworkModel
         {
             get
             {
-                return y;
+                return _y;
             }
             set
             {
-                if (y == value)
+                if (_y == value)
                 {
                     return;
                 }
 
-                y = value;
+                _y = value;
 
                 OnPropertyChanged("Y");
             }
@@ -145,16 +145,16 @@ namespace NetworkView.AdvancedNetworkModel
         {
             get
             {
-                return zIndex;
+                return _zIndex;
             }
             set
             {
-                if (zIndex == value)
+                if (_zIndex == value)
                 {
                     return;
                 }
 
-                zIndex = value;
+                _zIndex = value;
 
                 OnPropertyChanged("ZIndex");
             }
@@ -173,16 +173,16 @@ namespace NetworkView.AdvancedNetworkModel
         {
             get
             {
-                return size;
+                return _size;
             }
             set
             {
-                if (size == value)
+                if (_size == value)
                 {
                     return;
                 }
 
-                size = value;
+                _size = value;
 
                 SizeChanged?.Invoke(this, EventArgs.Empty);
             }
@@ -203,14 +203,14 @@ namespace NetworkView.AdvancedNetworkModel
         {
             get
             {
-                if (inputConnectors == null)
+                if (_inputConnectors == null)
                 {
-                    inputConnectors = new ImpObservableCollection<ConnectorViewModel>();
-                    inputConnectors.ItemsAdded += inputConnectors_ItemsAdded;
-                    inputConnectors.ItemsRemoved += inputConnectors_ItemsRemoved;
+                    _inputConnectors = new ImpObservableCollection<ConnectorViewModel>();
+                    _inputConnectors.ItemsAdded += inputConnectors_ItemsAdded;
+                    _inputConnectors.ItemsRemoved += inputConnectors_ItemsRemoved;
                 }
 
-                return inputConnectors;
+                return _inputConnectors;
             }
         }
 
@@ -221,14 +221,14 @@ namespace NetworkView.AdvancedNetworkModel
         {
             get
             {
-                if (outputConnectors == null)
+                if (_outputConnectors == null)
                 {
-                    outputConnectors = new ImpObservableCollection<ConnectorViewModel>();
-                    outputConnectors.ItemsAdded += outputConnectors_ItemsAdded;
-                    outputConnectors.ItemsRemoved += outputConnectors_ItemsRemoved;
+                    _outputConnectors = new ImpObservableCollection<ConnectorViewModel>();
+                    _outputConnectors.ItemsAdded += outputConnectors_ItemsAdded;
+                    _outputConnectors.ItemsRemoved += outputConnectors_ItemsRemoved;
                 }
 
-                return outputConnectors;
+                return _outputConnectors;
             }
         }
 
@@ -262,16 +262,16 @@ namespace NetworkView.AdvancedNetworkModel
         {
             get
             {
-                return isSelected;
+                return _isSelected;
             }
             set
             {
-                if (isSelected == value)
+                if (_isSelected == value)
                 {
                     return;
                 }
 
-                isSelected = value;
+                _isSelected = value;
 
                 OnPropertyChanged("IsSelected");
             }

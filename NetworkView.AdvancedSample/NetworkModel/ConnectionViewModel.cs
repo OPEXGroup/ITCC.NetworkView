@@ -17,23 +17,23 @@ namespace NetworkView.AdvancedNetworkModel
         /// <summary>
         /// The source connector the connection is attached to.
         /// </summary>
-        private ConnectorViewModel sourceConnector;
+        private ConnectorViewModel _sourceConnector;
 
         /// <summary>
         /// The destination connector the connection is attached to.
         /// </summary>
-        private ConnectorViewModel destConnector;
+        private ConnectorViewModel _destConnector;
 
         /// <summary>
         /// The source and dest hotspots used for generating connection points.
         /// </summary>
-        private Point sourceConnectorHotspot;
-        private Point destConnectorHotspot;
+        private Point _sourceConnectorHotspot;
+        private Point _destConnectorHotspot;
 
         /// <summary>
         /// Points that make up the connection.
         /// </summary>
-        private PointCollection points;
+        private PointCollection _points;
 
         #endregion Internal Data Members
 
@@ -44,28 +44,28 @@ namespace NetworkView.AdvancedNetworkModel
         {
             get
             {
-                return sourceConnector;
+                return _sourceConnector;
             }
             set
             {
-                if (sourceConnector == value)
+                if (_sourceConnector == value)
                 {
                     return;
                 }
 
-                if (sourceConnector != null)
+                if (_sourceConnector != null)
                 {
-                    sourceConnector.AttachedConnections.Remove(this);
-                    sourceConnector.HotspotUpdated -= sourceConnector_HotspotUpdated;
+                    _sourceConnector.AttachedConnections.Remove(this);
+                    _sourceConnector.HotspotUpdated -= sourceConnector_HotspotUpdated;
                 }
 
-                sourceConnector = value;
+                _sourceConnector = value;
 
-                if (sourceConnector != null)
+                if (_sourceConnector != null)
                 {
-                    sourceConnector.AttachedConnections.Add(this);
-                    sourceConnector.HotspotUpdated += sourceConnector_HotspotUpdated;
-                    SourceConnectorHotspot = sourceConnector.Hotspot;
+                    _sourceConnector.AttachedConnections.Add(this);
+                    _sourceConnector.HotspotUpdated += sourceConnector_HotspotUpdated;
+                    SourceConnectorHotspot = _sourceConnector.Hotspot;
                 }
 
                 OnPropertyChanged("SourceConnector");
@@ -80,28 +80,28 @@ namespace NetworkView.AdvancedNetworkModel
         {
             get
             {
-                return destConnector;
+                return _destConnector;
             }
             set
             {
-                if (destConnector == value)
+                if (_destConnector == value)
                 {
                     return;
                 }
 
-                if (destConnector != null)
+                if (_destConnector != null)
                 {
-                    destConnector.AttachedConnections.Remove(this);
-                    destConnector.HotspotUpdated -= destConnector_HotspotUpdated;
+                    _destConnector.AttachedConnections.Remove(this);
+                    _destConnector.HotspotUpdated -= destConnector_HotspotUpdated;
                 }
 
-                destConnector = value;
+                _destConnector = value;
 
-                if (destConnector != null)
+                if (_destConnector != null)
                 {
-                    destConnector.AttachedConnections.Add(this);
-                    destConnector.HotspotUpdated += destConnector_HotspotUpdated;
-                    DestConnectorHotspot = destConnector.Hotspot;
+                    _destConnector.AttachedConnections.Add(this);
+                    _destConnector.HotspotUpdated += destConnector_HotspotUpdated;
+                    DestConnectorHotspot = _destConnector.Hotspot;
                 }
 
                 OnPropertyChanged("DestConnector");
@@ -116,11 +116,11 @@ namespace NetworkView.AdvancedNetworkModel
         {
             get
             {
-                return sourceConnectorHotspot;
+                return _sourceConnectorHotspot;
             }
             set
             {
-                sourceConnectorHotspot = value;
+                _sourceConnectorHotspot = value;
 
                 ComputeConnectionPoints();
 
@@ -132,11 +132,11 @@ namespace NetworkView.AdvancedNetworkModel
         {
             get
             {
-                return destConnectorHotspot;
+                return _destConnectorHotspot;
             }
             set
             {
-                destConnectorHotspot = value;
+                _destConnectorHotspot = value;
 
                 ComputeConnectionPoints();
 
@@ -151,11 +151,11 @@ namespace NetworkView.AdvancedNetworkModel
         {
             get
             {
-                return points;
+                return _points;
             }
             set
             {
-                points = value;
+                _points = value;
 
                 OnPropertyChanged("Points");
             }
