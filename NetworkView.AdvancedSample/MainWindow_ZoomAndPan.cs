@@ -55,12 +55,12 @@ namespace NetworkView.AdvancedSample
         /// </summary> 
         private void networkControl_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            networkControl.Focus();
-            Keyboard.Focus(networkControl);
+            NetworkControl.Focus();
+            Keyboard.Focus(NetworkControl);
 
             _mouseButtonDown = e.ChangedButton;
             _origZoomAndPanControlMouseDownPoint = e.GetPosition(zoomAndPanControl);
-            _origContentMouseDownPoint = e.GetPosition(networkControl);
+            _origContentMouseDownPoint = e.GetPosition(NetworkControl);
 
             if ((Keyboard.Modifiers & ModifierKeys.Shift) != 0 &&
                 (e.ChangedButton == MouseButton.Left ||
@@ -83,7 +83,7 @@ namespace NetworkView.AdvancedSample
             if (_mouseHandlingMode != MouseHandlingMode.None)
             {
                 // Capture the mouse so that we eventually receive the mouse up event.
-                networkControl.CaptureMouse();
+                NetworkControl.CaptureMouse();
                 e.Handled = true;
             }
         }
@@ -127,7 +127,7 @@ namespace NetworkView.AdvancedSample
                 // Reenable clearing of selection when empty space is clicked.
                 // This is disabled when drag panning is in progress.
                 //
-                networkControl.IsClearSelectionOnEmptySpaceClickEnabled = true;
+                NetworkControl.IsClearSelectionOnEmptySpaceClickEnabled = true;
 
                 //
                 // Reset the override cursor.
@@ -135,7 +135,7 @@ namespace NetworkView.AdvancedSample
                 //
                 Mouse.OverrideCursor = null;
 
-                networkControl.ReleaseMouseCapture();
+                NetworkControl.ReleaseMouseCapture();
                 _mouseHandlingMode = MouseHandlingMode.None;
                 e.Handled = true;
             }
@@ -159,7 +159,7 @@ namespace NetworkView.AdvancedSample
                     // drag panning.
                     //
                     _mouseHandlingMode = MouseHandlingMode.DragPanning;
-                    networkControl.IsClearSelectionOnEmptySpaceClickEnabled = false;
+                    NetworkControl.IsClearSelectionOnEmptySpaceClickEnabled = false;
                     Mouse.OverrideCursor = Cursors.ScrollAll;
                 }
 
@@ -171,7 +171,7 @@ namespace NetworkView.AdvancedSample
                 // The user is left-dragging the mouse.
                 // Pan the viewport by the appropriate amount.
                 //
-                var curContentMousePoint = e.GetPosition(networkControl);
+                var curContentMousePoint = e.GetPosition(NetworkControl);
                 var dragOffset = curContentMousePoint - _origContentMouseDownPoint;
 
                 zoomAndPanControl.ContentOffsetX -= dragOffset.X;
@@ -194,7 +194,7 @@ namespace NetworkView.AdvancedSample
                     // to zoom in on.
                     //
                     _mouseHandlingMode = MouseHandlingMode.DragZooming;
-                    var curContentMousePoint = e.GetPosition(networkControl);
+                    var curContentMousePoint = e.GetPosition(NetworkControl);
                     InitDragZoomRect(_origContentMouseDownPoint, curContentMousePoint);
                 }
 
@@ -206,7 +206,7 @@ namespace NetworkView.AdvancedSample
                 // When in drag zooming mode continously update the position of the rectangle
                 // that the user is dragging out.
                 //
-                var curContentMousePoint = e.GetPosition(networkControl);
+                var curContentMousePoint = e.GetPosition(NetworkControl);
                 SetDragZoomRect(_origContentMouseDownPoint, curContentMousePoint);
 
                 e.Handled = true;
@@ -222,12 +222,12 @@ namespace NetworkView.AdvancedSample
 
             if (e.Delta > 0)
             {
-                var curContentMousePoint = e.GetPosition(networkControl);
+                var curContentMousePoint = e.GetPosition(NetworkControl);
                 ZoomIn(curContentMousePoint);
             }
             else if (e.Delta < 0)
             {
-                var curContentMousePoint = e.GetPosition(networkControl);
+                var curContentMousePoint = e.GetPosition(NetworkControl);
                 ZoomOut(curContentMousePoint);
             }
         }
@@ -239,7 +239,7 @@ namespace NetworkView.AdvancedSample
         {
             if ((Keyboard.Modifiers & ModifierKeys.Shift) == 0)
             {
-                var doubleClickPoint = e.GetPosition(networkControl);
+                var doubleClickPoint = e.GetPosition(NetworkControl);
                 zoomAndPanControl.AnimatedSnapTo(doubleClickPoint);
             }
         }
@@ -249,7 +249,7 @@ namespace NetworkView.AdvancedSample
         /// </summary>
         private void ZoomIn_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var o = networkControl.SelectedNode;
+            var o = NetworkControl.SelectedNode;
 
             ZoomIn(new Point(zoomAndPanControl.ContentZoomFocusX, zoomAndPanControl.ContentZoomFocusY));
         }
@@ -279,9 +279,9 @@ namespace NetworkView.AdvancedSample
         {
             IList nodes = null;
 
-            if (networkControl.SelectedNodes.Count > 0)
+            if (NetworkControl.SelectedNodes.Count > 0)
             {
-                nodes = networkControl.SelectedNodes;
+                nodes = NetworkControl.SelectedNodes;
             }
             else
             {
@@ -300,7 +300,7 @@ namespace NetworkView.AdvancedSample
             // Inflate the content rect by a fraction of the actual size of the total content area.
             // This puts a nice border around the content we are fitting to the viewport.
             //
-            actualContentRect.Inflate(networkControl.ActualWidth / 40, networkControl.ActualHeight / 40);
+            actualContentRect.Inflate(NetworkControl.ActualWidth / 40, NetworkControl.ActualHeight / 40);
 
             zoomAndPanControl.AnimatedZoomTo(actualContentRect);
         }

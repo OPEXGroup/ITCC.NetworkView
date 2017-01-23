@@ -50,7 +50,7 @@ namespace NetworkView.AdvancedSample
         private void networkControl_ConnectionDragStarted(object sender, ConnectionDragStartedEventArgs e)
         {
             var draggedOutConnector = (ConnectorViewModel)e.ConnectorDraggedOut;
-            var curDragPoint = Mouse.GetPosition(networkControl);
+            var curDragPoint = Mouse.GetPosition(NetworkControl);
 
             //
             // Delegate the real work to the view model.
@@ -94,7 +94,7 @@ namespace NetworkView.AdvancedSample
         /// </summary>
         private void networkControl_ConnectionDragging(object sender, ConnectionDraggingEventArgs e)
         {
-            var curDragPoint = Mouse.GetPosition(networkControl);
+            var curDragPoint = Mouse.GetPosition(NetworkControl);
             var connection = (ConnectionViewModel)e.Connection;
             ViewModel.ConnectionDragging(curDragPoint, connection);
         }
@@ -143,7 +143,7 @@ namespace NetworkView.AdvancedSample
         /// </summary>
         private void CreateNode()
         {
-            var newNodePosition = Mouse.GetPosition(networkControl);
+            var newNodePosition = Mouse.GetPosition(NetworkControl);
             ViewModel.CreateNode("New Node!", newNodePosition, true);
         }
 

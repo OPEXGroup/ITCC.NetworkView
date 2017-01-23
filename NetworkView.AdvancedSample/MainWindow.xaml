@@ -14,7 +14,7 @@
 	Width="800"
     Height="500"
 	Loaded="MainWindow_Loaded"
-    FocusManager.FocusedElement="{Binding ElementName=networkControl}"
+    FocusManager.FocusedElement="{Binding ElementName=NetworkControl}"
     >
    
     <!-- 
@@ -241,7 +241,7 @@
                 <ac:AdornedControl
                     HorizontalAdornerPlacement="Mouse"
                     VerticalAdornerPlacement="Mouse"
-                    IsMouseOverShowEnabled="{Binding ElementName=networkControl, Path=IsNotDragging}"
+                    IsMouseOverShowEnabled="{Binding ElementName=NetworkControl, Path=IsNotDragging}"
                     >
 
                     <!-- The connection is represented by a curved arrow. -->                                
@@ -305,7 +305,7 @@
                     VerticalAdornerPlacement="Outside"
                     AdornerOffsetX="-12"
                     AdornerOffsetY="8"
-                    IsMouseOverShowEnabled="{Binding ElementName=networkControl, Path=IsNotDragging}"
+                    IsMouseOverShowEnabled="{Binding ElementName=NetworkControl, Path=IsNotDragging}"
                     >
                     
                     <!-- The margin has been selected so that the selection rect nicely covers the entire node. -->
@@ -742,7 +742,7 @@
                         <!-- In this sample the NetworkView is the content displayed by the ZoomAndPanControl. -->
                         
                         <NetworkUI:NetworkView
-                            x:Name="networkControl"
+                            x:Name="NetworkControl"
                             
                             NodesSource="{Binding Network.Nodes}"
                             ConnectionsSource="{Binding Path=Network.Connections}"
