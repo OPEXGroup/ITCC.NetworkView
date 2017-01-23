@@ -149,8 +149,8 @@ namespace NetworkView.AdvancedNetworkModel
                 // The first connection has been added, notify the data-binding system that
                 // 'IsConnected' should be re-evaluated.
                 //
-                OnPropertyChanged("IsConnectionAttached");
-                OnPropertyChanged("IsConnected");
+                OnExplicitPropertyChanged(nameof(IsConnectionAttached));
+                OnExplicitPropertyChanged(nameof(IsConnected));
             }
         }
 
@@ -170,8 +170,8 @@ namespace NetworkView.AdvancedNetworkModel
                 // No longer connected to anything, notify the data-binding system that
                 // 'IsConnected' should be re-evaluated.
                 //
-                OnPropertyChanged("IsConnectionAttached");
-                OnPropertyChanged("IsConnected");
+                OnExplicitPropertyChanged(nameof(IsConnectionAttached));
+                OnExplicitPropertyChanged(nameof(IsConnected));
             }
         }
 
@@ -180,8 +180,8 @@ namespace NetworkView.AdvancedNetworkModel
         /// </summary>
         private void connection_ConnectionChanged(object sender, EventArgs e)
         {
-            OnPropertyChanged("IsConnectionAttached");
-            OnPropertyChanged("IsConnected");
+            OnExplicitPropertyChanged(nameof(IsConnectionAttached));
+            OnExplicitPropertyChanged(nameof(IsConnected));
         }
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace NetworkView.AdvancedNetworkModel
         /// </summary>
         private void OnHotspotUpdated()
         {
-            OnPropertyChanged("Hotspot");
+            OnExplicitPropertyChanged(nameof(Hotspot));
 
             HotspotUpdated?.Invoke(this, EventArgs.Empty);
         }

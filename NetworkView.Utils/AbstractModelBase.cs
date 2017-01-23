@@ -22,6 +22,9 @@ namespace NetworkView.Utils
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
+        protected virtual void OnExplicitPropertyChanged(string propertyName)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
         /// <summary>
         /// Event raised to indicate that a property value has changed.
         /// </summary>

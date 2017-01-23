@@ -74,7 +74,7 @@ namespace NetworkView.SimpleNetworkModel
         /// </summary>
         private void OnHotspotUpdated()
         {
-            OnPropertyChanged("Hotspot");
+            OnExplicitPropertyChanged(nameof(Hotspot));
 
             HotspotUpdated?.Invoke(this, EventArgs.Empty);
         }
