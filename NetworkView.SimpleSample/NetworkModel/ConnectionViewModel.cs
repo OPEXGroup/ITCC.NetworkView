@@ -67,7 +67,7 @@ namespace NetworkView.SimpleNetworkModel
                     SourceConnectorHotspot = _sourceConnector.Hotspot;
                 }
 
-                OnPropertyChanged("SourceConnector");
+                OnPropertyChanged();
             }
         }
 
@@ -106,7 +106,7 @@ namespace NetworkView.SimpleNetworkModel
                     DestConnectorHotspot = _destConnector.Hotspot;
                 }
 
-                OnPropertyChanged("DestConnector");
+                OnPropertyChanged();
             }
         }
 
@@ -123,7 +123,7 @@ namespace NetworkView.SimpleNetworkModel
             {
                 _sourceConnectorHotspot = value;
 
-                OnPropertyChanged("SourceConnectorHotspot");
+                OnPropertyChanged();
             }
         }
 
@@ -137,7 +137,7 @@ namespace NetworkView.SimpleNetworkModel
             {
                 _destConnectorHotspot = value;
 
-                OnPropertyChanged("DestConnectorHotspot");
+                OnPropertyChanged();
             }
         }
 

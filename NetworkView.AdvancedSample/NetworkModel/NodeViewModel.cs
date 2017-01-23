@@ -96,7 +96,7 @@ namespace NetworkView.AdvancedNetworkModel
 
                 _name = value;
 
-                OnPropertyChanged("Name");
+                OnPropertyChanged();
             }
         }
 
@@ -118,7 +118,7 @@ namespace NetworkView.AdvancedNetworkModel
 
                 _x = value;
 
-                OnPropertyChanged("X");
+                OnPropertyChanged();
             }
         }
 
@@ -140,7 +140,7 @@ namespace NetworkView.AdvancedNetworkModel
 
                 _y = value;
 
-                OnPropertyChanged("Y");
+                OnPropertyChanged();
             }
         }
 
@@ -162,7 +162,7 @@ namespace NetworkView.AdvancedNetworkModel
 
                 _zIndex = value;
 
-                OnPropertyChanged("ZIndex");
+                OnPropertyChanged();
             }
         }
 
@@ -279,7 +279,7 @@ namespace NetworkView.AdvancedNetworkModel
 
                 _isSelected = value;
 
-                OnPropertyChanged("IsSelected");
+                OnPropertyChanged();
             }
         }
 

@@ -82,7 +82,7 @@ namespace NetworkView.AdvancedSample
             {
                 network = value;
 
-                OnPropertyChanged("Network");
+                OnPropertyChanged();
             }
         }
 
@@ -99,7 +99,7 @@ namespace NetworkView.AdvancedSample
             {
                 _contentScale = value;
 
-                OnPropertyChanged("ContentScale");
+                OnPropertyChanged();
             }
         }
 
@@ -116,7 +116,7 @@ namespace NetworkView.AdvancedSample
             {
                 _contentOffsetX = value;
 
-                OnPropertyChanged("ContentOffsetX");
+                OnPropertyChanged();
             }
         }
 
@@ -133,7 +133,7 @@ namespace NetworkView.AdvancedSample
             {
                 _contentOffsetY = value;
 
-                OnPropertyChanged("ContentOffsetY");
+                OnPropertyChanged();
             }
         }
 
@@ -150,7 +150,7 @@ namespace NetworkView.AdvancedSample
             {
                 _contentWidth = value;
 
-                OnPropertyChanged("ContentWidth");
+                OnPropertyChanged();
             }
         }
 
@@ -167,7 +167,7 @@ namespace NetworkView.AdvancedSample
             {
                 _contentHeight = value;
 
-                OnPropertyChanged("ContentHeight");
+                OnPropertyChanged();
             }
         }
 
@@ -186,7 +186,7 @@ namespace NetworkView.AdvancedSample
             {
                 _contentViewportWidth = value;
 
-                OnPropertyChanged("ContentViewportWidth");
+                OnPropertyChanged();
             }
         }
 
@@ -205,7 +205,7 @@ namespace NetworkView.AdvancedSample
             {
                 _contentViewportHeight = value;
 
-                OnPropertyChanged("ContentViewportHeight");
+                OnPropertyChanged();
             }
         }
 

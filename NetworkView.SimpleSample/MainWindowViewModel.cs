@@ -41,7 +41,7 @@ namespace NetworkView.SimpleSample
             {
                 network = value;
 
-                OnPropertyChanged("Network");
+                OnPropertyChanged();
             }
         }
 

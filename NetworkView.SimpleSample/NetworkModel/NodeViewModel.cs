@@ -74,7 +74,7 @@ namespace NetworkView.SimpleNetworkModel
 
                 _name = value;
 
-                OnPropertyChanged("Name");
+                OnPropertyChanged();
             }
         }
 
@@ -96,7 +96,7 @@ namespace NetworkView.SimpleNetworkModel
 
                 _x = value;
 
-                OnPropertyChanged("X");
+                OnPropertyChanged();
             }
         }
 
@@ -118,7 +118,7 @@ namespace NetworkView.SimpleNetworkModel
 
                 _y = value;
 
-                OnPropertyChanged("Y");
+                OnPropertyChanged();
             }
         }
 
@@ -179,7 +179,7 @@ namespace NetworkView.SimpleNetworkModel
 
                 _isSelected = value;
 
-                OnPropertyChanged("IsSelected");
+                OnPropertyChanged();
             }
         }
 

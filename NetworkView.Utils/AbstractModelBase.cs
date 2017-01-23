@@ -1,6 +1,7 @@
 ﻿// This is an open source non-commercial project. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace NetworkView.Utils
 {
@@ -18,7 +19,7 @@ namespace NetworkView.Utils
         /// <summary>
         /// Raises the PropertyChanged event.
         /// </summary>
-        protected virtual void OnPropertyChanged(string propertyName)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         /// <summary>

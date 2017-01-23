@@ -68,7 +68,7 @@ namespace NetworkView.AdvancedNetworkModel
                     SourceConnectorHotspot = _sourceConnector.Hotspot;
                 }
 
-                OnPropertyChanged("SourceConnector");
+                OnPropertyChanged();
                 OnConnectionChanged();
             }
         }
@@ -104,7 +104,7 @@ namespace NetworkView.AdvancedNetworkModel
                     DestConnectorHotspot = _destConnector.Hotspot;
                 }
 
-                OnPropertyChanged("DestConnector");
+                OnPropertyChanged();
                 OnConnectionChanged();
             }
         }
@@ -124,7 +124,7 @@ namespace NetworkView.AdvancedNetworkModel
 
                 ComputeConnectionPoints();
 
-                OnPropertyChanged("SourceConnectorHotspot");
+                OnPropertyChanged();
             }
         }
 
@@ -140,7 +140,7 @@ namespace NetworkView.AdvancedNetworkModel
 
                 ComputeConnectionPoints();
 
-                OnPropertyChanged("DestConnectorHotspot");
+                OnPropertyChanged();
             }
         }
 
@@ -157,7 +157,7 @@ namespace NetworkView.AdvancedNetworkModel
             {
                 _points = value;
 
-                OnPropertyChanged("Points");
+                OnPropertyChanged();
             }
         }
 
