@@ -17,7 +17,7 @@ namespace NetworkView.SimpleNetworkModel
         /// The hotspot (or center) of the connector.
         /// This is pushed through from ConnectorItem in the UI.
         /// </summary>
-        private Point hotspot;
+        private Point _hotspot;
 
         #endregion Internal Data Members
         
@@ -47,16 +47,16 @@ namespace NetworkView.SimpleNetworkModel
         {
             get
             {
-                return hotspot;
+                return _hotspot;
             }
             set
             {
-                if (hotspot == value)
+                if (_hotspot == value)
                 {
                     return;
                 }
 
-                hotspot = value;
+                _hotspot = value;
 
                 OnHotspotUpdated();
             }

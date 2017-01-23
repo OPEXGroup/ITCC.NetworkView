@@ -14,12 +14,12 @@ namespace NetworkView.SimpleNetworkModel
         /// <summary>
         /// The collection of nodes in the network.
         /// </summary>
-        private ImpObservableCollection<NodeViewModel> nodes;
+        private ImpObservableCollection<NodeViewModel> _nodes;
 
         /// <summary>
         /// The collection of connections in the network.
         /// </summary>
-        private ImpObservableCollection<ConnectionViewModel> connections;
+        private ImpObservableCollection<ConnectionViewModel> _connections;
 
         #endregion Internal Data Members
 
@@ -30,12 +30,12 @@ namespace NetworkView.SimpleNetworkModel
         {
             get
             {
-                if (nodes == null)
+                if (_nodes == null)
                 {
-                    nodes = new ImpObservableCollection<NodeViewModel>();
+                    _nodes = new ImpObservableCollection<NodeViewModel>();
                 }
 
-                return nodes;
+                return _nodes;
             }
         }
 
@@ -46,13 +46,13 @@ namespace NetworkView.SimpleNetworkModel
         {
             get
             {
-                if (connections == null)
+                if (_connections == null)
                 {
-                    connections = new ImpObservableCollection<ConnectionViewModel>();
-                    connections.ItemsRemoved += connections_ItemsRemoved;
+                    _connections = new ImpObservableCollection<ConnectionViewModel>();
+                    _connections.ItemsRemoved += connections_ItemsRemoved;
                 }
 
-                return connections;
+                return _connections;
             }
         }
 

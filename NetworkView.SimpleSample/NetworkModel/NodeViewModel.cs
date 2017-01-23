@@ -1,5 +1,7 @@
 ﻿// This is an open source non-commercial project. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+
+using System;
 using System.Collections.Generic;
 using NetworkView.Utils;
 
@@ -14,29 +16,34 @@ namespace NetworkView.SimpleNetworkModel
         #region Internal Data Members
 
         /// <summary>
+        ///     Coordinates comparasion precision
+        /// </summary>
+        private const double Epsilon = 1e-6;
+
+        /// <summary>
         /// The name of the node.
         /// </summary>
-        private string name = string.Empty;
+        private string _name = string.Empty;
 
         /// <summary>
         /// The X coordinate for the position of the node.
         /// </summary>
-        private double x;
+        private double _x;
 
         /// <summary>
         /// The Y coordinate for the position of the node.
         /// </summary>
-        private double y;
+        private double _y;
 
         /// <summary>
         /// Set to 'true' when the node is selected.
         /// </summary>
-        private bool isSelected;
+        private bool _isSelected;
 
         /// <summary>
         /// List of input connectors (connections points) attached to the node.
         /// </summary>
-        private ImpObservableCollection<ConnectorViewModel> connectors;
+        private ImpObservableCollection<ConnectorViewModel> _connectors;
 
         #endregion Internal Data Members
 
@@ -46,7 +53,7 @@ namespace NetworkView.SimpleNetworkModel
 
         public NodeViewModel(string name)
         {
-            this.name = name;
+            _name = name;
         }
 
         /// <summary>
@@ -56,16 +63,16 @@ namespace NetworkView.SimpleNetworkModel
         {
             get
             {
-                return name;
+                return _name;
             }
             set
             {
-                if (name == value)
+                if (_name == value)
                 {
                     return;
                 }
 
-                name = value;
+                _name = value;
 
                 OnPropertyChanged("Name");
             }
@@ -78,16 +85,16 @@ namespace NetworkView.SimpleNetworkModel
         {
             get
             {
-                return x;
+                return _x;
             }
             set
             {
-                if (x == value)
+                if (Math.Abs(_x - value) < Epsilon)
                 {
                     return;
                 }
 
-                x = value;
+                _x = value;
 
                 OnPropertyChanged("X");
             }
@@ -100,16 +107,16 @@ namespace NetworkView.SimpleNetworkModel
         {
             get
             {
-                return y;
+                return _y;
             }
             set
             {
-                if (y == value)
+                if (Math.Abs(_y - value) < Epsilon)
                 {
                     return;
                 }
 
-                y = value;
+                _y = value;
 
                 OnPropertyChanged("Y");
             }
@@ -122,14 +129,14 @@ namespace NetworkView.SimpleNetworkModel
         {
             get
             {
-                if (connectors == null)
-                {
-                    connectors = new ImpObservableCollection<ConnectorViewModel>();
-                    connectors.ItemsAdded += connectors_ItemsAdded;
-                    connectors.ItemsRemoved += connectors_ItemsRemoved;
-                }
+                if (_connectors != null)
+                    return _connectors;
 
-                return connectors;
+                _connectors = new ImpObservableCollection<ConnectorViewModel>();
+                _connectors.ItemsAdded += connectors_ItemsAdded;
+                _connectors.ItemsRemoved += connectors_ItemsRemoved;
+
+                return _connectors;
             }
         }
 
@@ -161,16 +168,16 @@ namespace NetworkView.SimpleNetworkModel
         {
             get
             {
-                return isSelected;
+                return _isSelected;
             }
             set
             {
-                if (isSelected == value)
+                if (_isSelected == value)
                 {
                     return;
                 }
 
-                isSelected = value;
+                _isSelected = value;
 
                 OnPropertyChanged("IsSelected");
             }

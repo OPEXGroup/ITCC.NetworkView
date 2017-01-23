@@ -17,18 +17,18 @@ namespace NetworkView.SimpleNetworkModel
         /// <summary>
         /// The source connector the connection is attached to.
         /// </summary>
-        private ConnectorViewModel sourceConnector;
+        private ConnectorViewModel _sourceConnector;
 
         /// <summary>
         /// The destination connector the connection is attached to.
         /// </summary>
-        private ConnectorViewModel destConnector;
+        private ConnectorViewModel _destConnector;
 
         /// <summary>
         /// The source and dest hotspots used for generating connection points.
         /// </summary>
-        private Point sourceConnectorHotspot;
-        private Point destConnectorHotspot;
+        private Point _sourceConnectorHotspot;
+        private Point _destConnectorHotspot;
 
         #endregion Internal Data Members
 
@@ -39,32 +39,32 @@ namespace NetworkView.SimpleNetworkModel
         {
             get
             {
-                return sourceConnector;
+                return _sourceConnector;
             }
             set
             {
-                if (sourceConnector == value)
+                if (_sourceConnector == value)
                 {
                     return;
                 }
 
-                if (sourceConnector != null)
+                if (_sourceConnector != null)
                 {
-                    Trace.Assert(sourceConnector.AttachedConnection == this);
+                    Trace.Assert(_sourceConnector.AttachedConnection == this);
 
-                    sourceConnector.AttachedConnection = null;
-                    sourceConnector.HotspotUpdated -= sourceConnector_HotspotUpdated;
+                    _sourceConnector.AttachedConnection = null;
+                    _sourceConnector.HotspotUpdated -= sourceConnector_HotspotUpdated;
                 }
 
-                sourceConnector = value;
+                _sourceConnector = value;
 
-                if (sourceConnector != null)
+                if (_sourceConnector != null)
                 {
-                    Trace.Assert(sourceConnector.AttachedConnection == null);
+                    Trace.Assert(_sourceConnector.AttachedConnection == null);
 
-                    sourceConnector.AttachedConnection = this;
-                    sourceConnector.HotspotUpdated += sourceConnector_HotspotUpdated;
-                    SourceConnectorHotspot = sourceConnector.Hotspot;
+                    _sourceConnector.AttachedConnection = this;
+                    _sourceConnector.HotspotUpdated += sourceConnector_HotspotUpdated;
+                    SourceConnectorHotspot = _sourceConnector.Hotspot;
                 }
 
                 OnPropertyChanged("SourceConnector");
@@ -78,32 +78,32 @@ namespace NetworkView.SimpleNetworkModel
         {
             get
             {
-                return destConnector;
+                return _destConnector;
             }
             set
             {
-                if (destConnector == value)
+                if (_destConnector == value)
                 {
                     return;
                 }
 
-                if (destConnector != null)
+                if (_destConnector != null)
                 {
-                    Trace.Assert(destConnector.AttachedConnection == this);
+                    Trace.Assert(_destConnector.AttachedConnection == this);
 
-                    destConnector.AttachedConnection = null;
-                    destConnector.HotspotUpdated += destConnector_HotspotUpdated;
+                    _destConnector.AttachedConnection = null;
+                    _destConnector.HotspotUpdated += destConnector_HotspotUpdated;
                 }
 
-                destConnector = value;
+                _destConnector = value;
 
-                if (destConnector != null)
+                if (_destConnector != null)
                 {
-                    Trace.Assert(destConnector.AttachedConnection == null);
+                    Trace.Assert(_destConnector.AttachedConnection == null);
 
-                    destConnector.AttachedConnection = this;
-                    destConnector.HotspotUpdated += destConnector_HotspotUpdated;
-                    DestConnectorHotspot = destConnector.Hotspot;
+                    _destConnector.AttachedConnection = this;
+                    _destConnector.HotspotUpdated += destConnector_HotspotUpdated;
+                    DestConnectorHotspot = _destConnector.Hotspot;
                 }
 
                 OnPropertyChanged("DestConnector");
@@ -117,11 +117,11 @@ namespace NetworkView.SimpleNetworkModel
         {
             get
             {
-                return sourceConnectorHotspot;
+                return _sourceConnectorHotspot;
             }
             set
             {
-                sourceConnectorHotspot = value;
+                _sourceConnectorHotspot = value;
 
                 OnPropertyChanged("SourceConnectorHotspot");
             }
@@ -131,11 +131,11 @@ namespace NetworkView.SimpleNetworkModel
         {
             get
             {
-                return destConnectorHotspot;
+                return _destConnectorHotspot;
             }
             set
             {
-                destConnectorHotspot = value;
+                _destConnectorHotspot = value;
 
                 OnPropertyChanged("DestConnectorHotspot");
             }

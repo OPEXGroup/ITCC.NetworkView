@@ -16,6 +16,11 @@ namespace NetworkView.AdvancedNetworkModel
         #region Private Data Members
 
         /// <summary>
+        ///     Coordinates comparasion precision
+        /// </summary>
+        private const double Epsilon = 1e-6;
+
+        /// <summary>
         /// The name of the node.
         /// </summary>
         private string _name = string.Empty;
@@ -65,11 +70,12 @@ namespace NetworkView.AdvancedNetworkModel
 
         public NodeViewModel()
         {
+            
         }
 
         public NodeViewModel(string name)
         {
-            this._name = name;
+            _name = name;
         }
 
         /// <summary>
@@ -105,7 +111,7 @@ namespace NetworkView.AdvancedNetworkModel
             }
             set
             {
-                if (_x == value)
+                if (Math.Abs(_x - value) < Epsilon)
                 {
                     return;
                 }
@@ -127,7 +133,7 @@ namespace NetworkView.AdvancedNetworkModel
             }
             set
             {
-                if (_y == value)
+                if (Math.Abs(_y - value) < Epsilon)
                 {
                     return;
                 }
