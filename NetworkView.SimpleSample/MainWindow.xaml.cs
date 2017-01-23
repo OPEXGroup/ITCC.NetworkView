@@ -30,10 +30,12 @@ namespace NetworkView.SimpleSample
             //
             // Display help text for the sample app.
             //
-            var helpTextWindow = new HelpTextWindow();
-            helpTextWindow.Left = Left + Width + 5;
-            helpTextWindow.Top = Top;
-            helpTextWindow.Owner = this;
+            var helpTextWindow = new HelpTextWindow
+            {
+                Left = Left + Width + 5,
+                Top = Top,
+                Owner = this
+            };
             helpTextWindow.Show();
         }
 
@@ -43,7 +45,7 @@ namespace NetworkView.SimpleSample
         private void networkControl_ConnectionDragStarted(object sender, ConnectionDragStartedEventArgs e)
         {
             var draggedOutConnector = (ConnectorViewModel)e.ConnectorDraggedOut;
-            var curDragPoint = Mouse.GetPosition(networkControl);
+            var curDragPoint = Mouse.GetPosition(NetworkControl);
 
             //
             // Delegate the real work to the view model.
@@ -62,7 +64,7 @@ namespace NetworkView.SimpleSample
         /// </summary>
         private void networkControl_ConnectionDragging(object sender, ConnectionDraggingEventArgs e)
         {
-            var curDragPoint = Mouse.GetPosition(networkControl);
+            var curDragPoint = Mouse.GetPosition(NetworkControl);
             var connection = (ConnectionViewModel)e.Connection;
             ViewModel.ConnectionDragging(connection, curDragPoint);
         }
@@ -88,7 +90,7 @@ namespace NetworkView.SimpleSample
         /// </summary>
         private void CreateNode_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var newNodeLocation = Mouse.GetPosition(networkControl);
+            var newNodeLocation = Mouse.GetPosition(NetworkControl);
             ViewModel.CreateNode("New Node!", newNodeLocation);
         }
 
