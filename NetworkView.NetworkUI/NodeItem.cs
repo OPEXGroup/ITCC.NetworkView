@@ -96,6 +96,11 @@ namespace NetworkView.NetworkUI
         #region Private Data Members\Properties
 
         /// <summary>
+        ///     Offset comparasion presicion
+        /// </summary>
+        private const double Epsilon = 1e-6;
+
+        /// <summary>
         /// Reference to the data-bound parent NetworkView.
         /// </summary>
         internal NetworkView ParentNetworkView
@@ -294,13 +299,12 @@ namespace NetworkView.NetworkUI
                 }
 
                 var offset = curMousePoint - _lastMousePoint;
-                if (offset.X != 0.0 ||
-                    offset.Y != 0.0)
-                {
-                    _lastMousePoint = curMousePoint;
+                if (offset.Length <= Epsilon)
+                    return;
 
-                    RaiseEvent(new NodeDraggingEventArgs(NodeDraggingEvent, this, new[] { item }, offset.X, offset.Y));
-                }
+                _lastMousePoint = curMousePoint;
+
+                RaiseEvent(new NodeDraggingEventArgs(NodeDraggingEvent, this, new[] { item }, offset.X, offset.Y));
             }
             else if (_isLeftMouseDown && ParentNetworkView.EnableNodeDragging)
             {
