@@ -459,7 +459,9 @@ namespace NetworkView.AdornedControl
         private static void FadeInAdornerCommand_Executed(object target, ExecutedRoutedEventArgs e)
         {
             var c = (AdornedControl)target;
-            c.FadeOutAdorner();
+            // ToDo: rethink this
+            // c.FadeOutAdorner();
+            c.FadeInAdorner();
         }
 
         /// <summary>
