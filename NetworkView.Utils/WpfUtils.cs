@@ -39,13 +39,13 @@ namespace NetworkView.Utils
             return null;
         }
 
-        public static FrameworkElement FindParentWithDataContextAndName<DataContextT>(FrameworkElement childElement, string name)
-            where DataContextT : class
+        public static FrameworkElement FindParentWithDataContextAndName<TDataContextT>(FrameworkElement childElement, string name)
+            where TDataContextT : class
         {
             var parent = (FrameworkElement)childElement.Parent;
             if (parent != null)
             {
-                var data = parent.DataContext as DataContextT;
+                var data = parent.DataContext as TDataContextT;
                 if (data != null)
                 {
                     if (parent.Name == name)
@@ -54,7 +54,7 @@ namespace NetworkView.Utils
                     }
                 }
 
-                parent = FindParentWithDataContextAndName<DataContextT>(parent, name);
+                parent = FindParentWithDataContextAndName<TDataContextT>(parent, name);
                 if (parent != null)
                 {
                     return parent;
@@ -64,7 +64,7 @@ namespace NetworkView.Utils
             parent = (FrameworkElement)childElement.TemplatedParent;
             if (parent != null)
             {
-                var data = parent.DataContext as DataContextT;
+                var data = parent.DataContext as TDataContextT;
                 if (data != null)
                 {
                     if (parent.Name == name)
@@ -73,7 +73,7 @@ namespace NetworkView.Utils
                     }
                 }
 
-                parent = FindParentWithDataContextAndName<DataContextT>(parent, name);
+                parent = FindParentWithDataContextAndName<TDataContextT>(parent, name);
                 if (parent != null)
                 {
                     return parent;
@@ -83,18 +83,18 @@ namespace NetworkView.Utils
             return null;
         }
 
-        public static FrameworkElement FindParentWithDataContext<DataContextT>(FrameworkElement childElement)
-            where DataContextT : class
+        public static FrameworkElement FindParentWithDataContext<TDataContextT>(FrameworkElement childElement)
+            where TDataContextT : class
         {
             if (childElement.Parent != null)
             {
-                var data = ((FrameworkElement)childElement.Parent).DataContext as DataContextT;
+                var data = ((FrameworkElement)childElement.Parent).DataContext as TDataContextT;
                 if (data != null)
                 {
                     return (FrameworkElement)childElement.Parent;
                 }
 
-                var parent = FindParentWithDataContext<DataContextT>((FrameworkElement)childElement.Parent);
+                var parent = FindParentWithDataContext<TDataContextT>((FrameworkElement)childElement.Parent);
                 if (parent != null)
                 {
                     return parent;
@@ -103,13 +103,13 @@ namespace NetworkView.Utils
 
             if (childElement.TemplatedParent != null)
             {
-                var data = ((FrameworkElement)childElement.TemplatedParent).DataContext as DataContextT;
+                var data = ((FrameworkElement)childElement.TemplatedParent).DataContext as TDataContextT;
                 if (data != null)
                 {
                     return (FrameworkElement)childElement.TemplatedParent;
                 }
 
-                var parent = FindParentWithDataContext<DataContextT>((FrameworkElement)childElement.TemplatedParent);
+                var parent = FindParentWithDataContext<TDataContextT>((FrameworkElement)childElement.TemplatedParent);
                 if (parent != null)
                 {
                     return parent;
@@ -119,36 +119,36 @@ namespace NetworkView.Utils
             return null;
         }
 
-        public static ParentT FindVisualParentWithType<ParentT>(FrameworkElement childElement)
-            where ParentT : class
+        public static TParentT FindVisualParentWithType<TParentT>(FrameworkElement childElement)
+            where TParentT : class
         {
             var parentElement = (FrameworkElement)VisualTreeHelper.GetParent(childElement);
             if (parentElement != null)
             {
-                var parent = parentElement as ParentT;
+                var parent = parentElement as TParentT;
                 if (parent != null)
                 {
                     return parent;
                 }
 
-                return FindVisualParentWithType<ParentT>(parentElement);
+                return FindVisualParentWithType<TParentT>(parentElement);
             }
 
             return null;
         }
 
-        public static ParentT FindParentWithType<ParentT>(FrameworkElement childElement)
-            where ParentT : class
+        public static TParentT FindParentWithType<TParentT>(FrameworkElement childElement)
+            where TParentT : class
         {
             if (childElement.Parent != null)
             {
-                var parent = childElement.Parent as ParentT;
+                var parent = childElement.Parent as TParentT;
                 if (parent != null)
                 {
                     return parent;
                 }
 
-                parent = FindParentWithType<ParentT>((FrameworkElement)childElement.Parent);
+                parent = FindParentWithType<TParentT>((FrameworkElement)childElement.Parent);
                 if (parent != null)
         {
                     return parent;
@@ -157,13 +157,13 @@ namespace NetworkView.Utils
 
             if (childElement.TemplatedParent != null)
             {
-                var parent = childElement.TemplatedParent as ParentT;
+                var parent = childElement.TemplatedParent as TParentT;
                 if (parent != null)
                 {
                     return parent;
                 }
 
-                parent = FindParentWithType<ParentT>((FrameworkElement)childElement.TemplatedParent);
+                parent = FindParentWithType<TParentT>((FrameworkElement)childElement.TemplatedParent);
                 if (parent != null)
                 {
                     return parent;
@@ -173,24 +173,24 @@ namespace NetworkView.Utils
             var parentElement = (FrameworkElement)VisualTreeHelper.GetParent(childElement);
             if (parentElement != null)
             {
-                var parent = parentElement as ParentT;
+                var parent = parentElement as TParentT;
                 if (parent != null)
                 {
                     return parent;
                 }
 
-                return FindParentWithType<ParentT>(parentElement);
+                return FindParentWithType<TParentT>(parentElement);
             }
 
             return null;
         }
 
-        public static ParentT FindParentWithTypeAndDataContext<ParentT>(FrameworkElement childElement, object dataContext)
-            where ParentT : FrameworkElement
+        public static TParentT FindParentWithTypeAndDataContext<TParentT>(FrameworkElement childElement, object dataContext)
+            where TParentT : FrameworkElement
         {
             if (childElement.Parent != null)
             {
-                var parent = childElement.Parent as ParentT;
+                var parent = childElement.Parent as TParentT;
                 if (parent != null)
                 {
                     if (parent.DataContext == dataContext)
@@ -199,7 +199,7 @@ namespace NetworkView.Utils
                     }
                 }
 
-                parent = FindParentWithTypeAndDataContext<ParentT>((FrameworkElement)childElement.Parent, dataContext);
+                parent = FindParentWithTypeAndDataContext<TParentT>((FrameworkElement)childElement.Parent, dataContext);
                 if (parent != null)
                 {
                     return parent;
@@ -208,7 +208,7 @@ namespace NetworkView.Utils
 
             if (childElement.TemplatedParent != null)
             {
-                var parent = childElement.TemplatedParent as ParentT;
+                var parent = childElement.TemplatedParent as TParentT;
                 if (parent != null)
                 {
                     if (parent.DataContext == dataContext)
@@ -217,7 +217,7 @@ namespace NetworkView.Utils
                     }
                 }
 
-                parent = FindParentWithTypeAndDataContext<ParentT>((FrameworkElement)childElement.TemplatedParent, dataContext);
+                parent = FindParentWithTypeAndDataContext<TParentT>((FrameworkElement)childElement.TemplatedParent, dataContext);
                 if (parent != null)
                 {
                     return parent;
@@ -227,13 +227,13 @@ namespace NetworkView.Utils
             var parentElement = (FrameworkElement)VisualTreeHelper.GetParent(childElement);
             if (parentElement != null)
             {
-                var parent = parentElement as ParentT;
+                var parent = parentElement as TParentT;
                 if (parent != null)
                 {
                     return parent;
                 }
 
-                return FindParentWithType<ParentT>(parentElement);
+                return FindParentWithType<TParentT>(parentElement);
             }
 
             return null;
@@ -302,14 +302,14 @@ namespace NetworkView.Utils
         /// <summary>
         /// Hit test for a specific data context and name.
         /// </summary>
-        public static DataContextT HitTestForDataContextAndName<DataContextT, ElementT>(FrameworkElement rootElement, 
-                                          Point point, string name, out ElementT hitFrameworkElement)
-            where DataContextT : class
-            where ElementT : FrameworkElement
+        public static TDataContextT HitTestForDataContextAndName<TDataContextT, TElementT>(FrameworkElement rootElement, 
+                                          Point point, string name, out TElementT hitFrameworkElement)
+            where TDataContextT : class
+            where TElementT : FrameworkElement
         {
-            DataContextT data = null;
+            TDataContextT data = null;
             hitFrameworkElement = null;
-            ElementT frameworkElement = null;
+            TElementT frameworkElement = null;
 
             VisualTreeHelper.HitTest(
                     rootElement,
@@ -318,10 +318,10 @@ namespace NetworkView.Utils
                     // Hit test result.
                     delegate(HitTestResult result)
                     {
-                        frameworkElement = result.VisualHit as ElementT;
+                        frameworkElement = result.VisualHit as TElementT;
                         if (frameworkElement != null)
                         {
-                            data = frameworkElement.DataContext as DataContextT;
+                            data = frameworkElement.DataContext as TDataContextT;
                             if (data != null)
         {
                                 if (frameworkElement.Name == name)
@@ -346,14 +346,14 @@ namespace NetworkView.Utils
         /// of the specified type.
         /// Returns 'null' if nothing was 'hit'.
         /// </summary>
-        public static DataContextT HitTestForDataContext<DataContextT, ElementT>(FrameworkElement rootElement, 
-                                          Point point, out ElementT hitFrameworkElement)
-            where DataContextT : class
-            where ElementT : FrameworkElement
+        public static TDataContextT HitTestForDataContext<TDataContextT, TElementT>(FrameworkElement rootElement, 
+                                          Point point, out TElementT hitFrameworkElement)
+            where TDataContextT : class
+            where TElementT : FrameworkElement
         {
-            DataContextT data = null;
+            TDataContextT data = null;
             hitFrameworkElement = null;
-            ElementT frameworkElement = null;
+            TElementT frameworkElement = null;
 
             VisualTreeHelper.HitTest(
                     rootElement,
@@ -362,10 +362,10 @@ namespace NetworkView.Utils
                     // Hit test result.
                     delegate(HitTestResult result)
                     {
-                        frameworkElement = result.VisualHit as ElementT;
+                        frameworkElement = result.VisualHit as TElementT;
                         if (frameworkElement != null)
             {
-                            data = frameworkElement.DataContext as DataContextT;
+                            data = frameworkElement.DataContext as TDataContextT;
                             return data != null ? HitTestResultBehavior.Stop : HitTestResultBehavior.Continue;
             }
 
@@ -454,8 +454,8 @@ namespace NetworkView.Utils
         /// <summary>
         /// Find the framework element with the specified name.
         /// </summary>
-        public static ElementT FindElementWithName<ElementT>(Visual rootElement, string name)
-            where ElementT : FrameworkElement
+        public static TElementT FindElementWithName<TElementT>(Visual rootElement, string name)
+            where TElementT : FrameworkElement
         {
             var rootFrameworkElement = rootElement as FrameworkElement;
             if (rootFrameworkElement != null)
@@ -468,7 +468,7 @@ namespace NetworkView.Utils
             {
                 var childElement = (Visual)VisualTreeHelper.GetChild(rootElement, i);
 
-                var typedChildElement = childElement as ElementT;
+                var typedChildElement = childElement as TElementT;
                 if (typedChildElement != null)
                 {
                     if (typedChildElement.Name == name)
@@ -477,7 +477,7 @@ namespace NetworkView.Utils
                     }
                 }
 
-                var foundElement = FindElementWithName<ElementT>(childElement, name);
+                var foundElement = FindElementWithName<TElementT>(childElement, name);
                 if (foundElement != null)
                 {
                     return foundElement;
@@ -490,9 +490,9 @@ namespace NetworkView.Utils
         /// <summary>
         /// Find the framework element for the specified connector.
         /// </summary>
-        public static ElementT FindElementWithDataContextAndName<DataContextT, ElementT>(Visual rootElement, DataContextT data, string name)
-            where DataContextT : class
-            where ElementT : FrameworkElement
+        public static TElementT FindElementWithDataContextAndName<TDataContextT, TElementT>(Visual rootElement, TDataContextT data, string name)
+            where TDataContextT : class
+            where TElementT : FrameworkElement
         {
             Trace.Assert(rootElement != null);
 
@@ -507,7 +507,7 @@ namespace NetworkView.Utils
             {
                 var childElement = (Visual)VisualTreeHelper.GetChild(rootElement, i);
 
-                var typedChildElement = childElement as ElementT;
+                var typedChildElement = childElement as TElementT;
                 if (typedChildElement != null &&
                     typedChildElement.DataContext == data)
                 {
@@ -517,7 +517,7 @@ namespace NetworkView.Utils
                     }
                 }
 
-                var foundElement = FindElementWithDataContextAndName<DataContextT, ElementT>(childElement, data, name);
+                var foundElement = FindElementWithDataContextAndName<TDataContextT, TElementT>(childElement, data, name);
                 if (foundElement != null)
                 {
                     return foundElement;
@@ -530,8 +530,8 @@ namespace NetworkView.Utils
         /// <summary>
         /// Find the framework element for the specified connector.
         /// </summary>
-        public static ElementT FindElementWithType<ElementT>(Visual rootElement)
-            where ElementT : FrameworkElement
+        public static TElementT FindElementWithType<TElementT>(Visual rootElement)
+            where TElementT : FrameworkElement
         {
             if (rootElement == null)
             {
@@ -552,7 +552,7 @@ namespace NetworkView.Utils
             {
                 var childElement = (Visual)VisualTreeHelper.GetChild(rootElement, i);
 
-                var typedChildElement = childElement as ElementT;
+                var typedChildElement = childElement as TElementT;
                 if (typedChildElement != null)
                     {
                     return typedChildElement;
@@ -566,7 +566,7 @@ namespace NetworkView.Utils
             {
                 var childElement = (Visual)VisualTreeHelper.GetChild(rootElement, i);
 
-                var foundElement = FindElementWithType<ElementT>(childElement);
+                var foundElement = FindElementWithType<TElementT>(childElement);
                 if (foundElement != null)
                 {
                     return foundElement;
@@ -579,9 +579,9 @@ namespace NetworkView.Utils
         /// <summary>
         /// Find the framework element for the specified connector.
         /// </summary>
-        public static ElementT FindElementWithDataContext<DataContextT, ElementT>(Visual rootElement, DataContextT data) 
-            where DataContextT : class
-            where ElementT : FrameworkElement
+        public static TElementT FindElementWithDataContext<TDataContextT, TElementT>(Visual rootElement, TDataContextT data) 
+            where TDataContextT : class
+            where TElementT : FrameworkElement
         {
             if (rootElement == null)
             {
@@ -599,14 +599,14 @@ namespace NetworkView.Utils
             {
                 var childElement = (Visual)VisualTreeHelper.GetChild(rootElement, i);
 
-                var typedChildElement = childElement as ElementT;
+                var typedChildElement = childElement as TElementT;
                 if (typedChildElement != null &&
                     typedChildElement.DataContext == data)
                 {
                     return typedChildElement;
                 }
 
-                var foundElement = FindElementWithDataContext<DataContextT, ElementT>(childElement, data);
+                var foundElement = FindElementWithDataContext<TDataContextT, TElementT>(childElement, data);
                 if (foundElement != null)
                 {
                     return foundElement;
@@ -620,11 +620,11 @@ namespace NetworkView.Utils
         /// Walk up the visual tree and find a template for the specified type.
         /// Returns null if none was found.
         /// </summary>
-        public static DataTemplateT FindTemplateForType<DataTemplateT>(Type type, FrameworkElement element)
-            where DataTemplateT : class
+        public static TDataTemplateT FindTemplateForType<TDataTemplateT>(Type type, FrameworkElement element)
+            where TDataTemplateT : class
                     {
             var resource = element.TryFindResource(new DataTemplateKey(type));
-            var dataTemplate = resource as DataTemplateT;
+            var dataTemplate = resource as TDataTemplateT;
             if (dataTemplate != null)
                         {
                 return dataTemplate;
@@ -633,7 +633,7 @@ namespace NetworkView.Utils
             if (type.BaseType != null &&
                 type.BaseType != typeof(object))
             {
-                dataTemplate = FindTemplateForType<DataTemplateT>(type.BaseType, element);
+                dataTemplate = FindTemplateForType<TDataTemplateT>(type.BaseType, element);
                 if (dataTemplate != null)
                 {
                     return dataTemplate;
@@ -642,7 +642,7 @@ namespace NetworkView.Utils
 
             foreach (var interfaceType in type.GetInterfaces())
             {
-                dataTemplate = FindTemplateForType<DataTemplateT>(interfaceType, element);
+                dataTemplate = FindTemplateForType<TDataTemplateT>(interfaceType, element);
                 if (dataTemplate != null)
                 {
                     return dataTemplate;

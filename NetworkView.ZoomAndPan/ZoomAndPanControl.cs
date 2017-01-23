@@ -18,28 +18,28 @@ namespace NetworkView.ZoomAndPan
         /// <summary>
         /// Reference to the underlying content, which is named PART_Content in the template.
         /// </summary>
-        private FrameworkElement content;
+        private FrameworkElement _content;
 
         /// <summary>
         /// The transform that is applied to the content to scale it by 'ContentScale'.
         /// </summary>
-        private ScaleTransform contentScaleTransform;
+        private ScaleTransform _contentScaleTransform;
 
         /// <summary>
         /// The transform that is applied to the content to offset it by 'ContentOffsetX' and 'ContentOffsetY'.
         /// </summary>
-        private TranslateTransform contentOffsetTransform;
+        private TranslateTransform _contentOffsetTransform;
 
         /// <summary>
         /// Enable the update of the content offset as the content scale changes.
         /// This enabled for zooming about a point (google-maps style zooming) and zooming to a rect.
         /// </summary>
-        private bool enableContentOffsetUpdateFromScale;
+        private bool _enableContentOffsetUpdateFromScale;
 
         /// <summary>
         /// Used to disable syncronization between IScrollInfo interface and ContentOffsetX/ContentOffsetY.
         /// </summary>
-        private bool disableScrollOffsetSync;
+        private bool _disableScrollOffsetSync;
 
         /// <summary>
         /// Normally when content offsets changes the content focus is automatically updated.
@@ -47,17 +47,17 @@ namespace NetworkView.ZoomAndPan
         /// When we are zooming in or out we 'disableContentFocusSync' is set to 'true' because 
         /// we are zooming in or out relative to the content focus we don't want to update the focus.
         /// </summary>
-        private bool disableContentFocusSync;
+        private bool _disableContentFocusSync;
 
         /// <summary>
         /// The width of the viewport in content coordinates, clamped to the width of the content.
         /// </summary>
-        private double constrainedContentViewportWidth;
+        private double _constrainedContentViewportWidth;
 
         /// <summary>
         /// The height of the viewport in content coordinates, clamped to the height of the content.
         /// </summary>
-        private double constrainedContentViewportHeight;
+        private double _constrainedContentViewportHeight;
 
         #endregion Internal Data Members
 
@@ -78,30 +78,30 @@ namespace NetworkView.ZoomAndPan
         /// <summary>
         /// Set to 'true' when the vertical scrollbar is enabled.
         /// </summary>
-        private bool canVerticallyScroll;
+        private bool _canVerticallyScroll;
 
         /// <summary>
         /// Set to 'true' when the vertical scrollbar is enabled.
         /// </summary>
-        private bool canHorizontallyScroll;
+        private bool _canHorizontallyScroll;
 
         /// <summary>
         /// Records the unscaled extent of the content.
         /// This is calculated during the measure and arrange.
         /// </summary>
-        private Size unScaledExtent = new Size(0, 0);
+        private Size _unScaledExtent = new Size(0, 0);
 
         /// <summary>
         /// Records the size of the viewport (in viewport coordinates) onto the content.
         /// This is calculated during the measure and arrange.
         /// </summary>
-        private Size viewport = new Size(0, 0);
+        private Size _viewport = new Size(0, 0);
 
         /// <summary>
         /// Reference to the ScrollViewer that is wrapped (in XAML) around the ZoomAndPanControl.
         /// Or set to null if there is no ScrollViewer.
         /// </summary>
-        private ScrollViewer scrollOwner;
+        private ScrollViewer _scrollOwner;
 
         #endregion IScrollInfo Data Members
 
@@ -477,12 +477,12 @@ namespace NetworkView.ZoomAndPan
             //
             // When zooming about a point make updates to ContentScale also update content offset.
             //
-            enableContentOffsetUpdateFromScale = true;
+            _enableContentOffsetUpdateFromScale = true;
 
             AnimationHelper.StartAnimation(this, ContentScaleProperty, newContentScale, AnimationDuration,
                 delegate
                 {
-                    enableContentOffsetUpdateFromScale = false;
+                    _enableContentOffsetUpdateFromScale = false;
 
                     ResetViewportZoomFocus();
                 });
@@ -535,12 +535,12 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         public void AnimatedScaleToFit()
         {
-            if (content == null)
+            if (_content == null)
             {
                 throw new ApplicationException("PART_Content was not found in the ZoomAndPanControl visual template!");
             }
 
-            AnimatedZoomTo(new Rect(0, 0, content.ActualWidth, content.ActualHeight));
+            AnimatedZoomTo(new Rect(0, 0, _content.ActualWidth, _content.ActualHeight));
         }
 
         /// <summary>
@@ -548,12 +548,12 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         public void ScaleToFit()
         {
-            if (content == null)
+            if (_content == null)
             {
                 throw new ApplicationException("PART_Content was not found in the ZoomAndPanControl visual template!");
             }
 
-            ZoomTo(new Rect(0, 0, content.ActualWidth, content.ActualHeight));
+            ZoomTo(new Rect(0, 0, _content.ActualWidth, _content.ActualHeight));
         }
 
         #region Internal Methods
@@ -573,18 +573,18 @@ namespace NetworkView.ZoomAndPan
         {
             base.OnApplyTemplate();
 
-            content = Template.FindName("PART_Content", this) as FrameworkElement;
-            if (content != null)
+            _content = Template.FindName("PART_Content", this) as FrameworkElement;
+            if (_content != null)
             {
                 //
                 // Setup the transform on the content so that we can scale it by 'ContentScale'.
                 //
-                contentScaleTransform = new ScaleTransform(ContentScale, ContentScale);
+                _contentScaleTransform = new ScaleTransform(ContentScale, ContentScale);
 
                 //
                 // Setup the transform on the content so that we can translate it by 'ContentOffsetX' and 'ContentOffsetY'.
                 //
-                contentOffsetTransform = new TranslateTransform();
+                _contentOffsetTransform = new TranslateTransform();
                 UpdateTranslationX();
                 UpdateTranslationY();
 
@@ -593,9 +593,9 @@ namespace NetworkView.ZoomAndPan
                 // assign this to the content's 'RenderTransform'.
                 //
                 var transformGroup = new TransformGroup();
-                transformGroup.Children.Add(contentOffsetTransform);
-                transformGroup.Children.Add(contentScaleTransform);
-                content.RenderTransform = transformGroup;
+                transformGroup.Children.Add(_contentOffsetTransform);
+                transformGroup.Children.Add(_contentScaleTransform);
+                _content.RenderTransform = transformGroup;
             }
         }
 
@@ -619,12 +619,12 @@ namespace NetworkView.ZoomAndPan
             //
             // When zooming about a point make updates to ContentScale also update content offset.
             //
-            enableContentOffsetUpdateFromScale = true;
+            _enableContentOffsetUpdateFromScale = true;
 
             AnimationHelper.StartAnimation(this, ContentScaleProperty, newContentScale, AnimationDuration,
                 delegate
                 {
-                    enableContentOffsetUpdateFromScale = false;
+                    _enableContentOffsetUpdateFromScale = false;
 
                     callback?.Invoke(this, EventArgs.Empty);
                 });
@@ -656,13 +656,13 @@ namespace NetworkView.ZoomAndPan
         {
             var c = (ZoomAndPanControl)o;
 
-            if (c.contentScaleTransform != null)
+            if (c._contentScaleTransform != null)
             {
                 //
                 // Update the content scale transform whenever 'ContentScale' changes.
                 //
-                c.contentScaleTransform.ScaleX = c.ContentScale;
-                c.contentScaleTransform.ScaleY = c.ContentScale;
+                c._contentScaleTransform.ScaleX = c.ContentScale;
+                c._contentScaleTransform.ScaleY = c.ContentScale;
             }
 
             //
@@ -670,7 +670,7 @@ namespace NetworkView.ZoomAndPan
             //
             c.UpdateContentViewportSize();
 
-            if (c.enableContentOffsetUpdateFromScale)
+            if (c._enableContentOffsetUpdateFromScale)
             {
                 try
                 {
@@ -679,7 +679,7 @@ namespace NetworkView.ZoomAndPan
                     // to ensure that the viewport is focused on our desired content focus point.  Setting this
                     // to 'true' stops the automatic update of the content focus when content offset changes.
                     //
-                    c.disableContentFocusSync = true;
+                    c._disableContentFocusSync = true;
 
                     //
                     // Whilst zooming in or out keep the content offset up-to-date so that the viewport is always
@@ -695,15 +695,15 @@ namespace NetworkView.ZoomAndPan
                 }
                 finally
                 {
-                    c.disableContentFocusSync = false;
+                    c._disableContentFocusSync = false;
                 }
             }
 
             c.ContentScaleChanged?.Invoke(c, EventArgs.Empty);
 
-            if (c.scrollOwner != null)
+            if (c._scrollOwner != null)
             {
-                c.scrollOwner.InvalidateScrollInfo();
+                c._scrollOwner.InvalidateScrollInfo();
             }
         }
 
@@ -736,7 +736,7 @@ namespace NetworkView.ZoomAndPan
 
             c.UpdateTranslationX();
 
-            if (!c.disableContentFocusSync)
+            if (!c._disableContentFocusSync)
             {
                 //
                 // Normally want to automatically update content focus when content offset changes.
@@ -750,12 +750,12 @@ namespace NetworkView.ZoomAndPan
             //
             c.ContentOffsetXChanged?.Invoke(c, EventArgs.Empty);
 
-            if (!c.disableScrollOffsetSync && c.scrollOwner != null)
+            if (!c._disableScrollOffsetSync && c._scrollOwner != null)
             {
                 //
                 // Notify the owning ScrollViewer that the scrollbar offsets should be updated.
                 //
-                c.scrollOwner.InvalidateScrollInfo();
+                c._scrollOwner.InvalidateScrollInfo();
             }
         }
 
@@ -767,7 +767,7 @@ namespace NetworkView.ZoomAndPan
             var c = (ZoomAndPanControl)d;
             var value = (double)baseValue;
             var minOffsetX = 0.0;
-            var maxOffsetX = Math.Max(0.0, c.unScaledExtent.Width - c.constrainedContentViewportWidth);
+            var maxOffsetX = Math.Max(0.0, c._unScaledExtent.Width - c._constrainedContentViewportWidth);
             value = Math.Min(Math.Max(value, minOffsetX), maxOffsetX);
             return value;
         }
@@ -781,7 +781,7 @@ namespace NetworkView.ZoomAndPan
 
             c.UpdateTranslationY();
 
-            if (!c.disableContentFocusSync)
+            if (!c._disableContentFocusSync)
             {
                 //
                 // Normally want to automatically update content focus when content offset changes.
@@ -795,12 +795,12 @@ namespace NetworkView.ZoomAndPan
             //
             c.ContentOffsetYChanged?.Invoke(c, EventArgs.Empty);
 
-            if (!c.disableScrollOffsetSync && c.scrollOwner != null)
+            if (!c._disableScrollOffsetSync && c._scrollOwner != null)
             {
                 //
                 // Notify the owning ScrollViewer that the scrollbar offsets should be updated.
                 //
-                c.scrollOwner.InvalidateScrollInfo();
+                c._scrollOwner.InvalidateScrollInfo();
             }
 
         }
@@ -813,7 +813,7 @@ namespace NetworkView.ZoomAndPan
             var c = (ZoomAndPanControl)d;
             var value = (double)baseValue;
             var minOffsetY = 0.0;
-            var maxOffsetY = Math.Max(0.0, c.unScaledExtent.Height - c.constrainedContentViewportHeight);
+            var maxOffsetY = Math.Max(0.0, c._unScaledExtent.Height - c._constrainedContentViewportHeight);
             value = Math.Min(Math.Max(value, minOffsetY), maxOffsetY);
             return value;
         }
@@ -832,7 +832,7 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         private void UpdateViewportSize(Size newSize)
         {
-            if (viewport == newSize)
+            if (_viewport == newSize)
             {
                 //
                 // The viewport is already the specified size.
@@ -840,7 +840,7 @@ namespace NetworkView.ZoomAndPan
                 return;
             }
 
-            viewport = newSize;
+            _viewport = newSize;
 
             //
             // Update the viewport size in content coordiates.
@@ -865,12 +865,12 @@ namespace NetworkView.ZoomAndPan
             ContentOffsetX = ContentOffsetX;
             ContentOffsetY = ContentOffsetY;
 
-            if (scrollOwner != null)
+            if (_scrollOwner != null)
             {
                 //
                 // Tell that owning ScrollViewer that scrollbar data has changed.
                 //
-                scrollOwner.InvalidateScrollInfo();
+                _scrollOwner.InvalidateScrollInfo();
             }
         }
 
@@ -882,8 +882,8 @@ namespace NetworkView.ZoomAndPan
             ContentViewportWidth = ViewportWidth / ContentScale;
             ContentViewportHeight = ViewportHeight / ContentScale;
 
-            constrainedContentViewportWidth = Math.Min(ContentViewportWidth, unScaledExtent.Width);
-            constrainedContentViewportHeight = Math.Min(ContentViewportHeight, unScaledExtent.Height);
+            _constrainedContentViewportWidth = Math.Min(ContentViewportWidth, _unScaledExtent.Width);
+            _constrainedContentViewportHeight = Math.Min(ContentViewportHeight, _unScaledExtent.Height);
 
             UpdateTranslationX();
             UpdateTranslationY();
@@ -894,19 +894,19 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         private void UpdateTranslationX()
         {
-            if (contentOffsetTransform != null)
+            if (_contentOffsetTransform != null)
             {
-                var scaledContentWidth = unScaledExtent.Width * ContentScale;
+                var scaledContentWidth = _unScaledExtent.Width * ContentScale;
                 if (scaledContentWidth < ViewportWidth)
                 {
                     //
                     // When the content can fit entirely within the viewport, center it.
                     //
-                    contentOffsetTransform.X = (ContentViewportWidth - unScaledExtent.Width) / 2;
+                    _contentOffsetTransform.X = (ContentViewportWidth - _unScaledExtent.Width) / 2;
                 }
                 else
                 {
-                    contentOffsetTransform.X = -ContentOffsetX;
+                    _contentOffsetTransform.X = -ContentOffsetX;
                 }
             }
         }
@@ -916,19 +916,19 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         private void UpdateTranslationY()
         {
-            if (contentOffsetTransform != null)
+            if (_contentOffsetTransform != null)
             {
-                var scaledContentHeight = unScaledExtent.Height * ContentScale;
+                var scaledContentHeight = _unScaledExtent.Height * ContentScale;
                 if (scaledContentHeight < ViewportHeight)
                 {
                     //
                     // When the content can fit entirely within the viewport, center it.
                     //
-                    contentOffsetTransform.Y = (ContentViewportHeight - unScaledExtent.Height) / 2;
+                    _contentOffsetTransform.Y = (ContentViewportHeight - _unScaledExtent.Height) / 2;
                 }
                 else
                 {
-                    contentOffsetTransform.Y = -ContentOffsetY;
+                    _contentOffsetTransform.Y = -ContentOffsetY;
                 }
             }
         }
@@ -938,7 +938,7 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         private void UpdateContentZoomFocusX()
         {
-            ContentZoomFocusX = ContentOffsetX + (constrainedContentViewportWidth / 2);
+            ContentZoomFocusX = ContentOffsetX + (_constrainedContentViewportWidth / 2);
         }
 
         /// <summary>
@@ -946,7 +946,7 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         private void UpdateContentZoomFocusY()
         {
-            ContentZoomFocusY = ContentOffsetY + (constrainedContentViewportHeight / 2);
+            ContentZoomFocusY = ContentOffsetY + (_constrainedContentViewportHeight / 2);
         }
 
         /// <summary>
@@ -957,16 +957,16 @@ namespace NetworkView.ZoomAndPan
             var infiniteSize = new Size(double.PositiveInfinity, double.PositiveInfinity);
             var childSize = base.MeasureOverride(infiniteSize);
 
-            if (childSize != unScaledExtent)
+            if (childSize != _unScaledExtent)
             {
                 //
                 // Use the size of the child as the un-scaled extent content.
                 //
-                unScaledExtent = childSize;
+                _unScaledExtent = childSize;
 
-                if (scrollOwner != null)
+                if (_scrollOwner != null)
                 {
-                    scrollOwner.InvalidateScrollInfo();
+                    _scrollOwner.InvalidateScrollInfo();
                 }
             }
 
@@ -1007,16 +1007,16 @@ namespace NetworkView.ZoomAndPan
         {
             var size = base.ArrangeOverride(DesiredSize);
 
-            if (content.DesiredSize != unScaledExtent)
+            if (_content.DesiredSize != _unScaledExtent)
             {
                 //
                 // Use the size of the child as the un-scaled extent content.
                 //
-                unScaledExtent = content.DesiredSize;
+                _unScaledExtent = _content.DesiredSize;
 
-                if (scrollOwner != null)
+                if (_scrollOwner != null)
                 {
-                    scrollOwner.InvalidateScrollInfo();
+                    _scrollOwner.InvalidateScrollInfo();
                 }
             }
 

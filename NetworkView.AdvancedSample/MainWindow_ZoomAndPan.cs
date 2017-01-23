@@ -18,37 +18,37 @@ namespace NetworkView.AdvancedSample
         /// <summary>
         /// Specifies the current state of the mouse handling logic.
         /// </summary>
-        private MouseHandlingMode mouseHandlingMode = MouseHandlingMode.None;
+        private MouseHandlingMode _mouseHandlingMode = MouseHandlingMode.None;
 
         /// <summary>
         /// The point that was clicked relative to the ZoomAndPanControl.
         /// </summary>
-        private Point origZoomAndPanControlMouseDownPoint;
+        private Point _origZoomAndPanControlMouseDownPoint;
 
         /// <summary>
         /// The point that was clicked relative to the content that is contained within the ZoomAndPanControl.
         /// </summary>
-        private Point origContentMouseDownPoint;
+        private Point _origContentMouseDownPoint;
 
         /// <summary>
         /// Records which mouse button clicked during mouse dragging.
         /// </summary>
-        private MouseButton mouseButtonDown;
+        private MouseButton _mouseButtonDown;
 
         /// <summary>
         /// Saves the previous zoom rectangle, pressing the backspace key jumps back to this zoom rectangle.
         /// </summary>
-        private Rect prevZoomRect;
+        private Rect _prevZoomRect;
 
         /// <summary>
         /// Save the previous content scale, pressing the backspace key jumps back to this scale.
         /// </summary>
-        private double prevZoomScale;
+        private double _prevZoomScale;
 
         /// <summary>
         /// Set to 'true' when the previous zoom rect is saved.
         /// </summary>
-        private bool prevZoomRectSet;
+        private bool _prevZoomRectSet;
 
         /// <summary>
         /// Event raised on mouse down in the NetworkView.
@@ -58,18 +58,18 @@ namespace NetworkView.AdvancedSample
             networkControl.Focus();
             Keyboard.Focus(networkControl);
 
-            mouseButtonDown = e.ChangedButton;
-            origZoomAndPanControlMouseDownPoint = e.GetPosition(zoomAndPanControl);
-            origContentMouseDownPoint = e.GetPosition(networkControl);
+            _mouseButtonDown = e.ChangedButton;
+            _origZoomAndPanControlMouseDownPoint = e.GetPosition(zoomAndPanControl);
+            _origContentMouseDownPoint = e.GetPosition(networkControl);
 
             if ((Keyboard.Modifiers & ModifierKeys.Shift) != 0 &&
                 (e.ChangedButton == MouseButton.Left ||
                  e.ChangedButton == MouseButton.Right))
             {
                 // Shift + left- or right-down initiates zooming mode.
-                mouseHandlingMode = MouseHandlingMode.Zooming;
+                _mouseHandlingMode = MouseHandlingMode.Zooming;
             }
-            else if (mouseButtonDown == MouseButton.Left &&
+            else if (_mouseButtonDown == MouseButton.Left &&
                      (Keyboard.Modifiers & ModifierKeys.Control) == 0)
             {
                 //
@@ -77,10 +77,10 @@ namespace NetworkView.AdvancedSample
                 // When control is held down left dragging is used for drag selection.
                 // After panning has been initiated the user must drag further than the threshold value to actually start drag panning.
                 //
-                mouseHandlingMode = MouseHandlingMode.Panning;
+                _mouseHandlingMode = MouseHandlingMode.Panning;
             }
 
-            if (mouseHandlingMode != MouseHandlingMode.None)
+            if (_mouseHandlingMode != MouseHandlingMode.None)
             {
                 // Capture the mouse so that we eventually receive the mouse up event.
                 networkControl.CaptureMouse();
@@ -93,9 +93,9 @@ namespace NetworkView.AdvancedSample
         /// </summary>
         private void networkControl_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (mouseHandlingMode != MouseHandlingMode.None)
+            if (_mouseHandlingMode != MouseHandlingMode.None)
             {
-                if (mouseHandlingMode == MouseHandlingMode.Panning)
+                if (_mouseHandlingMode == MouseHandlingMode.Panning)
                 { 
                     //
                     // Panning was initiated but dragging was abandoned before the mouse
@@ -104,20 +104,20 @@ namespace NetworkView.AdvancedSample
                     // Because it was a mouse click in empty space we need to clear the current selection.
                     //
                 }
-                else if (mouseHandlingMode == MouseHandlingMode.Zooming)
+                else if (_mouseHandlingMode == MouseHandlingMode.Zooming)
                 {
-                    if (mouseButtonDown == MouseButton.Left)
+                    if (_mouseButtonDown == MouseButton.Left)
                     {
                         // Shift + left-click zooms in on the content.
-                        ZoomIn(origContentMouseDownPoint);
+                        ZoomIn(_origContentMouseDownPoint);
                     }
-                    else if (mouseButtonDown == MouseButton.Right)
+                    else if (_mouseButtonDown == MouseButton.Right)
                     {
                         // Shift + left-click zooms out from the content.
-                        ZoomOut(origContentMouseDownPoint);
+                        ZoomOut(_origContentMouseDownPoint);
                     }
                 }
-                else if (mouseHandlingMode == MouseHandlingMode.DragZooming)
+                else if (_mouseHandlingMode == MouseHandlingMode.DragZooming)
                 {
                     // When drag-zooming has finished we zoom in on the rectangle that was highlighted by the user.
                     ApplyDragZoomRect();
@@ -136,7 +136,7 @@ namespace NetworkView.AdvancedSample
                 Mouse.OverrideCursor = null;
 
                 networkControl.ReleaseMouseCapture();
-                mouseHandlingMode = MouseHandlingMode.None;
+                _mouseHandlingMode = MouseHandlingMode.None;
                 e.Handled = true;
             }
         }
@@ -146,10 +146,10 @@ namespace NetworkView.AdvancedSample
         /// </summary>
         private void networkControl_MouseMove(object sender, MouseEventArgs e)
         {
-            if (mouseHandlingMode == MouseHandlingMode.Panning)
+            if (_mouseHandlingMode == MouseHandlingMode.Panning)
             {
                 var curZoomAndPanControlMousePoint = e.GetPosition(zoomAndPanControl);
-                var dragOffset = curZoomAndPanControlMousePoint - origZoomAndPanControlMouseDownPoint;
+                var dragOffset = curZoomAndPanControlMousePoint - _origZoomAndPanControlMouseDownPoint;
                 double dragThreshold = 10;
                 if (Math.Abs(dragOffset.X) > dragThreshold ||
                     Math.Abs(dragOffset.Y) > dragThreshold)
@@ -158,33 +158,33 @@ namespace NetworkView.AdvancedSample
                     // The user has dragged the cursor further than the threshold distance, initiate
                     // drag panning.
                     //
-                    mouseHandlingMode = MouseHandlingMode.DragPanning;
+                    _mouseHandlingMode = MouseHandlingMode.DragPanning;
                     networkControl.IsClearSelectionOnEmptySpaceClickEnabled = false;
                     Mouse.OverrideCursor = Cursors.ScrollAll;
                 }
 
                 e.Handled = true;
             }
-            else if (mouseHandlingMode == MouseHandlingMode.DragPanning)
+            else if (_mouseHandlingMode == MouseHandlingMode.DragPanning)
             {
                 //
                 // The user is left-dragging the mouse.
                 // Pan the viewport by the appropriate amount.
                 //
                 var curContentMousePoint = e.GetPosition(networkControl);
-                var dragOffset = curContentMousePoint - origContentMouseDownPoint;
+                var dragOffset = curContentMousePoint - _origContentMouseDownPoint;
 
                 zoomAndPanControl.ContentOffsetX -= dragOffset.X;
                 zoomAndPanControl.ContentOffsetY -= dragOffset.Y;
 
                 e.Handled = true;
             }
-            else if (mouseHandlingMode == MouseHandlingMode.Zooming)
+            else if (_mouseHandlingMode == MouseHandlingMode.Zooming)
             {
                 var curZoomAndPanControlMousePoint = e.GetPosition(zoomAndPanControl);
-                var dragOffset = curZoomAndPanControlMousePoint - origZoomAndPanControlMouseDownPoint;
+                var dragOffset = curZoomAndPanControlMousePoint - _origZoomAndPanControlMouseDownPoint;
                 double dragThreshold = 10;
-                if (mouseButtonDown == MouseButton.Left &&
+                if (_mouseButtonDown == MouseButton.Left &&
                     (Math.Abs(dragOffset.X) > dragThreshold ||
                     Math.Abs(dragOffset.Y) > dragThreshold))
                 {
@@ -193,21 +193,21 @@ namespace NetworkView.AdvancedSample
                     // initiate drag zooming mode where the user can drag out a rectangle to select the area
                     // to zoom in on.
                     //
-                    mouseHandlingMode = MouseHandlingMode.DragZooming;
+                    _mouseHandlingMode = MouseHandlingMode.DragZooming;
                     var curContentMousePoint = e.GetPosition(networkControl);
-                    InitDragZoomRect(origContentMouseDownPoint, curContentMousePoint);
+                    InitDragZoomRect(_origContentMouseDownPoint, curContentMousePoint);
                 }
 
                 e.Handled = true;
             }
-            else if (mouseHandlingMode == MouseHandlingMode.DragZooming)
+            else if (_mouseHandlingMode == MouseHandlingMode.DragZooming)
             {
                 //
                 // When in drag zooming mode continously update the position of the rectangle
                 // that the user is dragging out.
                 //
                 var curContentMousePoint = e.GetPosition(networkControl);
-                SetDragZoomRect(origContentMouseDownPoint, curContentMousePoint);
+                SetDragZoomRect(_origContentMouseDownPoint, curContentMousePoint);
 
                 e.Handled = true;
             }
@@ -269,7 +269,7 @@ namespace NetworkView.AdvancedSample
         /// </summary>
         private void JumpBackToPrevZoom_CanExecuted(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = prevZoomRectSet;
+            e.CanExecute = _prevZoomRectSet;
         }
 
         /// <summary>
@@ -347,7 +347,7 @@ namespace NetworkView.AdvancedSample
         /// </summary>
         private void JumpBackToPrevZoom()
         {
-            zoomAndPanControl.AnimatedZoomTo(prevZoomScale, prevZoomRect);
+            zoomAndPanControl.AnimatedZoomTo(_prevZoomScale, _prevZoomRect);
 
             ClearPrevZoomRect();
         }
@@ -454,9 +454,9 @@ namespace NetworkView.AdvancedSample
         //
         private void SavePrevZoomRect()
         {
-            prevZoomRect = new Rect(zoomAndPanControl.ContentOffsetX, zoomAndPanControl.ContentOffsetY, zoomAndPanControl.ContentViewportWidth, zoomAndPanControl.ContentViewportHeight);
-            prevZoomScale = zoomAndPanControl.ContentScale;
-            prevZoomRectSet = true;
+            _prevZoomRect = new Rect(zoomAndPanControl.ContentOffsetX, zoomAndPanControl.ContentOffsetY, zoomAndPanControl.ContentViewportWidth, zoomAndPanControl.ContentViewportHeight);
+            _prevZoomScale = zoomAndPanControl.ContentScale;
+            _prevZoomRectSet = true;
         }
 
         /// <summary>
@@ -464,7 +464,7 @@ namespace NetworkView.AdvancedSample
         /// </summary>
         private void ClearPrevZoomRect()
         {
-            prevZoomRectSet = false;
+            _prevZoomRectSet = false;
         }
     }
 }

@@ -24,41 +24,41 @@ namespace NetworkView.AdvancedSample
         ///
         /// The current scale at which the content is being viewed.
         /// 
-        private double contentScale = 1;
+        private double _contentScale = 1;
 
         ///
         /// The X coordinate of the offset of the viewport onto the content (in content coordinates).
         /// 
-        private double contentOffsetX;
+        private double _contentOffsetX;
 
         ///
         /// The Y coordinate of the offset of the viewport onto the content (in content coordinates).
         /// 
-        private double contentOffsetY;
+        private double _contentOffsetY;
 
         ///
         /// The width of the content (in content coordinates).
         /// 
-        private double contentWidth = 1000;
+        private double _contentWidth = 1000;
 
         ///
         /// The heigth of the content (in content coordinates).
         /// 
-        private double contentHeight = 1000;
+        private double _contentHeight = 1000;
 
         ///
         /// The width of the viewport onto the content (in content coordinates).
         /// The value for this is actually computed by the main window's ZoomAndPanControl and update in the
         /// view-model so that the value can be shared with the overview window.
         /// 
-        private double contentViewportWidth;
+        private double _contentViewportWidth;
 
         ///
         /// The height of the viewport onto the content (in content coordinates).
         /// The value for this is actually computed by the main window's ZoomAndPanControl and update in the
         /// view-model so that the value can be shared with the overview window.
         /// 
-        private double contentViewportHeight;
+        private double _contentViewportHeight;
 
         #endregion Internal Data Members
 
@@ -93,11 +93,11 @@ namespace NetworkView.AdvancedSample
         {
             get
             {
-                return contentScale;
+                return _contentScale;
             }
             set
             {
-                contentScale = value;
+                _contentScale = value;
 
                 OnPropertyChanged("ContentScale");
             }
@@ -110,11 +110,11 @@ namespace NetworkView.AdvancedSample
         {
             get
             {
-                return contentOffsetX;
+                return _contentOffsetX;
             }
             set
             {
-                contentOffsetX = value;
+                _contentOffsetX = value;
 
                 OnPropertyChanged("ContentOffsetX");
             }
@@ -127,11 +127,11 @@ namespace NetworkView.AdvancedSample
         {
             get
             {
-                return contentOffsetY;
+                return _contentOffsetY;
             }
             set
             {
-                contentOffsetY = value;
+                _contentOffsetY = value;
 
                 OnPropertyChanged("ContentOffsetY");
             }
@@ -144,11 +144,11 @@ namespace NetworkView.AdvancedSample
         {
             get
             {
-                return contentWidth;
+                return _contentWidth;
             }
             set
             {
-                contentWidth = value;
+                _contentWidth = value;
 
                 OnPropertyChanged("ContentWidth");
             }
@@ -161,11 +161,11 @@ namespace NetworkView.AdvancedSample
         {
             get
             {
-                return contentHeight;
+                return _contentHeight;
             }
             set
             {
-                contentHeight = value;
+                _contentHeight = value;
 
                 OnPropertyChanged("ContentHeight");
             }
@@ -180,11 +180,11 @@ namespace NetworkView.AdvancedSample
         {
             get
             {
-                return contentViewportWidth;
+                return _contentViewportWidth;
             }
             set
             {
-                contentViewportWidth = value;
+                _contentViewportWidth = value;
 
                 OnPropertyChanged("ContentViewportWidth");
             }
@@ -199,11 +199,11 @@ namespace NetworkView.AdvancedSample
         {
             get
             {
-                return contentViewportHeight;
+                return _contentViewportHeight;
             }
             set
             {
-                contentViewportHeight = value;
+                _contentViewportHeight = value;
 
                 OnPropertyChanged("ContentViewportHeight");
             }

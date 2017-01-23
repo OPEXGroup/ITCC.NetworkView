@@ -21,28 +21,28 @@ namespace NetworkView.NetworkUI
         /// <summary>
         /// When dragging a connection, this is set to the ConnectorItem that was initially dragged out.
         /// </summary>
-        private ConnectorItem draggedOutConnectorItem;
+        private ConnectorItem _draggedOutConnectorItem;
 
         /// <summary>
         /// The view-model object for the connector that has been dragged out.
         /// </summary>
-        private object draggedOutConnectorDataContext;
+        private object _draggedOutConnectorDataContext;
 
         /// <summary>
         /// The view-model object for the node whose connector was dragged out.
         /// </summary>
-        private object draggedOutNodeDataContext;
+        private object _draggedOutNodeDataContext;
 
         /// <summary>
         /// The view-model object for the connection that is currently being dragged, or null if none being dragged.
         /// </summary>
-        private object draggingConnectionDataContext;
+        private object _draggingConnectionDataContext;
 
         /// <summary>
         /// A reference to the feedback adorner that is currently in the adorner layer, or null otherwise.
         /// It is used for feedback when dragging a connection over a prospective connector.
         /// </summary>
-        private FrameworkElementAdorner feedbackAdorner;
+        private FrameworkElementAdorner _feedbackAdorner;
 
         #endregion Private Data Members
 
@@ -62,24 +62,24 @@ namespace NetworkView.NetworkUI
             IsDraggingConnection = true;
             IsNotDraggingConnection = false;
 
-            draggedOutConnectorItem = (ConnectorItem)e.OriginalSource;
-            var nodeItem = draggedOutConnectorItem.ParentNodeItem;
-            draggedOutNodeDataContext = nodeItem.DataContext != null ? nodeItem.DataContext : nodeItem;
-            draggedOutConnectorDataContext = draggedOutConnectorItem.DataContext != null ? draggedOutConnectorItem.DataContext : draggedOutConnectorItem;
+            _draggedOutConnectorItem = (ConnectorItem)e.OriginalSource;
+            var nodeItem = _draggedOutConnectorItem.ParentNodeItem;
+            _draggedOutNodeDataContext = nodeItem.DataContext != null ? nodeItem.DataContext : nodeItem;
+            _draggedOutConnectorDataContext = _draggedOutConnectorItem.DataContext != null ? _draggedOutConnectorItem.DataContext : _draggedOutConnectorItem;
 
             //
             // Raise an event so that application code can create a connection and
             // add it to the view-model.
             //
-            var eventArgs = new ConnectionDragStartedEventArgs(ConnectionDragStartedEvent, this, draggedOutNodeDataContext, draggedOutConnectorDataContext);
+            var eventArgs = new ConnectionDragStartedEventArgs(ConnectionDragStartedEvent, this, _draggedOutNodeDataContext, _draggedOutConnectorDataContext);
             RaiseEvent(eventArgs);
 
             //
             // Retrieve the the view-model object for the connection was created by application code.
             //
-            draggingConnectionDataContext = eventArgs.Connection;
+            _draggingConnectionDataContext = eventArgs.Connection;
 
-            if (draggingConnectionDataContext == null)
+            if (_draggingConnectionDataContext == null)
             {
                 //
                 // Application code didn't create any connection.
@@ -95,7 +95,7 @@ namespace NetworkView.NetworkUI
         {
             e.Handled = true;
 
-            Trace.Assert((ConnectorItem)e.OriginalSource == draggedOutConnectorItem);
+            Trace.Assert((ConnectorItem)e.OriginalSource == _draggedOutConnectorItem);
 
             var mousePoint = Mouse.GetPosition(this);
             //
@@ -103,8 +103,8 @@ namespace NetworkView.NetworkUI
             //
             var connectionDraggingEventArgs =
                 new ConnectionDraggingEventArgs(ConnectionDraggingEvent, this, 
-                        draggedOutNodeDataContext, draggingConnectionDataContext, 
-                        draggedOutConnectorDataContext);
+                        _draggedOutNodeDataContext, _draggingConnectionDataContext, 
+                        _draggedOutConnectorDataContext);
 
             RaiseEvent(connectionDraggingEventArgs);
 
@@ -122,8 +122,8 @@ namespace NetworkView.NetworkUI
                 // that was dragged over is valid or not.
                 //
                 var queryFeedbackEventArgs = 
-                    new QueryConnectionFeedbackEventArgs(QueryConnectionFeedbackEvent, this, draggedOutNodeDataContext, draggingConnectionDataContext, 
-                            draggedOutConnectorDataContext, connectorDataContextDraggedOver);
+                    new QueryConnectionFeedbackEventArgs(QueryConnectionFeedbackEvent, this, _draggedOutNodeDataContext, _draggingConnectionDataContext, 
+                            _draggedOutConnectorDataContext, connectorDataContextDraggedOver);
 
                 RaiseEvent(queryFeedbackEventArgs);
 
@@ -161,7 +161,7 @@ namespace NetworkView.NetworkUI
         {
             e.Handled = true;
 
-            Trace.Assert((ConnectorItem)e.OriginalSource == draggedOutConnectorItem);
+            Trace.Assert((ConnectorItem)e.OriginalSource == _draggedOutConnectorItem);
 
             var mousePoint = Mouse.GetPosition(this);
 
@@ -182,16 +182,16 @@ namespace NetworkView.NetworkUI
             // The application code can determine if the connection between the two connectors
             // is valid and if so it is free to make the appropriate connection in the view-model.
             //
-            RaiseEvent(new ConnectionDragCompletedEventArgs(ConnectionDragCompletedEvent, this, draggedOutNodeDataContext, draggingConnectionDataContext, draggedOutConnectorDataContext, connectorDataContextDraggedOver));
+            RaiseEvent(new ConnectionDragCompletedEventArgs(ConnectionDragCompletedEvent, this, _draggedOutNodeDataContext, _draggingConnectionDataContext, _draggedOutConnectorDataContext, connectorDataContextDraggedOver));
 
             IsDragging = false;
             IsNotDragging = true;
             IsDraggingConnection = false;
             IsNotDraggingConnection = true;
-            draggedOutConnectorDataContext = null;
-            draggedOutNodeDataContext = null;
-            draggedOutConnectorItem = null;
-            draggingConnectionDataContext = null;
+            _draggedOutConnectorDataContext = null;
+            _draggedOutNodeDataContext = null;
+            _draggedOutConnectorItem = null;
+            _draggingConnectionDataContext = null;
         }
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace NetworkView.NetworkUI
             // Run a hit test 
             //
             HitTestResult result = null;
-            VisualTreeHelper.HitTest(nodeItemsControl, null, 
+            VisualTreeHelper.HitTest(_nodeItemsControl, null, 
                 //
                 // Result callback delegate.
                 // This method is called when we have a result.
@@ -277,16 +277,16 @@ namespace NetworkView.NetworkUI
         {
             var adornerLayer = AdornerLayer.GetAdornerLayer(this);
 
-            if (feedbackAdorner != null)
+            if (_feedbackAdorner != null)
             {
-                if (feedbackAdorner.AdornedElement == adornedElement)
+                if (_feedbackAdorner.AdornedElement == adornedElement)
                 {
                     // No change.
                     return;
                 }
 
-                adornerLayer.Remove(feedbackAdorner);
-                feedbackAdorner = null;
+                adornerLayer.Remove(_feedbackAdorner);
+                _feedbackAdorner = null;
             }
 
             //
@@ -302,8 +302,8 @@ namespace NetworkView.NetworkUI
             //
             // Create the adorner and add it to the adorner layer.
             //
-            feedbackAdorner = new FrameworkElementAdorner(adornerElement, adornedElement);
-            adornerLayer.Add(feedbackAdorner);
+            _feedbackAdorner = new FrameworkElementAdorner(adornerElement, adornedElement);
+            adornerLayer.Add(_feedbackAdorner);
         }
 
         /// <summary>
@@ -311,14 +311,14 @@ namespace NetworkView.NetworkUI
         /// </summary>
         private void ClearFeedbackAdorner()
         {
-            if (feedbackAdorner == null)
+            if (_feedbackAdorner == null)
             {
                 return;
             }
 
             var adornerLayer = AdornerLayer.GetAdornerLayer(this);
-            adornerLayer.Remove(feedbackAdorner);
-            feedbackAdorner = null;
+            adornerLayer.Remove(_feedbackAdorner);
+            _feedbackAdorner = null;
         }
 
         #endregion Private Methods

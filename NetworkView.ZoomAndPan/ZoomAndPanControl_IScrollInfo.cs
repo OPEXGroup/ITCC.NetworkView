@@ -27,11 +27,11 @@ namespace NetworkView.ZoomAndPan
         {
             get
             {
-                return canVerticallyScroll;
+                return _canVerticallyScroll;
             }
             set
             {
-                canVerticallyScroll = value;
+                _canVerticallyScroll = value;
             }
         }
 
@@ -42,33 +42,33 @@ namespace NetworkView.ZoomAndPan
         {
             get
             {
-                return canHorizontallyScroll;
+                return _canHorizontallyScroll;
             }
             set
             {
-                canHorizontallyScroll = value;
+                _canHorizontallyScroll = value;
             }
         }
 
         /// <summary>
         /// The width of the content (with 'ContentScale' applied).
         /// </summary>
-        public double ExtentWidth => unScaledExtent.Width * ContentScale;
+        public double ExtentWidth => _unScaledExtent.Width * ContentScale;
 
         /// <summary>
         /// The height of the content (with 'ContentScale' applied).
         /// </summary>
-        public double ExtentHeight => unScaledExtent.Height * ContentScale;
+        public double ExtentHeight => _unScaledExtent.Height * ContentScale;
 
         /// <summary>
         /// Get the width of the viewport onto the content.
         /// </summary>
-        public double ViewportWidth => viewport.Width;
+        public double ViewportWidth => _viewport.Width;
 
         /// <summary>
         /// Get the height of the viewport onto the content.
         /// </summary>
-        public double ViewportHeight => viewport.Height;
+        public double ViewportHeight => _viewport.Height;
 
         /// <summary>
         /// Reference to the ScrollViewer that is wrapped (in XAML) around the ZoomAndPanControl.
@@ -78,11 +78,11 @@ namespace NetworkView.ZoomAndPan
         {
             get
             {
-                return scrollOwner;
+                return _scrollOwner;
             }
             set
             {
-                scrollOwner = value;
+                _scrollOwner = value;
             }
         }
 
@@ -101,20 +101,20 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         public void SetHorizontalOffset(double offset)
         {
-            if (disableScrollOffsetSync)
+            if (_disableScrollOffsetSync)
             {
                 return;
             }
 
             try
             {
-                disableScrollOffsetSync = true;
+                _disableScrollOffsetSync = true;
 
                 ContentOffsetX = offset / ContentScale;
             }
             finally
             {
-                disableScrollOffsetSync = false;
+                _disableScrollOffsetSync = false;
             }
         }
 
@@ -123,20 +123,20 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         public void SetVerticalOffset(double offset)
         {
-            if (disableScrollOffsetSync)
+            if (_disableScrollOffsetSync)
             {
                 return;
             }
 
             try
             {
-                disableScrollOffsetSync = true;
+                _disableScrollOffsetSync = true;
 
                 ContentOffsetY = offset / ContentScale;
             }
             finally
             {
-                disableScrollOffsetSync = false;
+                _disableScrollOffsetSync = false;
             }
         }
 
@@ -257,9 +257,9 @@ namespace NetworkView.ZoomAndPan
         /// </summary>
         public Rect MakeVisible(Visual visual, Rect rectangle)
         {
-            if (content.IsAncestorOf(visual))
+            if (_content.IsAncestorOf(visual))
             {
-                var transformedRect = visual.TransformToAncestor(content).TransformBounds(rectangle);
+                var transformedRect = visual.TransformToAncestor(_content).TransformBounds(rectangle);
                 var viewportRect = new Rect(ContentOffsetX, ContentOffsetY, ContentViewportWidth, ContentViewportHeight);
                 if (!transformedRect.Contains(viewportRect))
                 {
