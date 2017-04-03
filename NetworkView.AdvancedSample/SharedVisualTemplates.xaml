@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:networkUi="clr-namespace:NetworkView.NetworkUI;assembly=NetworkView.NetworkUI">
+    xmlns:networkUi="clr-namespace:NetworkView.NetworkUI;assembly=ITCC.NetworkView.NetworkUI">
     
     <BooleanToVisibilityConverter
         x:Key="BooleanToVisibilityConverter" 

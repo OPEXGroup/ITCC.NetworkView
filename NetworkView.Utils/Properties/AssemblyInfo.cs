@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NetworkView.Utils")]
+[assembly: AssemblyTitle("ITCC.NetworkView.Utils")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("NetworkView.Utils")]
+[assembly: AssemblyProduct("ITCC.NetworkView.Utils")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

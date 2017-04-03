@@ -7,10 +7,10 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NetworkView.NetworkUI")]
+[assembly: AssemblyTitle("ITCC.NetworkView.NetworkUI")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("NetworkView.NetworkUI")]
+[assembly: AssemblyProduct("ITCC.NetworkView.NetworkUI")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

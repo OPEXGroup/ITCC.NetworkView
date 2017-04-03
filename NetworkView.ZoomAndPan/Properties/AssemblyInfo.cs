@@ -7,10 +7,10 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NetworkView.ZoomAndPanControl")]
+[assembly: AssemblyTitle("ITCC.NetworkView.ZoomAndPanControl")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("NetworkView.ZoomAndPanControl")]
+[assembly: AssemblyProduct("ITCC.NetworkView.ZoomAndPanControl")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
