@@ -84,7 +84,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>..\..\..\build\sample\AdvancedSample\ITCC.NetworkView.AdvancedSample\AnyCPU\x86\</OutputPath>
+    <OutputPath>..\..\..\build\sample\AdvancedSample\ITCC.NetworkView.AdvancedSample\x86\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>

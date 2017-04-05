@@ -56,7 +56,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\..\build\sample\AdvancedSample\ITCC.NetworkView.AdvancedSample.NetworkModel\AnyCPU\x64\</OutputPath>
+    <OutputPath>..\..\..\build\sample\AdvancedSample\ITCC.NetworkView.AdvancedSample.NetworkModel\x64\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -74,7 +74,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\..\build\sample\AdvancedSample\ITCC.NetworkView.AdvancedSample.NetworkModel\AnyCPU\x86\</OutputPath>
+    <OutputPath>..\..\..\build\sample\AdvancedSample\ITCC.NetworkView.AdvancedSample.NetworkModel\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
