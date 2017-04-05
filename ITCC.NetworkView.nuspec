@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>ITCC.NetworkView</id>
+    <version>1.0.0</version>
+    <title>ITCC.NetworkView</title>
+    <authors>VladimirTyrin,VladislavPrishchepa</authors>
+    <owners>VladimirTyrin,VladislavPrishchepa</owners>
+    <projectUrl>https://github.com/OPEXGroup/ITCC.NetworkView</projectUrl>
+    <licenseUrl>https://github.com/OPEXGroup/ITCC.NetworkView/blob/master/LICENCE.MD</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A WPF control for visualizing and editing networks, graphs and flow-charts</description>
+    <releaseNotes>First release.</releaseNotes>
+    <copyright>Copyright (c) 2016-2017, Vladimir Tyrin, Vladislav Prishchepa</copyright>
+    <tags>WPF Graph Network FlowChart</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="PresentationCore" />
+      <frameworkAssembly assemblyName="WindowsBase" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+  	<file src="build\lib\ITCC.NetworkView.AdornedControl\AnyCPU\Release\ITCC.NetworkView.AdornedControl.dll" target="lib\net45"/>
+  	<file src="build\lib\ITCC.NetworkView.AdornedControl\AnyCPU\Release\ITCC.NetworkView.AdornedControl.xml" target="lib\net45"/>
+  	<file src="build\lib\ITCC.NetworkView.NetworkUI\AnyCPU\Release\ITCC.NetworkView.NetworkUI.dll" target="lib\net45"/>
+  	<file src="build\lib\ITCC.NetworkView.NetworkUI\AnyCPU\Release\ITCC.NetworkView.NetworkUI.xml" target="lib\net45"/>
+  	<file src="build\lib\ITCC.NetworkView.Utils\AnyCPU\Release\ITCC.NetworkView.Utils.dll" target="lib\net45"/>
+  	<file src="build\lib\ITCC.NetworkView.Utils\AnyCPU\Release\ITCC.NetworkView.Utils.xml" target="lib\net45"/>
+  	<file src="build\lib\ITCC.NetworkView.ZoomAndPan\AnyCPU\Release\ITCC.NetworkView.ZoomAndPan.dll" target="lib\net45"/>
+  	<file src="build\lib\ITCC.NetworkView.ZoomAndPan\AnyCPU\Release\ITCC.NetworkView.ZoomAndPan.xml" target="lib\net45"/>
+  </files>
+</package>

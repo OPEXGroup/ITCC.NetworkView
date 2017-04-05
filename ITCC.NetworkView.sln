@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		CHANGELOG.md = CHANGELOG.md
 		CPOL.htm = CPOL.htm
+		ITCC.NetworkView.nuspec = ITCC.NetworkView.nuspec
 		LICENSE.md = LICENSE.md
 		README.md = README.md
 	EndProjectSection
@@ -19,11 +20,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITCC.NetworkView.NetworkUI"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITCC.NetworkView.SimpleSample", "sample\SimpleSample\ITCC.NetworkView.SimpleSample\ITCC.NetworkView.SimpleSample.csproj", "{21411DAC-85C8-416B-ABD2-869EE23F4FFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITCC.NetworkView.SimpleNetworkModel", "sample\SimpleSample\ITCC.NetworkView.SimpleSample.NetworkModel\ITCC.NetworkView.SimpleSample.NetworkModel.csproj", "{B855BFF4-4537-446F-AD26-5392296A248E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITCC.NetworkView.SimpleSample.NetworkModel", "sample\SimpleSample\ITCC.NetworkView.SimpleSample.NetworkModel\ITCC.NetworkView.SimpleSample.NetworkModel.csproj", "{B855BFF4-4537-446F-AD26-5392296A248E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITCC.NetworkView.AdvancedSample", "sample\AdvancedSample\ITCC.NetworkView.AdvancedSample\ITCC.NetworkView.AdvancedSample.csproj", "{2AA2E559-5417-40ED-A739-D98049C8A68A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITCC.NetworkView.AdvancedNetworkModel", "sample\AdvancedSample\ITCC.NetworkView.AdvancedSample.NetworkModel\ITCC.NetworkView.AdvancedSample.NetworkModel.csproj", "{669475DA-8F89-4657-B917-0B0C126BCD1D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITCC.NetworkView.AdvancedSample.NetworkModel", "sample\AdvancedSample\ITCC.NetworkView.AdvancedSample.NetworkModel\ITCC.NetworkView.AdvancedSample.NetworkModel.csproj", "{669475DA-8F89-4657-B917-0B0C126BCD1D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITCC.NetworkView.AdornedControl", "src\ITCC.NetworkView.AdornedControl\ITCC.NetworkView.AdornedControl.csproj", "{94B81CB7-F8A6-44BC-BD71-E927F701E0D8}"
 EndProject
