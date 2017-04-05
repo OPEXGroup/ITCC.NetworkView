@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ITCC.NetworkView.AdornedControl")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A content control that allows an adorner for the content to be defined in XAML.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("ITCC NetworkView")]
 [assembly: AssemblyTrademark("")]
@@ -33,3 +33,6 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyCopyright("Copyright (c) 2016-2017, Vladimir Tyrin, Vladislav Prishchepa")]
+[assembly: AssemblyCompany("ITCC")]
+

@@ -8,7 +8,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ITCC.NetworkView.NetworkUI")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Contains NetworkView control and supporting UI element classes.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("ITCC NetworkView")]
 [assembly: AssemblyTrademark("")]
@@ -39,3 +39,6 @@ using System.Windows;
     ResourceDictionaryLocation.None,
     ResourceDictionaryLocation.SourceAssembly
 )]
+[assembly: AssemblyCopyright("Copyright (c) 2016-2017, Vladimir Tyrin, Vladislav Prishchepa")]
+[assembly: AssemblyCompany("ITCC")]
+

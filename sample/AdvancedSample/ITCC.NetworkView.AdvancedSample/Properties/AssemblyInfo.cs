@@ -7,7 +7,7 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("The advanced sample application. Builds on the features introduced in the simple sample and adds more features and improved visuals.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -50,4 +50,7 @@ using System.Windows;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: AssemblyProduct("ITCC NetworkView")]
+[assembly: AssemblyCopyright("Copyright (c) 2016-2017, Vladimir Tyrin, Vladislav Prishchepa")]
+[assembly: AssemblyCompany("ITCC")]
+[assembly: AssemblyTitle("ITCC.NetworkView.AdvancedSample")]
 

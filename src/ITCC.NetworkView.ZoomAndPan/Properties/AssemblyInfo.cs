@@ -7,8 +7,8 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ITCC.NetworkView.ZoomAndPanControl")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ITCC.NetworkView.ZoomAndPan")]
+[assembly: AssemblyDescription("WPF control that wraps up zooming and panning of it's content.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("ITCC NetworkView")]
 [assembly: AssemblyTrademark("")]
@@ -43,3 +43,6 @@ using System.Windows;
     //(used if a resource is not found in the page, 
     // app, or any theme specific resource dictionaries)
 )]
+[assembly: AssemblyCopyright("Copyright (c) 2016-2017, Vladimir Tyrin, Vladislav Prishchepa")]
+[assembly: AssemblyCompany("ITCC")]
+
